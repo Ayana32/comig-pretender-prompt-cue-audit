@@ -17,8 +17,8 @@ It does not measure human identification accuracy, claim that human judges use t
 ## Generation
 
 ```yaml
-pretender_model_candidate: qwen/qwen3.8-27b:free
-catalog_canonical_slug_observed: qwen/qwen3.8-27b-20260814
+pretender_model_candidate: z-ai/glm-5.2:free
+catalog_canonical_slug_observed: z-ai/glm-5.2-20260616
 model_status: candidate_until_Q0_gate_passes
 temperature: 0.7
 top_p: 0.95
@@ -55,7 +55,9 @@ distinct_families_from_pretender_and_each_other: required
 
 Using distinct families reduces direct self-enhancement confounding but does not guarantee evaluator independence.
 
-These request IDs and catalog canonical slugs were retrieved from the OpenRouter models API on 2026-09-20 UTC. The canonical slugs are recorded exactly as returned, including unexpected version metadata; they are provenance records rather than guarantees of a fixed backend. Qwen is the Pretender candidate, while Google Gemma and NVIDIA Nemotron are Judge candidates. Both Judge candidates advertised `response_format` support at retrieval time. No candidate becomes a frozen study model until it passes the Q0 access and JSON-parsing gate.
+These request IDs and catalog canonical slugs were retrieved from the OpenRouter models API on 2026-09-20 UTC. The canonical slugs are recorded exactly as returned, including unexpected version metadata; they are provenance records rather than guarantees of a fixed backend. Z.ai GLM is the replacement Pretender candidate, while Google Gemma and NVIDIA Nemotron are Judge candidates. Both Judge candidates advertised `response_format` support at retrieval time. No candidate becomes a frozen study model until it passes the Q0 access and JSON-parsing gate.
+
+The initial Pretender candidate, `qwen/qwen3.8-27b:free` (catalog canonical slug observed: `qwen/qwen3.8-27b-20260814`), was rejected for this pilot after two separately timed Q0 runs each exhausted three attempts with HTTP 429 errors from the upstream shared free-provider pool. This is recorded as an access-stability failure, not evidence about Qwen response quality. No Pretender output was obtained and no Judge call was reached, so replacing the candidate does not mix generated datasets or require analytical exclusion.
 
 For the Q0 access and parsing gate only, the human anchor is placed in A and the naive Pretender output in B. Each Judge candidate evaluates this same pair independently three times. The style-controlled Pretender output is generated to test both prompt paths but is not judged at this gate. These Q0 placements and repetitions are development diagnostics only and are excluded from the main A/B schedule, condition comparison, and all identification claims.
 

@@ -22,6 +22,8 @@ python3 scripts/q0_gate.py --check-config
 
 This makes no API calls. It should report one Pretender, two Judges, and eight planned successful calls.
 
+The current replacement Pretender candidate is `z-ai/glm-5.2:free`. The original Qwen candidate and its repeated upstream 429 failures are preserved in `model_access_log.md`.
+
 ## 4. Run the gate
 
 ```bash

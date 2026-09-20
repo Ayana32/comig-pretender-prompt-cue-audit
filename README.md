@@ -26,11 +26,15 @@ COMIG organisers construct the prompt used by the LLM Pretender. If that prompt 
 
 ## Pre-generation freeze
 
-The questions, human anchors, prompt conditions, codebook v1, A/B presentation schedule, and core protocol were finalised before any model output was inspected. The pre-dry-run freeze commit is recorded in the following documentation commit:
+The questions, human anchors, prompt conditions, codebook v1, A/B presentation schedule, and core protocol were finalised before any model output was inspected. The following hash identifies that original freeze commit; the README line recording the hash necessarily appears in a later documentation commit:
 
 ```text
 PRE_DRY_RUN_FREEZE_COMMIT: d4cb1f395d562d463c020b2593f17957ce7fab8a
 ```
+
+The judge prompt and content-preservation form were subsequently frozen before Q0 model calls and will be identified by their own tool-freeze commit.
+
+Q0 and its anchor may be included in development diagnostics, but Q0 is always displayed separately from the eight-item main results and excluded from main summary statistics.
 
 ## Reproducibility limitation
 

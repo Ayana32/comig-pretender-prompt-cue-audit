@@ -49,6 +49,8 @@ distinct_families_from_pretender_and_each_other: required
 
 Using distinct families reduces direct self-enhancement confounding but does not guarantee evaluator independence.
 
+Judge calls use `judge_prompt.md` v1, including its forced A/B choice, confidence scale, justification-length guidance, JSON schema, and invalid-output policy. Q0 tests parse stability before the judge models are frozen.
+
 ## Pre-specified A/B presentation schedule
 
 The original presentation is balanced across Q1–Q8, with four anchors in position A and four in position B. This schedule is fixed before judge calls. For each condition and judge, the original evaluation uses the scheduled placement; the swapped evaluation reverses A and B while preserving response content.
@@ -75,6 +77,7 @@ The schedule is reused for both prompt conditions and both judge models so condi
 - `OVERALL_JUDGMENT` is stored separately from evidence cues.
 - `CONTENT_DIFFERENCE` refers only to substantive differences the judge identifies within an anchor–pretender comparison.
 - Condition-to-condition content preservation is assessed separately.
+- Condition-to-condition preservation is recorded with `content_check.md` v1 for Q1–Q8 designated-run pairs; confounded cases are retained and flagged.
 - After main generation, new patterns are recorded as `EMERGENT_*`; v1 is not rewritten.
 
 ## Language-form limitation
@@ -84,4 +87,3 @@ The fixed human anchors were written in English by a multilingual researcher for
 ## Ethics-by-design boundary
 
 No external human participants are recruited, no sensitive personal information is collected, and no human identification accuracy is measured. A future validation study would recruit judges and non-pretenders from a defined social world, allow judges to formulate their own questions, obtain informed consent, specify data retention, and undergo formal ethical review before collection or dissemination.
-

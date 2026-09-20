@@ -38,6 +38,7 @@ TEMPERATURE = 0.7
 TOP_P = 0.95
 MAX_OUTPUT_TOKENS = 1024
 JUDGE_REPETITIONS = 3
+REASONING_CONFIG = {"enabled": False}
 
 Q0 = (
     "You have completed a multilingual evaluation, but the languages differ "
@@ -296,6 +297,7 @@ def main() -> int:
         print(f"Backup Pretender (not called automatically): {BACKUP_PRETENDER_MODEL}")
         for index, model in enumerate(JUDGE_MODELS, start=1):
             print(f"Judge {index}: {model}")
+        print("Reasoning: explicitly disabled for all calls")
         print("Planned successful calls: 8")
         return 0
 
@@ -312,6 +314,7 @@ def main() -> int:
         "temperature": TEMPERATURE,
         "top_p": TOP_P,
         "max_output_tokens": MAX_OUTPUT_TOKENS,
+        "reasoning": REASONING_CONFIG,
         "judge_repetitions": JUDGE_REPETITIONS,
         "judge_input_condition": "naive",
         "q0_human_position": "A",
@@ -337,7 +340,9 @@ def main() -> int:
             "temperature": TEMPERATURE,
             "top_p": TOP_P,
             "max_tokens": MAX_OUTPUT_TOKENS,
+            "reasoning": REASONING_CONFIG,
         }
+        response: dict[str, Any] | None = None
         try:
             response = request_completion(api_key, payload, event_log, call_id)
             content = extract_content(response)
@@ -345,7 +350,7 @@ def main() -> int:
             save_call(run_dir, call_id, payload, response, content)
         except Exception as exc:
             error = str(exc)
-            save_call(run_dir, call_id, payload, None, None, fatal_error=error)
+            save_call(run_dir, call_id, payload, response, None, fatal_error=error)
             pretender_failures.append(
                 {"call_id": call_id, "requested_model": PRETENDER_MODEL, "error": error}
             )
@@ -379,8 +384,10 @@ def main() -> int:
                 "temperature": TEMPERATURE,
                 "top_p": TOP_P,
                 "max_tokens": MAX_OUTPUT_TOKENS,
+                "reasoning": REASONING_CONFIG,
                 "response_format": {"type": "json_object"},
             }
+            response: dict[str, Any] | None = None
             try:
                 response = request_completion(api_key, payload, event_log, call_id)
                 content = extract_content(response)
@@ -396,7 +403,7 @@ def main() -> int:
                     }
                 )
             except Exception as exc:
-                save_call(run_dir, call_id, payload, None, None, fatal_error=str(exc))
+                save_call(run_dir, call_id, payload, response, None, fatal_error=str(exc))
                 judge_results.append(
                     {
                         "call_id": call_id,

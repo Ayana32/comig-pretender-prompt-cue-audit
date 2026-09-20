@@ -1,4 +1,4 @@
-# Protocol v1 — Pre-dry-run freeze
+# Protocol v1.1 — Q0 diagnostic revision
 
 ## Scope
 
@@ -25,6 +25,7 @@ model_status: candidate_until_Q0_gate_passes
 temperature: 0.7
 top_p: 0.95
 max_output_tokens: 1024
+reasoning: disabled
 runs_per_condition: 3
 designated_run: run_1
 seed_policy: use_only_if_supported; otherwise record_unsupported
@@ -32,6 +33,8 @@ finish_reason_recorded: true
 ```
 
 The same model and supported parameters are used across both conditions. Every response records the exact model ID or alias, provider, access tier, access date, supported parameters, output-token count where available, and finish reason. Responses terminated by an output-token limit are retained as documented cases but excluded from length and mean-sentence-length comparisons.
+
+Reasoning is explicitly disabled for Pretender and Judge calls because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. Allowing model-specific default reasoning would confound model comparisons and could create condition-dependent missing outputs. This pre-main change is recorded as protocol v1.1 and Q0 is rerun under the common policy.
 
 Because free access tiers may change model aliases, backend providers, limits, or availability over time, exact reproducibility is not guaranteed. The exact identifier exposed by the provider and execution date will be recorded.
 
@@ -51,6 +54,7 @@ judge_model_1_catalog_canonical_slug_observed: google/gemma-4-31b-it-20260402
 judge_model_2_candidate: nvidia/nemotron-3-super-120b-a12b:free
 judge_model_2_catalog_canonical_slug_observed: nvidia/nemotron-3-super-120b-a12b-20230311
 judge_response_format: json_object
+reasoning: disabled
 model_status: candidates_until_Q0_gate_passes
 distinct_families_from_pretender_and_each_other: required
 ```

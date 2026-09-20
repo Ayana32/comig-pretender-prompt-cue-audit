@@ -24,6 +24,8 @@ This makes no API calls. It should report one Pretender, two Judges, and eight p
 
 The Pretender candidate remains `qwen/qwen3.8-27b:free`; `z-ai/glm-5.2:free` is a documented backup only. If the Pretender fails, the script records the error and continues testing both Judges with a frozen diagnostic fixture. Fixture-based Judge outputs test access and schema compliance only and are excluded from study analysis.
 
+Protocol v1.1 explicitly disables provider-default reasoning for all three models. This keeps the output-token policy comparable across model families and prevents hidden reasoning from exhausting the visible-answer budget. Failed content extraction also retains the complete raw API response for diagnosis.
+
 ## 4. Run the gate
 
 ```bash

@@ -29,7 +29,7 @@ COMIG organisers construct the prompt used by the LLM Pretender. If that prompt 
 The questions, human anchors, prompt conditions, codebook v1, A/B presentation schedule, and core protocol were finalised before any model output was inspected. The pre-dry-run freeze commit is recorded in the following documentation commit:
 
 ```text
-PRE_DRY_RUN_FREEZE_COMMIT: to_be_recorded_after_first_commit
+PRE_DRY_RUN_FREEZE_COMMIT: d4cb1f395d562d463c020b2593f17957ce7fab8a
 ```
 
 ## Reproducibility limitation
@@ -39,4 +39,3 @@ The planned implementation uses free access tiers. Model aliases, backend provid
 ## Current status
 
 Pre-dry-run design frozen. Model-access validation and Q0 dry run are pending.
-

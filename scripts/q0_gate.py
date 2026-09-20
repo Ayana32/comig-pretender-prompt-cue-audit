@@ -27,7 +27,8 @@ from typing import Any
 
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
-PRETENDER_MODEL = "z-ai/glm-5.2:free"
+PRETENDER_MODEL = "qwen/qwen3.8-27b:free"
+BACKUP_PRETENDER_MODEL = "z-ai/glm-5.2:free"
 JUDGE_MODELS = (
     "google/gemma-4-31b-it:free",
     "nvidia/nemotron-3-super-120b-a12b:free",
@@ -50,6 +51,15 @@ Q0_HUMAN_ANCHOR = (
     "limitation of this evaluation. Also, the way to calculate their "
     "estimates should be reported. Furthermore, I have to claim that this "
     "result is not confirmed for these reasons."
+)
+
+# Used only to probe Judge access and JSON compliance when no live naive
+# Pretender output is available. It is not study data and is never coded.
+DIAGNOSTIC_PRETENDER_FIXTURE = (
+    "Report the sample size and uncertainty interval for every language, and "
+    "avoid treating small ranking differences as meaningful when intervals "
+    "overlap. I would also describe the estimator, flag unequal precision, "
+    "and frame cross-language comparisons as provisional rather than confirmed."
 )
 
 SHARED_BASE = """You are taking part in a competence imitation task.
@@ -283,6 +293,7 @@ def main() -> int:
     if args.check_config:
         print("Configuration is valid.")
         print(f"Pretender: {PRETENDER_MODEL}")
+        print(f"Backup Pretender (not called automatically): {BACKUP_PRETENDER_MODEL}")
         for index, model in enumerate(JUDGE_MODELS, start=1):
             print(f"Judge {index}: {model}")
         print("Planned successful calls: 8")
@@ -316,99 +327,111 @@ def main() -> int:
         "style_controlled": SHARED_BASE.format(question=Q0) + "\n\n" + STYLE_CLAUSE,
     }
 
-    try:
-        for condition, prompt in conditions.items():
-            call_id = f"pretender__{condition}"
-            print(f"Calling {call_id}...", flush=True)
+    pretender_failures: list[dict[str, str]] = []
+    for condition, prompt in conditions.items():
+        call_id = f"pretender__{condition}"
+        print(f"Calling {call_id}...", flush=True)
+        payload = {
+            "model": PRETENDER_MODEL,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": TEMPERATURE,
+            "top_p": TOP_P,
+            "max_tokens": MAX_OUTPUT_TOKENS,
+        }
+        try:
+            response = request_completion(api_key, payload, event_log, call_id)
+            content = extract_content(response)
+            pretender_outputs[condition] = content
+            save_call(run_dir, call_id, payload, response, content)
+        except Exception as exc:
+            error = str(exc)
+            save_call(run_dir, call_id, payload, None, None, fatal_error=error)
+            pretender_failures.append(
+                {"call_id": call_id, "requested_model": PRETENDER_MODEL, "error": error}
+            )
+            print(f"  recorded failure; continuing after {call_id}", flush=True)
+
+    # Prefer the live naive output. If it is unavailable, a frozen fixture lets
+    # both Judge endpoints be tested independently. Fixture results are access
+    # and schema diagnostics only and must not enter cue coding or analysis.
+    if "naive" in pretender_outputs:
+        response_b = pretender_outputs["naive"]
+        judge_input_source = "live_naive_pretender_output"
+    else:
+        response_b = DIAGNOSTIC_PRETENDER_FIXTURE
+        judge_input_source = "frozen_diagnostic_fixture_not_study_data"
+
+    response_a = Q0_HUMAN_ANCHOR
+    judge_prompt = JUDGE_TEMPLATE.format(
+        question=Q0,
+        response_a=response_a,
+        response_b=response_b,
+    )
+
+    judge_results: list[dict[str, Any]] = []
+    for judge_index, model in enumerate(JUDGE_MODELS, start=1):
+        for repetition in range(1, JUDGE_REPETITIONS + 1):
+            call_id = f"judge_{judge_index}__rep_{repetition}"
+            print(f"Calling {call_id} ({model})...", flush=True)
             payload = {
-                "model": PRETENDER_MODEL,
-                "messages": [{"role": "user", "content": prompt}],
+                "model": model,
+                "messages": [{"role": "user", "content": judge_prompt}],
                 "temperature": TEMPERATURE,
                 "top_p": TOP_P,
                 "max_tokens": MAX_OUTPUT_TOKENS,
+                "response_format": {"type": "json_object"},
             }
             try:
                 response = request_completion(api_key, payload, event_log, call_id)
                 content = extract_content(response)
-                pretender_outputs[condition] = content
-                save_call(run_dir, call_id, payload, response, content)
-            except Exception as exc:  # preserve a failed gate without hiding details
+                validation = validate_judge_json(content)
+                save_call(run_dir, call_id, payload, response, content, validation)
+                judge_results.append(
+                    {
+                        "call_id": call_id,
+                        "requested_model": model,
+                        "returned_model": response.get("model"),
+                        "input_source": judge_input_source,
+                        **validation,
+                    }
+                )
+            except Exception as exc:
                 save_call(run_dir, call_id, payload, None, None, fatal_error=str(exc))
-                raise
+                judge_results.append(
+                    {
+                        "call_id": call_id,
+                        "requested_model": model,
+                        "input_source": judge_input_source,
+                        "parse_valid": False,
+                        "schema_valid": False,
+                        "failure_reasons": [f"FATAL_API_ERROR: {exc}"],
+                    }
+                )
 
-        # Q0 gate uses the naive response only. This is a parser/access test, not
-        # a condition comparison or identification-accuracy estimate.
-        response_a = Q0_HUMAN_ANCHOR
-        response_b = pretender_outputs["naive"]
-        judge_prompt = JUDGE_TEMPLATE.format(
-            question=Q0,
-            response_a=response_a,
-            response_b=response_b,
-        )
-
-        judge_results: list[dict[str, Any]] = []
-        for judge_index, model in enumerate(JUDGE_MODELS, start=1):
-            for repetition in range(1, JUDGE_REPETITIONS + 1):
-                call_id = f"judge_{judge_index}__rep_{repetition}"
-                print(f"Calling {call_id} ({model})...", flush=True)
-                payload = {
-                    "model": model,
-                    "messages": [{"role": "user", "content": judge_prompt}],
-                    "temperature": TEMPERATURE,
-                    "top_p": TOP_P,
-                    "max_tokens": MAX_OUTPUT_TOKENS,
-                    "response_format": {"type": "json_object"},
-                }
-                try:
-                    response = request_completion(api_key, payload, event_log, call_id)
-                    content = extract_content(response)
-                    validation = validate_judge_json(content)
-                    save_call(run_dir, call_id, payload, response, content, validation)
-                    judge_results.append(
-                        {
-                            "call_id": call_id,
-                            "requested_model": model,
-                            "returned_model": response.get("model"),
-                            **validation,
-                        }
-                    )
-                except Exception as exc:
-                    save_call(run_dir, call_id, payload, None, None, fatal_error=str(exc))
-                    judge_results.append(
-                        {
-                            "call_id": call_id,
-                            "requested_model": model,
-                            "parse_valid": False,
-                            "schema_valid": False,
-                            "failure_reasons": [f"FATAL_API_ERROR: {exc}"],
-                        }
-                    )
-
-        valid_count = sum(item["schema_valid"] for item in judge_results)
-        summary = {
-            "completed_at_utc": utc_now(),
-            "run_directory": str(run_dir),
-            "pretender_calls_completed": len(pretender_outputs),
-            "judge_calls_attempted": len(judge_results),
-            "judge_schema_valid": valid_count,
-            "judge_schema_total": len(judge_results),
-            "gate_passed": len(pretender_outputs) == 2 and valid_count == 6,
-            "judge_results": judge_results,
-        }
-        (run_dir / "summary.json").write_text(
-            json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
-        print(json.dumps(summary, ensure_ascii=False, indent=2))
-        print(f"Results saved to: {run_dir.resolve()}")
-        return 0 if summary["gate_passed"] else 1
-    except Exception as exc:
-        append_jsonl(
-            event_log,
-            {"event": "gate_aborted", "at_utc": utc_now(), "error": str(exc)},
-        )
-        print(f"ERROR: {exc}", file=sys.stderr)
-        print(f"Partial results saved to: {run_dir.resolve()}", file=sys.stderr)
-        return 1
+    valid_count = sum(item["schema_valid"] for item in judge_results)
+    summary = {
+        "completed_at_utc": utc_now(),
+        "run_directory": str(run_dir),
+        "pretender_calls_completed": len(pretender_outputs),
+        "pretender_failures": pretender_failures,
+        "judge_input_source": judge_input_source,
+        "judge_calls_attempted": len(judge_results),
+        "judge_schema_valid": valid_count,
+        "judge_schema_total": len(judge_results),
+        "judge_access_probe_passed": valid_count == 6,
+        "full_q0_gate_passed": (
+            len(pretender_outputs) == 2
+            and judge_input_source == "live_naive_pretender_output"
+            and valid_count == 6
+        ),
+        "judge_results": judge_results,
+    }
+    (run_dir / "summary.json").write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    print(f"Results saved to: {run_dir.resolve()}")
+    return 0 if summary["full_q0_gate_passed"] else 1
 
 
 if __name__ == "__main__":

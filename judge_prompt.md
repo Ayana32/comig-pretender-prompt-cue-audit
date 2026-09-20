@@ -20,13 +20,13 @@ Response B:
 
 Decide which response was written by the human.
 
-Choose exactly one response, A or B. Do not choose a tie. Report confidence as an integer from 50 to 100, where 50 means a forced choice with no meaningful confidence and 100 means completely certain. Give a concise justification of 2–4 sentences, approximately 40–100 words, referring to evidence in the responses. Do not reveal hidden chain-of-thought; provide only a brief decision rationale.
+Choose exactly one response, A or B. Do not choose a tie. Report confidence as an integer from 50 to 100, where 50 means a forced choice with no meaningful confidence and 100 means completely certain. Give a concise justification of 2 to 4 sentences, approximately 40 to 100 words, referring to evidence in the responses. Do not reveal hidden chain-of-thought; provide only a brief decision rationale.
 
 Return exactly one JSON object with no Markdown fence and no text before or after it, using this schema:
 {
   "selected_human_response": "A" | "B",
   "confidence": <integer from 50 to 100>,
-  "justification": "<2–4 sentence rationale>"
+  "justification": "<2 to 4 sentence rationale>"
 }
 ```
 
@@ -35,8 +35,8 @@ Return exactly one JSON object with no Markdown fence and no text before or afte
 | Field | Type | Allowed values | Meaning |
 |---|---|---|---|
 | `selected_human_response` | string | `A`, `B` | Forced authorship selection |
-| `confidence` | integer | `50`–`100` inclusive | Confidence in the forced selection |
-| `justification` | string | 2–4 sentences; target 40–100 words | Concise evidence for the selection |
+| `confidence` | integer | `50` to `100` inclusive | Confidence in the forced selection |
+| `justification` | string | 2 to 4 sentences; target 40 to 100 words | Concise evidence for the selection |
 
 The response is parse-valid only if it is a single JSON object, contains exactly the three required fields, and all values satisfy the allowed types and ranges. Raw output is retained whether valid or invalid.
 

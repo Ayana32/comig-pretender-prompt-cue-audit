@@ -17,7 +17,9 @@ It does not measure human identification accuracy, claim that human judges use t
 ## Generation
 
 ```yaml
-pretender_model: TBD_after_Q0_access_test
+pretender_model_candidate: qwen/qwen3.8-27b:free
+catalog_canonical_slug_observed: qwen/qwen3.8-27b-20260814
+model_status: candidate_until_Q0_gate_passes
 temperature: 0.7
 top_p: 0.95
 max_output_tokens: 1024
@@ -42,14 +44,22 @@ Because free access tiers may change model aliases, backend providers, limits, o
 ## Judge models
 
 ```yaml
-judge_model_1: TBD_after_Q0_access_test
-judge_model_2: TBD_after_Q0_access_test
+judge_model_1_candidate: google/gemma-4-31b-it:free
+judge_model_1_catalog_canonical_slug_observed: google/gemma-4-31b-it-20260402
+judge_model_2_candidate: nvidia/nemotron-3-super-120b-a12b:free
+judge_model_2_catalog_canonical_slug_observed: nvidia/nemotron-3-super-120b-a12b-20230311
+judge_response_format: json_object
+model_status: candidates_until_Q0_gate_passes
 distinct_families_from_pretender_and_each_other: required
 ```
 
 Using distinct families reduces direct self-enhancement confounding but does not guarantee evaluator independence.
 
+These request IDs and catalog canonical slugs were retrieved from the OpenRouter models API on 2026-09-20 UTC. The canonical slugs are recorded exactly as returned, including unexpected version metadata; they are provenance records rather than guarantees of a fixed backend. Qwen is the Pretender candidate, while Google Gemma and NVIDIA Nemotron are Judge candidates. Both Judge candidates advertised `response_format` support at retrieval time. No candidate becomes a frozen study model until it passes the Q0 access and JSON-parsing gate.
+
 Judge calls use `judge_prompt.md` v1, including its forced A/B choice, confidence scale, justification-length guidance, JSON schema, and invalid-output policy. Q0 tests parse stability before the judge models are frozen.
+
+The judge prompt and pretender shared base describe the same target social world: postgraduate researchers in speech and natural language processing with relevant multilingual language-model evaluation experience. This alignment is intentional, but it may also shape which membership cues judges attend to and is therefore part of the documented setup.
 
 ## Pre-specified A/B presentation schedule
 

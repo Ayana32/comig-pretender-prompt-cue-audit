@@ -44,6 +44,8 @@ Q0 and its anchor may be included in development diagnostics, but Q0 is always d
 
 The planned implementation uses free access tiers. Model aliases, backend providers, rate limits, and availability may change over time, so exact reproduction is not guaranteed even when the exposed model identifiers and access dates are recorded.
 
+Judge justifications are constrained to 2 to 4 sentences and approximately 40 to 100 words to limit between-model output variation. Consequently, reported cue frequencies reflect only the cues judges chose to verbalise within that budget, not every cue they may have used internally.
+
 ## Current status
 
 Pre-dry-run design frozen. Model-access validation and Q0 dry run are pending.

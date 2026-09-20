@@ -32,7 +32,11 @@ The questions, human anchors, prompt conditions, codebook v1, A/B presentation s
 PRE_DRY_RUN_FREEZE_COMMIT: d4cb1f395d562d463c020b2593f17957ce7fab8a
 ```
 
-The judge prompt and content-preservation form were subsequently frozen before Q0 model calls and will be identified by their own tool-freeze commit.
+The judge prompt and content-preservation form were subsequently frozen before Q0 model calls. The hash points to the tool-freeze commit; this hash record appears in the following documentation commit:
+
+```text
+PRE_Q0_TOOL_FREEZE_COMMIT: 6747f20d0f2710550f3f0ba0c19f1307a9d25b7b
+```
 
 Q0 and its anchor may be included in development diagnostics, but Q0 is always displayed separately from the eight-item main results and excluded from main summary statistics.
 

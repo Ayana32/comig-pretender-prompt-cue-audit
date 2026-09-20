@@ -57,6 +57,8 @@ Using distinct families reduces direct self-enhancement confounding but does not
 
 These request IDs and catalog canonical slugs were retrieved from the OpenRouter models API on 2026-09-20 UTC. The canonical slugs are recorded exactly as returned, including unexpected version metadata; they are provenance records rather than guarantees of a fixed backend. Qwen is the Pretender candidate, while Google Gemma and NVIDIA Nemotron are Judge candidates. Both Judge candidates advertised `response_format` support at retrieval time. No candidate becomes a frozen study model until it passes the Q0 access and JSON-parsing gate.
 
+For the Q0 access and parsing gate only, the human anchor is placed in A and the naive Pretender output in B. Each Judge candidate evaluates this same pair independently three times. The style-controlled Pretender output is generated to test both prompt paths but is not judged at this gate. These Q0 placements and repetitions are development diagnostics only and are excluded from the main A/B schedule, condition comparison, and all identification claims.
+
 Judge calls use `judge_prompt.md` v1, including its forced A/B choice, confidence scale, justification-length guidance, JSON schema, and invalid-output policy. Q0 tests parse stability before the judge models are frozen.
 
 The judge prompt and pretender shared base describe the same target social world: postgraduate researchers in speech and natural language processing with relevant multilingual language-model evaluation experience. This alignment is intentional, but it may also shape which membership cues judges attend to and is therefore part of the documented setup.

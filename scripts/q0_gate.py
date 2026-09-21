@@ -3,9 +3,11 @@
 
 The API key is read only from OPENROUTER_API_KEY and is never written to disk.
 This script performs eight successful-call targets:
-  1. Qwen Pretender: naive once and style-controlled once.
-  2. Gemma Judge: three independent calls on the naive Q0 pair.
+  1. GLM Pretender: naive once and style-controlled once.
+  2. Nex Judge: three independent calls on the naive Q0 pair.
   3. Nemotron Judge: three independent calls on the same naive Q0 pair.
+
+Use --replacement-gate to call only the newly selected GLM and Nex endpoints.
 
 Q0 is a development item and is excluded from the main analysis.
 """
@@ -27,10 +29,10 @@ from typing import Any
 
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
-PRETENDER_MODEL = "qwen/qwen3.8-27b:free"
-BACKUP_PRETENDER_MODEL = "z-ai/glm-5.2:free"
+PRETENDER_MODEL = "z-ai/glm-5.2:free"
+RETIRED_PRETENDER_MODEL = "qwen/qwen3.8-27b:free"
 JUDGE_MODELS = (
-    "google/gemma-4-31b-it:free",
+    "nex-agi/nex-n2.5-mini:free",
     "nvidia/nemotron-3-super-120b-a12b:free",
 )
 
@@ -284,6 +286,11 @@ def main() -> int:
         action="store_true",
         help="Validate local configuration without making API calls.",
     )
+    parser.add_argument(
+        "--replacement-gate",
+        action="store_true",
+        help="Call only the newly selected GLM Pretender and Nex Judge.",
+    )
     args = parser.parse_args()
 
     api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -294,11 +301,13 @@ def main() -> int:
     if args.check_config:
         print("Configuration is valid.")
         print(f"Pretender: {PRETENDER_MODEL}")
-        print(f"Backup Pretender (not called automatically): {BACKUP_PRETENDER_MODEL}")
+        print(f"Retired Pretender: {RETIRED_PRETENDER_MODEL}")
         for index, model in enumerate(JUDGE_MODELS, start=1):
             print(f"Judge {index}: {model}")
         print("Reasoning: explicitly disabled for all calls")
-        print("Planned successful calls: 8")
+        planned = 5 if args.replacement_gate else 8
+        print(f"Mode: {'replacement gate' if args.replacement_gate else 'full Q0 gate'}")
+        print(f"Planned successful calls: {planned}")
         return 0
 
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -308,7 +317,12 @@ def main() -> int:
 
     manifest = {
         "started_at_utc": utc_now(),
-        "purpose": "Q0 development gate; excluded from main analysis",
+        "purpose": (
+            "Q0 replacement-model access gate; excluded from main analysis"
+            if args.replacement_gate
+            else "Q0 development gate; excluded from main analysis"
+        ),
+        "mode": "replacement_gate" if args.replacement_gate else "full_q0_gate",
         "pretender_model": PRETENDER_MODEL,
         "judge_models": list(JUDGE_MODELS),
         "temperature": TEMPERATURE,
@@ -374,7 +388,8 @@ def main() -> int:
     )
 
     judge_results: list[dict[str, Any]] = []
-    for judge_index, model in enumerate(JUDGE_MODELS, start=1):
+    active_judges = JUDGE_MODELS[:1] if args.replacement_gate else JUDGE_MODELS
+    for judge_index, model in enumerate(active_judges, start=1):
         for repetition in range(1, JUDGE_REPETITIONS + 1):
             call_id = f"judge_{judge_index}__rep_{repetition}"
             print(f"Calling {call_id} ({model})...", flush=True)
@@ -425,8 +440,15 @@ def main() -> int:
         "judge_calls_attempted": len(judge_results),
         "judge_schema_valid": valid_count,
         "judge_schema_total": len(judge_results),
-        "judge_access_probe_passed": valid_count == 6,
+        "judge_access_probe_passed": valid_count == len(active_judges) * JUDGE_REPETITIONS,
+        "replacement_gate_passed": (
+            len(pretender_outputs) == 2
+            and judge_input_source == "live_naive_pretender_output"
+            and valid_count == JUDGE_REPETITIONS
+        ) if args.replacement_gate else None,
         "full_q0_gate_passed": (
+            not args.replacement_gate
+            and
             len(pretender_outputs) == 2
             and judge_input_source == "live_naive_pretender_output"
             and valid_count == 6
@@ -438,7 +460,12 @@ def main() -> int:
     )
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     print(f"Results saved to: {run_dir.resolve()}")
-    return 0 if summary["full_q0_gate_passed"] else 1
+    passed = (
+        summary["replacement_gate_passed"]
+        if args.replacement_gate
+        else summary["full_q0_gate_passed"]
+    )
+    return 0 if passed else 1
 
 
 if __name__ == "__main__":

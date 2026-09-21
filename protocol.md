@@ -1,4 +1,4 @@
-# Protocol v1.1 — Q0 diagnostic revision
+# Protocol v1.2 — replacement-model gate
 
 ## Scope
 
@@ -17,10 +17,9 @@ It does not measure human identification accuracy, claim that human judges use t
 ## Generation
 
 ```yaml
-pretender_model_candidate: qwen/qwen3.8-27b:free
-catalog_canonical_slug_observed: qwen/qwen3.8-27b-20260814
-backup_candidate_not_yet_activated: z-ai/glm-5.2:free
-backup_catalog_canonical_slug_observed: z-ai/glm-5.2-20260616
+pretender_model_candidate: z-ai/glm-5.2:free
+catalog_canonical_slug_observed: z-ai/glm-5.2-20260616
+retired_candidate: qwen/qwen3.8-27b:free
 model_status: candidate_until_Q0_gate_passes
 temperature: 0.7
 top_p: 0.95
@@ -34,7 +33,7 @@ finish_reason_recorded: true
 
 The same model and supported parameters are used across both conditions. Every response records the exact model ID or alias, provider, access tier, access date, supported parameters, output-token count where available, and finish reason. Responses terminated by an output-token limit are retained as documented cases but excluded from length and mean-sentence-length comparisons.
 
-Reasoning is explicitly disabled for Pretender and Judge calls because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. Allowing model-specific default reasoning would confound model comparisons and could create condition-dependent missing outputs. This pre-main change is recorded as protocol v1.1 and Q0 is rerun under the common policy.
+Reasoning is explicitly disabled for Pretender and Judge calls because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. Allowing model-specific default reasoning would confound model comparisons and could create condition-dependent missing outputs. This decision was first recorded as protocol v1.1; the replacement-model decision is recorded as protocol v1.2.
 
 Because free access tiers may change model aliases, backend providers, limits, or availability over time, exact reproducibility is not guaranteed. The exact identifier exposed by the provider and execution date will be recorded.
 
@@ -49,8 +48,8 @@ Because free access tiers may change model aliases, backend providers, limits, o
 ## Judge models
 
 ```yaml
-judge_model_1_candidate: google/gemma-4-31b-it:free
-judge_model_1_catalog_canonical_slug_observed: google/gemma-4-31b-it-20260402
+judge_model_1_candidate: nex-agi/nex-n2.5-mini:free
+judge_model_1_catalog_canonical_slug_observed: nex-agi/nex-n2.5-mini-20260908
 judge_model_2_candidate: nvidia/nemotron-3-super-120b-a12b:free
 judge_model_2_catalog_canonical_slug_observed: nvidia/nemotron-3-super-120b-a12b-20230311
 judge_response_format: json_object
@@ -61,9 +60,9 @@ distinct_families_from_pretender_and_each_other: required
 
 Using distinct families reduces direct self-enhancement confounding but does not guarantee evaluator independence.
 
-These request IDs and catalog canonical slugs were retrieved from the OpenRouter models API on 2026-09-20 UTC. The canonical slugs are recorded exactly as returned, including unexpected version metadata; they are provenance records rather than guarantees of a fixed backend. Qwen remains the Pretender candidate, with Z.ai GLM documented only as a backup; Google Gemma and NVIDIA Nemotron are Judge candidates. Both Judge candidates advertised `response_format` support at retrieval time. No candidate becomes a frozen study model until it passes the Q0 access and JSON-parsing gate.
+The original candidate IDs were retrieved from the OpenRouter models API on 2026-09-20 UTC; replacement availability and supported parameters were checked again on 2026-09-21 UTC. Canonical slugs are provenance records rather than guarantees of a fixed backend. GLM is now the Pretender candidate, Nex is the Judge 1 candidate, and Nemotron is the retained Judge 2 candidate. The Judge candidates advertise structured or JSON response support. Replacement candidates are not frozen study models until they pass the Q0 access and JSON-parsing gate.
 
-Two same-evening Q0 runs for Qwen exhausted their short retries with upstream shared-pool HTTP 429 errors. Because 10- and 30-second retry intervals cannot distinguish a temporary congestion window from persistent endpoint instability, Qwen is not rejected on this evidence. It will receive a separately timed retry several hours later or the next morning before any replacement decision.
+Qwen was retired after a separately timed retry on 2026-09-21 again failed both required conditions: the naive request returned HTTP 200 without string content, while the style-controlled request exhausted retries with upstream HTTP 429. Gemma was retired after two separately timed diagnostics produced 0/6 successful calls, all due to upstream HTTP 429. GLM and Nex are replacement candidates until the replacement gate passes. Nemotron remains the retained Judge candidate after 6/6 schema-valid diagnostic calls across two runs.
 
 For the Q0 access and parsing gate only, the human anchor is placed in A and the naive Pretender output in B. Each Judge candidate evaluates this same pair independently three times. If the live naive output is unavailable, Judges instead receive a frozen diagnostic Pretender fixture so their access and JSON compliance can still be tested. Fixture-based outputs are marked as diagnostics and excluded from cue coding, condition comparison, and all identification claims. A failure in any model is recorded without preventing the remaining model endpoints from being attempted.
 

@@ -14,12 +14,27 @@ Two separately timed Q0 runs were reported:
 
 The provider metadata identified an upstream shared-pool rate limit from ModelRun. Both runs occurred in the same evening and used short in-run retry intervals of 10 and 30 seconds. This does not establish persistent endpoint instability, so Qwen remains the candidate pending one separately timed retry several hours later or the next morning.
 
-## Backup candidate — not activated
+## Backup candidate recorded on 2026-09-20
 
 Replacement request ID: `z-ai/glm-5.2:free`  
 Catalog canonical slug observed: `z-ai/glm-5.2-20260616`
 
-GLM is recorded only as a backup and has not replaced Qwen. A replacement decision will be made only after the separately timed Qwen retry. Judge candidates remain unchanged and are tested independently even when the Pretender endpoint fails.
+At this stage GLM was recorded only as a backup. It was activated after the separately timed retry documented below.
+
+## 2026-09-21 — Separately timed retry and replacement decision
+
+Local run directory: `20260921T062402Z`
+
+| Endpoint | Outcome |
+|---|---|
+| Qwen naive | HTTP 200, but `message.content` was not a string; the older local runner did not retain the raw body |
+| Qwen style-controlled | All three attempts returned upstream shared-pool HTTP 429 |
+| Gemma Judge | 0/3 calls completed; all exhausted retries with upstream shared-pool HTTP 429 |
+| Nemotron Judge | 3/3 calls completed; 3/3 exact-JSON schema-valid |
+
+Combined with the 2026-09-20 diagnostic, Nemotron achieved 6/6 schema-valid calls, while Gemma achieved 0/6 and Qwen did not complete both required conditions in either separately timed run. Qwen and Gemma are therefore retired for this seven-day pilot. The replacement candidates are `z-ai/glm-5.2:free` as Pretender and `nex-agi/nex-n2.5-mini:free` as Judge 1. They remain candidates until the Q0 replacement gate passes.
+
+The 2026-09-21 run came from an older local extraction script despite the repository having a later raw-response preservation patch. This mismatch is recorded rather than reconstructing the missing raw body.
 
 ## 2026-09-20 — Independent endpoint diagnostic
 

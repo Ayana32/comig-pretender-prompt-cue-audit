@@ -20,13 +20,24 @@ Do not paste the key into project files or commit it. Closing the terminal sessi
 python3 scripts/q0_gate.py --check-config
 ```
 
-This makes no API calls. It should report one Pretender, two Judges, and eight planned successful calls.
+This makes no API calls. The full mode should report one Pretender, two Judges, and eight planned successful calls.
 
-The Pretender candidate remains `qwen/qwen3.8-27b:free`; `z-ai/glm-5.2:free` is a documented backup only. If the Pretender fails, the script records the error and continues testing both Judges with a frozen diagnostic fixture. Fixture-based Judge outputs test access and schema compliance only and are excluded from study analysis.
+The current candidates are GLM as Pretender, Nex as Judge 1, and retained Nemotron as Judge 2. Qwen and Gemma were retired after separately timed endpoint failures. If the Pretender fails, the script records the error and continues testing Judges with a frozen diagnostic fixture. Fixture-based Judge outputs test access and schema compliance only and are excluded from study analysis.
 
-Protocol v1.1 explicitly disables provider-default reasoning for all three models. This keeps the output-token policy comparable across model families and prevents hidden reasoning from exhausting the visible-answer budget. Failed content extraction also retains the complete raw API response for diagnosis.
+Protocol v1.2 retains the v1.1 decision to disable provider-default reasoning for all three models. This keeps the output-token policy comparable across model families and prevents hidden reasoning from exhausting the visible-answer budget. Failed content extraction also retains the complete raw API response for diagnosis.
 
 ## 4. Run the gate
+
+First run only the newly selected endpoints:
+
+```bash
+python3 scripts/q0_gate.py --check-config --replacement-gate
+python3 scripts/q0_gate.py --replacement-gate
+```
+
+This makes two GLM Pretender calls and three Nex Judge calls. It does not repeat the already-completed Nemotron access probe.
+
+If `replacement_gate_passed` is `true`, run the complete Q0 dry run once:
 
 ```bash
 python3 scripts/q0_gate.py

@@ -5,7 +5,7 @@ The API key is read only from OPENROUTER_API_KEY and is never written to disk.
 This script performs eight successful-call targets:
   1. GPT-4.1 Mini Pretender: naive once and style-controlled once.
   2. Nex Judge: three independent calls on the naive Q0 pair.
-  3. Nemotron Judge: three independent calls on the same naive Q0 pair.
+  3. Gemini Judge: three independent calls on the same naive Q0 pair.
 
 Use --pretender-only to call only the newly selected paid OpenAI endpoint.
 
@@ -37,6 +37,10 @@ RETIRED_PRETENDER_MODELS = (
 )
 JUDGE_MODELS = (
     "nex-agi/nex-n2.5-mini:free",
+    "google/gemini-2.5-flash-lite",
+)
+RETIRED_JUDGE_MODELS = (
+    "google/gemma-4-31b-it:free",
     "nvidia/nemotron-3-super-120b-a12b:free",
 )
 
@@ -300,10 +304,16 @@ def main() -> int:
         action="store_true",
         help="Call only the newly selected GPT-4.1 Mini Pretender in both conditions.",
     )
+    parser.add_argument(
+        "--judge2-only",
+        action="store_true",
+        help="Generate one live naive response and call only Gemini Judge three times.",
+    )
     args = parser.parse_args()
 
-    if args.replacement_gate and args.pretender_only:
-        parser.error("choose at most one of --replacement-gate and --pretender-only")
+    selected_modes = sum((args.replacement_gate, args.pretender_only, args.judge2_only))
+    if selected_modes > 1:
+        parser.error("choose at most one gate-mode flag")
 
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key and not args.check_config:
@@ -316,11 +326,16 @@ def main() -> int:
         print(f"Retired Pretenders: {', '.join(RETIRED_PRETENDER_MODELS)}")
         for index, model in enumerate(JUDGE_MODELS, start=1):
             print(f"Judge {index}: {model}")
+        print(f"Retired Judges: {', '.join(RETIRED_JUDGE_MODELS)}")
         print("Pretender reasoning: not requested (parameter unsupported)")
         print("Judge reasoning: explicitly disabled")
-        planned = 2 if args.pretender_only else (5 if args.replacement_gate else 8)
-        mode = "pretender-only gate" if args.pretender_only else (
+        planned = 4 if args.judge2_only else (
+            2 if args.pretender_only else (5 if args.replacement_gate else 8)
+        )
+        mode = "judge-2-only gate" if args.judge2_only else (
+            "pretender-only gate" if args.pretender_only else (
             "replacement gate" if args.replacement_gate else "full Q0 gate"
+            )
         )
         print(f"Mode: {mode}")
         print(f"Planned successful calls: {planned}")
@@ -334,14 +349,17 @@ def main() -> int:
     manifest = {
         "started_at_utc": utc_now(),
         "purpose": (
-            "Q0 paid OpenAI Pretender access gate; excluded from main analysis"
+            "Q0 paid Gemini Judge access gate; excluded from main analysis"
+            if args.judge2_only
+            else "Q0 paid OpenAI Pretender access gate; excluded from main analysis"
             if args.pretender_only
             else "Q0 replacement-model access gate; excluded from main analysis"
             if args.replacement_gate
             else "Q0 development gate; excluded from main analysis"
         ),
         "mode": (
-            "pretender_only_gate" if args.pretender_only
+            "judge2_only_gate" if args.judge2_only
+            else "pretender_only_gate" if args.pretender_only
             else "replacement_gate" if args.replacement_gate
             else "full_q0_gate"
         ),
@@ -362,10 +380,11 @@ def main() -> int:
     )
 
     pretender_outputs: dict[str, str] = {}
-    conditions = {
-        "naive": SHARED_BASE.format(question=Q0),
-        "style_controlled": SHARED_BASE.format(question=Q0) + "\n\n" + STYLE_CLAUSE,
-    }
+    conditions = {"naive": SHARED_BASE.format(question=Q0)}
+    if not args.judge2_only:
+        conditions["style_controlled"] = (
+            SHARED_BASE.format(question=Q0) + "\n\n" + STYLE_CLAUSE
+        )
 
     pretender_failures: list[dict[str, str]] = []
     for condition, prompt in conditions.items():
@@ -410,10 +429,15 @@ def main() -> int:
     )
 
     judge_results: list[dict[str, Any]] = []
-    active_judges = () if args.pretender_only else (
-        JUDGE_MODELS[:1] if args.replacement_gate else JUDGE_MODELS
-    )
-    for judge_index, model in enumerate(active_judges, start=1):
+    if args.pretender_only:
+        active_judges: tuple[tuple[int, str], ...] = ()
+    elif args.judge2_only:
+        active_judges = ((2, JUDGE_MODELS[1]),)
+    elif args.replacement_gate:
+        active_judges = ((1, JUDGE_MODELS[0]),)
+    else:
+        active_judges = tuple(enumerate(JUDGE_MODELS, start=1))
+    for judge_index, model in active_judges:
         for repetition in range(1, JUDGE_REPETITIONS + 1):
             call_id = f"judge_{judge_index}__rep_{repetition}"
             print(f"Calling {call_id} ({model})...", flush=True)
@@ -476,9 +500,15 @@ def main() -> int:
         "pretender_only_gate_passed": (
             len(pretender_outputs) == 2
         ) if args.pretender_only else None,
+        "judge2_only_gate_passed": (
+            len(pretender_outputs) == 1
+            and judge_input_source == "live_naive_pretender_output"
+            and valid_count == JUDGE_REPETITIONS
+        ) if args.judge2_only else None,
         "full_q0_gate_passed": (
             not args.replacement_gate
             and not args.pretender_only
+            and not args.judge2_only
             and
             len(pretender_outputs) == 2
             and judge_input_source == "live_naive_pretender_output"
@@ -492,7 +522,9 @@ def main() -> int:
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     print(f"Results saved to: {run_dir.resolve()}")
     passed = (
-        summary["pretender_only_gate_passed"]
+        summary["judge2_only_gate_passed"]
+        if args.judge2_only
+        else summary["pretender_only_gate_passed"]
         if args.pretender_only
         else summary["replacement_gate_passed"]
         if args.replacement_gate

@@ -22,9 +22,9 @@ python3 scripts/q0_gate.py --check-config
 
 This makes no API calls. The full mode should report one Pretender, two Judges, and eight planned successful calls.
 
-The current candidates are paid GPT-4.1 Mini as Pretender, Nex as Judge 1, and retained Nemotron as Judge 2. Qwen, GLM, Mistral, and Gemma were retired after separately timed endpoint failures. If the Pretender fails in full mode, the script records the error and continues testing Judges with a frozen diagnostic fixture. Fixture-based Judge outputs test access and schema compliance only and are excluded from study analysis.
+The current configuration is paid GPT-4.1 Mini as Pretender, Nex as Judge 1, and paid Gemini 2.5 Flash-Lite as Judge 2 candidate. Qwen, GLM, Mistral, Gemma, and Nemotron were retired after documented endpoint failures. If the Pretender fails in full mode, the script records the error and continues testing Judges with a frozen diagnostic fixture. Fixture-based Judge outputs test access and schema compliance only and are excluded from study analysis.
 
-Protocol v1.4 retains the v1.1 decision to disable provider-default reasoning for Judges that support it. GPT-4.1 Mini does not advertise a reasoning parameter, so the Pretender request omits that field. Failed content extraction retains the complete raw API response for diagnosis.
+Protocol v1.5 retains the v1.1 decision to disable provider-default reasoning for Judges that support it. GPT-4.1 Mini does not advertise a reasoning parameter, so the Pretender request omits that field. Failed content extraction retains the complete raw API response for diagnosis.
 
 ## 4. Run the gate
 
@@ -42,6 +42,15 @@ If `pretender_only_gate_passed` is `true`, run the complete Q0 dry run once:
 ```bash
 python3 scripts/q0_gate.py
 ```
+
+If the complete run retires Judge 2, test only its replacement with one live naive Pretender response:
+
+```bash
+python3 scripts/q0_gate.py --check-config --judge2-only
+python3 scripts/q0_gate.py --judge2-only
+```
+
+This performs one paid Pretender call and three Gemini Judge calls. It does not repeat the style-controlled generation or Nex calls.
 
 The script performs two Pretender calls and six Judge calls. Retryable HTTP failures receive at most two retries with delays. Results are written immediately under a timestamped directory in `outputs/q0_gate/`.
 

@@ -1,4 +1,4 @@
-# Protocol v1.4 — stable OpenAI Pretender endpoint
+# Protocol v1.5 — stable paid model endpoints
 
 ## Scope
 
@@ -37,7 +37,7 @@ finish_reason_recorded: true
 
 The same model and supported parameters are used across both conditions. Every response records the exact model ID or alias, provider, access tier, access date, supported parameters, output-token count where available, and finish reason. Responses terminated by an output-token limit are retained as documented cases but excluded from length and mean-sentence-length comparisons.
 
-Reasoning is explicitly disabled for Judge calls that support the parameter because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. GPT-4.1 Mini does not advertise a reasoning parameter, so that field is omitted rather than sending an unsupported control. This decision was first recorded as protocol v1.1; free-model replacements were recorded in v1.2, the first paid candidate in v1.3, and the stable OpenAI candidate in v1.4.
+Reasoning is explicitly disabled for Judge calls that support the parameter because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. GPT-4.1 Mini does not advertise a reasoning parameter, so that field is omitted rather than sending an unsupported control. This decision was first recorded as protocol v1.1; free-model replacements were recorded in v1.2, the first paid candidate in v1.3, the stable OpenAI candidate in v1.4, and the stable paid Judge 2 candidate in v1.5.
 
 Because free access tiers may change model aliases, backend providers, limits, or availability over time, exact reproducibility is not guaranteed. The exact identifier exposed by the provider and execution date will be recorded.
 
@@ -54,8 +54,8 @@ Because free access tiers may change model aliases, backend providers, limits, o
 ```yaml
 judge_model_1_candidate: nex-agi/nex-n2.5-mini:free
 judge_model_1_catalog_canonical_slug_observed: nex-agi/nex-n2.5-mini-20260908
-judge_model_2_candidate: nvidia/nemotron-3-super-120b-a12b:free
-judge_model_2_catalog_canonical_slug_observed: nvidia/nemotron-3-super-120b-a12b-20230311
+judge_model_2_candidate: google/gemini-2.5-flash-lite
+judge_model_2_catalog_canonical_slug_observed: google/gemini-2.5-flash-lite
 judge_response_format: json_object
 reasoning: disabled
 model_status: candidates_until_Q0_gate_passes
@@ -64,9 +64,9 @@ distinct_families_from_pretender_and_each_other: required
 
 Using distinct families reduces direct self-enhancement confounding but does not guarantee evaluator independence.
 
-The original candidate IDs were retrieved from the OpenRouter models API on 2026-09-20 UTC; replacement availability and supported parameters were checked again on 2026-09-21 UTC. Canonical slugs are provenance records rather than guarantees of a fixed backend. GPT-4.1 Mini is now the paid Pretender candidate, Nex is Judge 1, and Nemotron is Judge 2. The Judge candidates advertise structured or JSON response support. GPT-4.1 Mini is not frozen as the study Pretender until it passes the two-condition Q0 gate.
+The original candidate IDs were retrieved from the OpenRouter models API on 2026-09-20 UTC; replacement availability and supported parameters were checked again on 2026-09-21 UTC. Canonical slugs are provenance records rather than guarantees of a fixed backend. GPT-4.1 Mini is the paid Pretender, Nex is Judge 1, and paid Gemini 2.5 Flash-Lite is the Judge 2 candidate. The Judge models advertise structured or JSON response support. Gemini is not frozen as Judge 2 until it passes three Q0 schema-valid calls.
 
-Qwen was retired after a separately timed retry on 2026-09-21 again failed both required conditions: the naive request returned HTTP 200 without string content, while the style-controlled request exhausted retries with upstream HTTP 429. Gemma was retired after two separately timed diagnostics produced 0/6 successful calls, all due to upstream HTTP 429. A subsequent authenticated replacement gate found Nex schema-valid on 3/3 calls, but both GLM Pretender conditions exhausted retries because its free upstream provider was overloaded. Nex is therefore retained as Judge 1, while GLM is retired. Paid Mistral then completed the naive condition but exhausted upstream 429 retries for the style-controlled condition. GPT-4.1 Mini is therefore the final paid Pretender candidate because it supports the frozen sampling parameters without model-specific reasoning controls. Nemotron remains Judge 2 after 6/6 schema-valid diagnostic calls across two runs.
+Qwen was retired after a separately timed retry on 2026-09-21 again failed both required conditions: the naive request returned HTTP 200 without string content, while the style-controlled request exhausted retries with upstream HTTP 429. Gemma was retired after two separately timed diagnostics produced 0/6 successful calls, all due to upstream HTTP 429. A subsequent authenticated replacement gate found Nex schema-valid on 3/3 calls, but both GLM Pretender conditions exhausted retries because its free upstream provider was overloaded. Nex is therefore retained as Judge 1, while GLM is retired. Paid Mistral then completed the naive condition but exhausted upstream 429 retries for the style-controlled condition. GPT-4.1 Mini passed both Pretender conditions and is frozen. In the complete Q0 run, Nemotron produced only 1/3 schema-valid outputs; the other two raw responses were explicit NVIDIA `503 provider_overloaded` errors. Nemotron is therefore retired and paid Gemini 2.5 Flash-Lite becomes the final Judge 2 candidate.
 
 For the Q0 access and parsing gate only, the human anchor is placed in A and the naive Pretender output in B. Each Judge candidate evaluates this same pair independently three times. If the live naive output is unavailable, Judges instead receive a frozen diagnostic Pretender fixture so their access and JSON compliance can still be tested. Fixture-based outputs are marked as diagnostics and excluded from cue coding, condition comparison, and all identification claims. A failure in any model is recorded without preventing the remaining model endpoints from being attempted.
 

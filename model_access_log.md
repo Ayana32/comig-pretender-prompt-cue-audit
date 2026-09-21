@@ -77,3 +77,15 @@ Local run directory: `20260921T173023Z`
 | Style-controlled | All attempts returned upstream HTTP 429 from the Mistral provider |
 
 The API key and paid balance were valid, and the naive call confirms that the request format was accepted. The endpoint nevertheless failed the requirement that both conditions complete under the same run policy. Mistral is therefore retired for this time-bounded pilot. `openai/gpt-4.1-mini` is selected as the final paid Pretender candidate; its observed canonical slug is `openai/gpt-4.1-mini-2025-04-14`, and its advertised parameters include `temperature`, `top_p`, and `max_tokens` without a reasoning parameter.
+
+## 2026-09-21 — Complete Q0 run with GPT-4.1 Mini
+
+Local run directory: `20260921T184022Z`
+
+| Endpoint | Outcome |
+|---|---|
+| GPT-4.1 Mini Pretender | 2/2 conditions completed |
+| Nex Judge | 3/3 exact-JSON schema-valid |
+| Nemotron Judge | 1/3 schema-valid; 2/3 raw responses contained NVIDIA `503 provider_overloaded` errors |
+
+GPT-4.1 Mini is frozen as Pretender and Nex as Judge 1. Nemotron is retired because it failed on the live, longer naive response despite earlier fixture-based access success. `google/gemini-2.5-flash-lite` is selected as a paid Judge 2 candidate. The differing Nex selections on the identical Q0 pair are retained as a development observation about run-to-run judge variability, but Q0 is excluded from the main analysis.

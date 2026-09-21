@@ -3,11 +3,11 @@
 
 The API key is read only from OPENROUTER_API_KEY and is never written to disk.
 This script performs eight successful-call targets:
-  1. Mistral Pretender: naive once and style-controlled once.
+  1. GPT-4.1 Mini Pretender: naive once and style-controlled once.
   2. Nex Judge: three independent calls on the naive Q0 pair.
   3. Nemotron Judge: three independent calls on the same naive Q0 pair.
 
-Use --pretender-only to call only the newly selected paid Mistral endpoint.
+Use --pretender-only to call only the newly selected paid OpenAI endpoint.
 
 Q0 is a development item and is excluded from the main analysis.
 """
@@ -29,10 +29,11 @@ from typing import Any
 
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
-PRETENDER_MODEL = "mistralai/mistral-small-2603"
+PRETENDER_MODEL = "openai/gpt-4.1-mini"
 RETIRED_PRETENDER_MODELS = (
     "qwen/qwen3.8-27b:free",
     "z-ai/glm-5.2:free",
+    "mistralai/mistral-small-2603",
 )
 JUDGE_MODELS = (
     "nex-agi/nex-n2.5-mini:free",
@@ -297,7 +298,7 @@ def main() -> int:
     parser.add_argument(
         "--pretender-only",
         action="store_true",
-        help="Call only the newly selected Mistral Pretender in both conditions.",
+        help="Call only the newly selected GPT-4.1 Mini Pretender in both conditions.",
     )
     args = parser.parse_args()
 
@@ -315,7 +316,8 @@ def main() -> int:
         print(f"Retired Pretenders: {', '.join(RETIRED_PRETENDER_MODELS)}")
         for index, model in enumerate(JUDGE_MODELS, start=1):
             print(f"Judge {index}: {model}")
-        print("Reasoning: explicitly disabled for all calls")
+        print("Pretender reasoning: not requested (parameter unsupported)")
+        print("Judge reasoning: explicitly disabled")
         planned = 2 if args.pretender_only else (5 if args.replacement_gate else 8)
         mode = "pretender-only gate" if args.pretender_only else (
             "replacement gate" if args.replacement_gate else "full Q0 gate"
@@ -332,7 +334,7 @@ def main() -> int:
     manifest = {
         "started_at_utc": utc_now(),
         "purpose": (
-            "Q0 paid-Pretender access gate; excluded from main analysis"
+            "Q0 paid OpenAI Pretender access gate; excluded from main analysis"
             if args.pretender_only
             else "Q0 replacement-model access gate; excluded from main analysis"
             if args.replacement_gate
@@ -348,7 +350,8 @@ def main() -> int:
         "temperature": TEMPERATURE,
         "top_p": TOP_P,
         "max_output_tokens": MAX_OUTPUT_TOKENS,
-        "reasoning": REASONING_CONFIG,
+        "pretender_reasoning": None,
+        "judge_reasoning": REASONING_CONFIG,
         "judge_repetitions": JUDGE_REPETITIONS,
         "judge_input_condition": "naive",
         "q0_human_position": "A",
@@ -374,7 +377,6 @@ def main() -> int:
             "temperature": TEMPERATURE,
             "top_p": TOP_P,
             "max_tokens": MAX_OUTPUT_TOKENS,
-            "reasoning": REASONING_CONFIG,
         }
         response: dict[str, Any] | None = None
         try:

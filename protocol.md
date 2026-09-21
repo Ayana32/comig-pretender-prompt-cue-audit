@@ -1,4 +1,4 @@
-# Protocol v1.3 — stable paid Pretender endpoint
+# Protocol v1.4 — stable OpenAI Pretender endpoint
 
 ## Scope
 
@@ -17,17 +17,18 @@ It does not measure human identification accuracy, claim that human judges use t
 ## Generation
 
 ```yaml
-pretender_model_candidate: mistralai/mistral-small-2603
-catalog_canonical_slug_observed: mistralai/mistral-small-2603
+pretender_model_candidate: openai/gpt-4.1-mini
+catalog_canonical_slug_observed: openai/gpt-4.1-mini-2025-04-14
 access_tier: paid
 retired_candidates:
   - qwen/qwen3.8-27b:free
   - z-ai/glm-5.2:free
+  - mistralai/mistral-small-2603
 model_status: candidate_until_Q0_gate_passes
 temperature: 0.7
 top_p: 0.95
 max_output_tokens: 1024
-reasoning: disabled
+reasoning: not_applicable_or_not_requested
 runs_per_condition: 3
 designated_run: run_1
 seed_policy: use_only_if_supported; otherwise record_unsupported
@@ -36,7 +37,7 @@ finish_reason_recorded: true
 
 The same model and supported parameters are used across both conditions. Every response records the exact model ID or alias, provider, access tier, access date, supported parameters, output-token count where available, and finish reason. Responses terminated by an output-token limit are retained as documented cases but excluded from length and mean-sentence-length comparisons.
 
-Reasoning is explicitly disabled for Pretender and Judge calls because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. Allowing model-specific default reasoning would confound model comparisons and could create condition-dependent missing outputs. This decision was first recorded as protocol v1.1; free-model replacements were recorded in v1.2, and the stable paid-Pretender decision is recorded in v1.3.
+Reasoning is explicitly disabled for Judge calls that support the parameter because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. GPT-4.1 Mini does not advertise a reasoning parameter, so that field is omitted rather than sending an unsupported control. This decision was first recorded as protocol v1.1; free-model replacements were recorded in v1.2, the first paid candidate in v1.3, and the stable OpenAI candidate in v1.4.
 
 Because free access tiers may change model aliases, backend providers, limits, or availability over time, exact reproducibility is not guaranteed. The exact identifier exposed by the provider and execution date will be recorded.
 
@@ -63,9 +64,9 @@ distinct_families_from_pretender_and_each_other: required
 
 Using distinct families reduces direct self-enhancement confounding but does not guarantee evaluator independence.
 
-The original candidate IDs were retrieved from the OpenRouter models API on 2026-09-20 UTC; replacement availability and supported parameters were checked again on 2026-09-21 UTC. Canonical slugs are provenance records rather than guarantees of a fixed backend. Mistral Small 2603 is now the paid Pretender candidate, Nex is Judge 1, and Nemotron is Judge 2. The Judge candidates advertise structured or JSON response support. Mistral is not frozen as the study Pretender until it passes the two-condition Q0 gate.
+The original candidate IDs were retrieved from the OpenRouter models API on 2026-09-20 UTC; replacement availability and supported parameters were checked again on 2026-09-21 UTC. Canonical slugs are provenance records rather than guarantees of a fixed backend. GPT-4.1 Mini is now the paid Pretender candidate, Nex is Judge 1, and Nemotron is Judge 2. The Judge candidates advertise structured or JSON response support. GPT-4.1 Mini is not frozen as the study Pretender until it passes the two-condition Q0 gate.
 
-Qwen was retired after a separately timed retry on 2026-09-21 again failed both required conditions: the naive request returned HTTP 200 without string content, while the style-controlled request exhausted retries with upstream HTTP 429. Gemma was retired after two separately timed diagnostics produced 0/6 successful calls, all due to upstream HTTP 429. A subsequent authenticated replacement gate found Nex schema-valid on 3/3 calls, but both GLM Pretender conditions exhausted retries because its free upstream provider was overloaded. Nex is therefore retained as Judge 1, while GLM is retired. To prevent the seven-day pilot from becoming a test of volatile shared free capacity, Mistral Small 2603 is the paid Pretender candidate. Nemotron remains Judge 2 after 6/6 schema-valid diagnostic calls across two runs.
+Qwen was retired after a separately timed retry on 2026-09-21 again failed both required conditions: the naive request returned HTTP 200 without string content, while the style-controlled request exhausted retries with upstream HTTP 429. Gemma was retired after two separately timed diagnostics produced 0/6 successful calls, all due to upstream HTTP 429. A subsequent authenticated replacement gate found Nex schema-valid on 3/3 calls, but both GLM Pretender conditions exhausted retries because its free upstream provider was overloaded. Nex is therefore retained as Judge 1, while GLM is retired. Paid Mistral then completed the naive condition but exhausted upstream 429 retries for the style-controlled condition. GPT-4.1 Mini is therefore the final paid Pretender candidate because it supports the frozen sampling parameters without model-specific reasoning controls. Nemotron remains Judge 2 after 6/6 schema-valid diagnostic calls across two runs.
 
 For the Q0 access and parsing gate only, the human anchor is placed in A and the naive Pretender output in B. Each Judge candidate evaluates this same pair independently three times. If the live naive output is unavailable, Judges instead receive a frozen diagnostic Pretender fixture so their access and JSON compliance can still be tested. Fixture-based outputs are marked as diagnostics and excluded from cue coding, condition comparison, and all identification claims. A failure in any model is recorded without preventing the remaining model endpoints from being attempted.
 

@@ -66,3 +66,14 @@ After authentication was corrected:
 | Nex Judge | 3/3 calls completed; 3/3 exact-JSON schema-valid |
 
 Nex is retained as Judge 1. GLM is retired as Pretender because both required conditions failed and continuing to rotate shared free endpoints would threaten the fixed seven-day schedule. `mistralai/mistral-small-2603` is selected as a paid Pretender candidate and receives a two-call Pretender-only Q0 gate before the complete dry run.
+
+## 2026-09-21 — Paid Mistral Pretender gate
+
+Local run directory: `20260921T173023Z`
+
+| Condition | Outcome |
+|---|---|
+| Naive | Completed successfully |
+| Style-controlled | All attempts returned upstream HTTP 429 from the Mistral provider |
+
+The API key and paid balance were valid, and the naive call confirms that the request format was accepted. The endpoint nevertheless failed the requirement that both conditions complete under the same run policy. Mistral is therefore retired for this time-bounded pilot. `openai/gpt-4.1-mini` is selected as the final paid Pretender candidate; its observed canonical slug is `openai/gpt-4.1-mini-2025-04-14`, and its advertised parameters include `temperature`, `top_p`, and `max_tokens` without a reasoning parameter.

@@ -22,9 +22,9 @@ python3 scripts/q0_gate.py --check-config
 
 This makes no API calls. The full mode should report one Pretender, two Judges, and eight planned successful calls.
 
-The current candidates are paid Mistral Small 2603 as Pretender, Nex as Judge 1, and retained Nemotron as Judge 2. Qwen, GLM, and Gemma were retired after separately timed endpoint failures. If the Pretender fails in full mode, the script records the error and continues testing Judges with a frozen diagnostic fixture. Fixture-based Judge outputs test access and schema compliance only and are excluded from study analysis.
+The current candidates are paid GPT-4.1 Mini as Pretender, Nex as Judge 1, and retained Nemotron as Judge 2. Qwen, GLM, Mistral, and Gemma were retired after separately timed endpoint failures. If the Pretender fails in full mode, the script records the error and continues testing Judges with a frozen diagnostic fixture. Fixture-based Judge outputs test access and schema compliance only and are excluded from study analysis.
 
-Protocol v1.3 retains the v1.1 decision to disable provider-default reasoning for all three models. This keeps the output-token policy comparable across model families and prevents hidden reasoning from exhausting the visible-answer budget. Failed content extraction also retains the complete raw API response for diagnosis.
+Protocol v1.4 retains the v1.1 decision to disable provider-default reasoning for Judges that support it. GPT-4.1 Mini does not advertise a reasoning parameter, so the Pretender request omits that field. Failed content extraction retains the complete raw API response for diagnosis.
 
 ## 4. Run the gate
 
@@ -35,7 +35,7 @@ python3 scripts/q0_gate.py --check-config --pretender-only
 python3 scripts/q0_gate.py --pretender-only
 ```
 
-This makes only two Mistral Pretender calls, one per condition. It does not repeat the already-completed Nex or Nemotron access probes.
+This makes only two GPT-4.1 Mini Pretender calls, one per condition. It does not repeat the already-completed Nex or Nemotron access probes.
 
 If `pretender_only_gate_passed` is `true`, run the complete Q0 dry run once:
 

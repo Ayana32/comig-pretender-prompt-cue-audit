@@ -50,3 +50,19 @@ Local run directory: `20260920T205014Z`
 Because the live naive response was unavailable, both Judges were probed with the frozen diagnostic fixture. Nemotron selected B on all three calls with confidence 88, 80, and 80. These selections are not study findings: the fixture was designed only to exercise the endpoint and schema and is excluded from cue coding and identification analysis.
 
 The run exposed a cross-model configuration problem. Qwen and Nemotron returned substantial reasoning fields, while Gemma's catalog default has reasoning disabled. OpenRouter documents that reasoning tokens usually count against `max_tokens` and can leave empty content. Protocol v1.1 therefore disables reasoning explicitly for all Pretender and Judge calls and reruns Q0. The runner also now retains a raw API response when content extraction or validation fails.
+
+## 2026-09-21 — GLM/Nex replacement gate
+
+Local run directory: `20260921T171107Z`
+
+An earlier `20260921T170301Z` run returned HTTP 401 for every endpoint because the local API credential was invalid; it is classified as an authentication-invalid run and provides no model-access evidence.
+
+After authentication was corrected:
+
+| Endpoint | Outcome |
+|---|---|
+| GLM naive | All attempts returned upstream HTTP 429; provider reported `overloaded` |
+| GLM style-controlled | All attempts returned upstream HTTP 429; provider reported `overloaded` |
+| Nex Judge | 3/3 calls completed; 3/3 exact-JSON schema-valid |
+
+Nex is retained as Judge 1. GLM is retired as Pretender because both required conditions failed and continuing to rotate shared free endpoints would threaten the fixed seven-day schedule. `mistralai/mistral-small-2603` is selected as a paid Pretender candidate and receives a two-call Pretender-only Q0 gate before the complete dry run.

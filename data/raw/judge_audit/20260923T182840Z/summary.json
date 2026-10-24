@@ -1,0 +1,16 @@
+{
+  "completed_at_utc": "2026-09-23T18:30:27.385071+00:00",
+  "run_directory": "outputs/judge_audit/20260923T182840Z",
+  "expected_calls": 64,
+  "completed_api_outputs": 64,
+  "schema_valid_outputs": 64,
+  "missing_call_ids": [],
+  "schema_invalid_call_ids": [],
+  "fatal_call_ids_last_attempt": [],
+  "counts_by_judge_and_schema_valid": {
+    "judge_1|True": 32,
+    "judge_2|True": 32
+  },
+  "primary_execution_complete": true,
+  "full_schema_gate_passed": true
+}

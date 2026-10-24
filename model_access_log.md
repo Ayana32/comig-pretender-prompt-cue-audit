@@ -89,3 +89,17 @@ Local run directory: `20260921T184022Z`
 | Nemotron Judge | 1/3 schema-valid; 2/3 raw responses contained NVIDIA `503 provider_overloaded` errors |
 
 GPT-4.1 Mini is frozen as Pretender and Nex as Judge 1. Nemotron is retired because it failed on the live, longer naive response despite earlier fixture-based access success. `google/gemini-2.5-flash-lite` is selected as a paid Judge 2 candidate. The differing Nex selections on the identical Q0 pair are retained as a development observation about run-to-run judge variability, but Q0 is excluded from the main analysis.
+
+## 2026-09-21 — Final Gemini gate and canonical Q0 run
+
+Replacement-gate run `20260921T184708Z` completed one live GPT-4.1 Mini naive response and produced 3/3 schema-valid Gemini Judge outputs. Canonical complete run `20260921T184834Z` then completed both Pretender conditions and produced 6/6 schema-valid outputs across Nex and Gemini.
+
+Final frozen configuration:
+
+| Role | Model |
+|---|---|
+| Pretender | `openai/gpt-4.1-mini` |
+| Judge 1 | `nex-agi/nex-n2.5-mini:free` |
+| Judge 2 | `google/gemini-2.5-flash-lite` |
+
+In the canonical run, Nex selected the true human anchor A on all three calls, while Gemini selected Pretender response B on all three. Nex treated polished structure as an AI cue; Gemini treated structure, detail, and concrete methods as evidence of human expertise. This Q0 development disagreement motivated codebook v1.1's target-response and signal-direction fields and is excluded from main statistics.

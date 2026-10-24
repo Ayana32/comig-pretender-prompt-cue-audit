@@ -1,0 +1,286 @@
+Blind ID,Event order,Cue code,Target response,Signal direction,Evidence span,Event memo,Event complete
+J001,1,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,sounds more like a researcher’s practical workflow: it names concrete checks,,Yes
+J001,2,STYLE_FORMAT,B,UNSPECIFIED,repetitive,,Yes
+J001,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,focusing on broad hypotheses and elimination without the same field-specific detail,,Yes
+J002,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,more detailed and nuanced approach to distinguishing between meaningful effects and artifacts,,Yes
+J002,2,TECHNICAL_SUBSTANCE,B,HUMAN_SIGNAL,"This logical progression and emphasis on consistency across different experimental factors suggest a deeper understanding of experimental design, characteristic of a human researcher.",,Yes
+J003,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"much more detailed and structured approach to investigating the anomaly, demonstrating a deeper understanding of the nuances involved in multilingual NLP evaluation",,Yes
+J003,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"breaks down the investigation into logical steps, including data, model behavior, linguistic factors, and controlled experiments, which is characteristic of expert analysis",,Yes
+J003,3,STYLE_FORMAT,B,UNSPECIFIED,too brief,,Yes
+J003,4,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,"too brief and generic, lacking the depth expected from a postgraduate researcher",,Yes
+J004,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,provides a more detailed and structured approach to investigating tokenization as a cause,,Yes
+J004,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,measuring token fertility is less direct and its proposed solution of reducing fertility is not clearly explained,,Yes
+J005,1,EXPERIENTIAL_TACIT,B,HUMAN_SIGNAL,"Response B sounds more like a researcher’s evaluation design: it explicitly combines human evaluation with LLM-as-a-judge, chooses pairwise comparison to address scoring instability, and mentions testing for position bias.",,Yes
+J005,2,EXPERIENTIAL_TACIT,B,UNSPECIFIED,These details reflect practical multilingual LLM-evaluation concerns.,,Yes
+J005,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,listing broad criteria and well-known limitations without the same methodological specificity,,Yes
+J006,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,provides a more detailed and structured approach to addressing the reviewer’s comment,,Yes
+J006,2,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"specific techniques like causal mediation analysis and counterfactual generation, even citing relevant work",,Yes
+J006,3,TECHNICAL_SUBSTANCE,COMPARISON,HUMAN_SIGNAL,"lacks the depth and specific experimental suggestions seen in B, which are characteristic of a human researcher’s thoroughness",,Yes
+J007,1,STYLE_FORMAT,A,HUMAN_SIGNAL,it is structured,,Yes
+J007,2,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,uses field-specific distinctions such as representational similarity versus functional equivalence,,Yes
+J007,3,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,names relevant methods like CKA/SVCCA and discusses layer-wise and task-head analyses in a nuanced way,,Yes
+J007,4,EPISTEMIC_STYLE,B,AI_SIGNAL,much more tentative,,Yes
+J007,5,AI_STEREOTYPE,B,AI_SIGNAL,"generic, with phrases like “we could claim” and “we need more experiments,” which makes it feel more AI-like",,Yes
+J008,1,CONTEXT_SENSITIVITY,A,HUMAN_SIGNAL,Response A reads like a careful researcher’s answer: it frames the issue as what would make one suspicious,,Yes
+J008,2,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"gives coherent, domain-relevant artifacts such as mistranslation, cultural transfer, annotation inconsistency, and tokenization effects",,Yes
+J008,3,AI_STEREOTYPE,B,AI_SIGNAL,Response B is more generic,,Yes
+J008,4,STYLE_FORMAT,B,AI_SIGNAL,awkwardly repetitive,,Yes
+J008,5,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,"vague cues like “lexical cues” and “the cue,” making it look more AI-generated",,Yes
+J009,1,EPISTEMIC_STYLE,A,UNSPECIFIED,slightly more cautious,,Yes
+J009,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"methodologically precise, explicitly limiting claims to correlational evidence and naming activation patching, ablation, and counterfactual interventions",,Yes
+J009,3,STYLE_REGISTER,B,UNSPECIFIED,slightly more generic and conversational,,Yes
+J010,1,EPISTEMIC_STYLE,B,UNSPECIFIED,offers a more nuanced interpretation,,Yes
+J010,2,CONTEXT_SENSITIVITY,B,UNSPECIFIED,acknowledging potential limitations in capturing task-specific or language-specific features,,Yes
+J010,3,EXPERIENTIAL_TACIT,B,HUMAN_SIGNAL,"proposes concrete next steps like probing task alignment and analyzing error patterns, which are characteristic of a researcher's approach to dissecting complex findings",,Yes
+J010,4,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"more generic, suggesting 'more experiments' without specifying what kind",,Yes
+J011,1,TECHNICAL_SUBSTANCE,B,HUMAN_SIGNAL,"is more likely human-written because it gives concrete multilingual NLP examples such as FLORES, XTREME, tokenizers, language tags, BLEU, chrF, and detokenization",,Yes
+J011,2,EXPERIENTIAL_TACIT,B,HUMAN_SIGNAL,"Its detailed, practical troubleshooting structure feels like an experienced researcher’s checklist",,Yes
+J011,3,STYLE_FORMAT,A,UNSPECIFIED,much more generic and compressed,,Yes
+J011,4,STYLE_FORMAT,A,UNSPECIFIED,Response A’s brevity could also be a deliberate expert answer,,Yes
+J012,1,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,it emphasizes documenting irreproducibility and tracing the pipeline with intermediate outputs to localize the failure,,Yes
+J012,2,STYLE_FORMAT,B,UNSPECIFIED,it is more like a standard checklist of technical checks,,Yes
+J012,3,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,A’s focus on stepwise process tracing gives it a slight human-researcher feel,,Yes
+J013,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,gives a more complete and technically coherent interpretation,,Yes
+J013,2,CONTEXT_SENSITIVITY,B,UNSPECIFIED,it distinguishes shared cross-lingual representations from task-specific or language-specific gaps,,Yes
+J013,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"proposes concrete follow-up tests such as task alignment, fine-tuning, and error analysis",,Yes
+J013,4,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"vague, with less developed experimental reasoning",,Yes
+J014,1,STYLE_FORMAT,B,HUMAN_SIGNAL,more concise,,Yes
+J014,2,STYLE_REGISTER,B,HUMAN_SIGNAL,direct,,Yes
+J014,3,EPISTEMIC_STYLE,B,HUMAN_SIGNAL,"appropriately calibrated, matching how a researcher would respond to a reviewer by limiting claims to correlational evidence",,Yes
+J014,4,STYLE_FORMAT,A,AI_SIGNAL,Response A is more verbose,,Yes
+J014,5,AI_STEREOTYPE,A,AI_SIGNAL,somewhat generic,,Yes
+J014,6,STYLE_FORMAT,A,AI_SIGNAL,repeated intervention-based points,,Yes
+J014,7,EPISTEMIC_STYLE,A,AI_SIGNAL,broad claims about “current best practices”,,Yes
+J015,1,EPISTEMIC_STYLE,A,HUMAN_SIGNAL,"it acknowledges the limitation, frames correlation as a first step",,Yes
+J015,2,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,proposes intervention-based causal tests,,Yes
+J015,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,technically sound,,Yes
+J015,4,STYLE_REGISTER,B,UNSPECIFIED,generic and procedural,,Yes
+J016,1,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,it is detailed,,Yes
+J016,2,STYLE_FORMAT,A,HUMAN_SIGNAL,structured,,Yes
+J016,3,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,"includes concrete checks such as RTL scripts, token ID mismatches, embeddings, random seeds, and human evaluation",,Yes
+J016,4,STYLE_FORMAT,B,UNSPECIFIED,compressed,,Yes
+J016,5,EXPERIENTIAL_TACIT,B,UNSPECIFIED,lacking the domain-specific examples and nuanced troubleshooting language seen in A,,Yes
+J017,1,STYLE_REGISTER,B,HUMAN_SIGNAL,"a fuller, more natural academic tone",,Yes
+J017,2,STYLE_REGISTER,B,HUMAN_SIGNAL,a polite reviewer response,,Yes
+J017,3,STYLE_FORMAT,B,HUMAN_SIGNAL,structured,,Yes
+J017,4,STYLE_REGISTER,B,HUMAN_SIGNAL,still conversational explanation,,Yes
+J017,5,STYLE_FORMAT,A,AI_SIGNAL,its terseness makes it harder to distinguish from an AI-generated summary,,Yes
+J018,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,provides a much more detailed and comprehensive approach to investigating the problem,,Yes
+J018,2,STYLE_FORMAT,B,UNSPECIFIED,structured,,Yes
+J018,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"outlines multiple specific experimental steps, control measures, and forms of analysis (like ablation studies and error analysis), which is characteristic of a thorough research methodology",,Yes
+J018,4,STYLE_FORMAT,A,AI_SIGNAL,too brief,,Yes
+J018,5,TECHNICAL_SUBSTANCE,A,AI_SIGNAL,lacks the depth of explanation expected from a postgraduate researcher,,Yes
+J019,1,STYLE_FORMAT,A,HUMAN_SIGNAL,"reads like a terse, researcher-style summary",,Yes
+J019,2,STYLE_REGISTER,A,HUMAN_SIGNAL,"informal phrases such as “I would like to pick three” and “that was the cue,”",,Yes
+J019,3,LANGUAGE_FORM,A,HUMAN_SIGNAL,a slightly awkward final sentence,,Yes
+J019,4,AI_STEREOTYPE,B,AI_SIGNAL,much more polished,,Yes
+J019,5,STYLE_FORMAT,B,AI_SIGNAL,structured,,Yes
+J019,6,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,broad multilingual-evaluation coverage,,Yes
+J019,7,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"The concrete focus on back-translation, lexical cues, and ranking shifts in A also gives it a more human, field-specific feel",,Yes
+J020,1,STYLE_FORMAT,A,HUMAN_SIGNAL,it is concise,,Yes
+J020,2,EPISTEMIC_STYLE,A,HUMAN_SIGNAL,opinionated,,Yes
+J020,3,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,"focused on a practical evaluation choice: combining human evaluation with LLM-as-a-judge, plus pairwise comparison and position-bias testing",,Yes
+J020,4,AI_STEREOTYPE,B,AI_SIGNAL,reads more like a generated survey of standard best practices,,Yes
+J020,5,AI_STEREOTYPE,B,AI_SIGNAL,formulaic structure,,Yes
+J020,6,STYLE_FORMAT,B,AI_SIGNAL,broad lists,,Yes
+J020,7,AI_STEREOTYPE,B,AI_SIGNAL,"generic limitations such as fluency, relevance, coherence, and informativeness",,Yes
+J021,1,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,"recounting concrete experimental observations, using phrases like “when we did back-translation” and “that was the cue.”",,Yes
+J021,2,LANGUAGE_FORM,A,HUMAN_SIGNAL,Its slightly awkward phrasing also feels more human,,Yes
+J021,3,STYLE_REGISTER,B,UNSPECIFIED,polished,,Yes
+J021,4,STYLE_FORMAT,B,UNSPECIFIED,generalized checklist of common artifacts,,Yes
+J021,5,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,"A has the more experiential, researcher-like tone",,Yes
+J022,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"contains more field-specific diagnostic details, mentioning model checkpoints, tokenizers, preprocessing scripts, evaluation metrics, and data splits",,Yes
+J022,2,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,That specificity is consistent with someone familiar with multilingual NLP experiment repositories,,Yes
+J022,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,Response B is sound,,Yes
+J022,4,AI_STEREOTYPE,B,AI_SIGNAL,more generic,,Yes
+J022,5,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,"abstract, which makes it slightly more likely to be AI-generated",,Yes
+J023,1,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,reads more like a human postgraduate researcher’s practical troubleshooting checklist,,Yes
+J023,2,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"concrete multilingual NLP details such as FLORES, XTREME, tokenizers, language-ID tokens, detokenization, and checkpoint hashes",,Yes
+J023,3,STYLE_FORMAT,A,AI_SIGNAL,somewhat verbose,,Yes
+J023,4,AI_STEREOTYPE,A,AI_SIGNAL,polished in a way that could be AI-generated,,Yes
+J023,5,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,its domain-specific examples make it the more plausible human-authored response,,Yes
+J024,1,EXPERIENTIAL_TACIT,A,UNSPECIFIED,"demonstrates a more nuanced and practical approach by suggesting specific steps like verifying tokenization and metric alignment, and comparing intermediate results",,Yes
+J024,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,a more detailed reporting strategy,,Yes
+J024,3,CONTEXT_SENSITIVITY,A,UNSPECIFIED,linguistic idiosyncrasies,,Yes
+J024,4,EPISTEMIC_STYLE,A,HUMAN_SIGNAL,"cautious interpretation, which is characteristic of a human researcher's thought process in handling complex data anomalies",,Yes
+J025,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,proposes a more comprehensive and nuanced investigation strategy,,Yes
+J025,2,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,is a narrower approach and doesn't directly address the quality of tokenization itself as thoroughly as Response A,,Yes
+J026,1,EPISTEMIC_STYLE,A,HUMAN_SIGNAL,"a more tentative, researcher-like style, with hedging such as “could” and “might”",,Yes
+J026,2,EPISTEMIC_STYLE,A,HUMAN_SIGNAL,a focus on methodological caution,,Yes
+J026,3,STYLE_FORMAT,B,UNSPECIFIED,more formulaic and expansive,,Yes
+J026,4,STYLE_FORMAT,B,UNSPECIFIED,"polished headings, bullet points, examples",,Yes
+J026,5,AI_STEREOTYPE,B,AI_SIGNAL,"a concluding offer to recommend papers, which feels more AI-generated",,Yes
+J027,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,provides a more comprehensive and nuanced approach to the evaluation problem,,Yes
+J027,2,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,also addresses the limitations of automated metrics like BLEU/ROUGE in this context,,Yes
+J027,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,less detailed and its suggested methods are not as clearly explained,,Yes
+J028,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,more comprehensive,,Yes
+J028,2,STYLE_FORMAT,B,UNSPECIFIED,structured,,Yes
+J028,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"provides a more nuanced discussion of limitations, including subjectivity, metric biases, and language coverage",,Yes
+J028,4,STYLE_FORMAT,A,AI_SIGNAL,very brief,,Yes
+J028,5,TECHNICAL_SUBSTANCE,A,AI_SIGNAL,lacks the depth expected from a postgraduate researcher in the field,,Yes
+J029,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,much more detailed,,Yes
+J029,2,STYLE_FORMAT,B,UNSPECIFIED,structured,,Yes
+J029,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,comprehensive investigation plan,,Yes
+J029,4,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"breaks down the problem into logical steps with specific examples relevant to NLP and linguistics, such as tokenization, morphological complexity, and script issues",,Yes
+J029,5,TECHNICAL_SUBSTANCE,A,AI_SIGNAL,too general and lacks the depth expected from a postgraduate researcher in the field,,Yes
+J030,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,demonstrates a more comprehensive understanding of evaluation metrics relevant to open-ended responses,,Yes
+J030,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,explicitly states the limitations of automated metrics like BLEU and ROUGE in this context,,Yes
+J030,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"Response B's suggestion of LLM-as-a-judge, while valid, is less detailed",,Yes
+J030,4,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,its mention of position-bias test is a bit out of scope for the core question,,Yes
+J031,1,LANGUAGE_FORM,A,UNSPECIFIED,uses slightly more natural phrasing like 'I'd acknowledge' and 'probe causality',,Yes
+J031,2,LANGUAGE_FORM,B,UNSPECIFIED,the phrasing 'answer by limiting my claims' feels a bit more stilted,,Yes
+J031,3,TECHNICAL_SUBSTANCE,BOTH,UNSPECIFIED,Both propose similar methods for redesigning the experiment,,Yes
+J032,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"provides a comprehensive and nuanced interpretation of the observed phenomenon, detailing potential reasons for the disconnect between representational similarity and behavioral transfer",,Yes
+J032,2,STYLE_FORMAT,A,UNSPECIFIED,structured,,Yes
+J032,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"detailed plan for future testing, demonstrating a deep understanding of the field's methodologies",,Yes
+J032,4,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,significantly less detailed and lacks the depth expected from a postgraduate researcher,,Yes
+J033,1,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,it is detailed,,Yes
+J033,2,CONTEXT_SENSITIVITY,A,HUMAN_SIGNAL,balanced,,Yes
+J033,3,EPISTEMIC_STYLE,A,HUMAN_SIGNAL,methodologically cautious,,Yes
+J033,4,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,structured experimental controls and error analysis,,Yes
+J033,5,EPISTEMIC_STYLE,A,UNSPECIFIED,It avoids overclaiming causality,,Yes
+J033,6,EXPERIENTIAL_TACIT,A,UNSPECIFIED,mentions realistic confounds such as data scarcity and domain mismatch,,Yes
+J033,7,STYLE_FORMAT,B,AI_SIGNAL,"unusually terse and compressed, which is more consistent with an AI-generated summary",,Yes
+J034,1,STYLE_FORMAT,A,HUMAN_SIGNAL,concise,,Yes
+J034,2,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,hypothesis-driven troubleshooting style,,Yes
+J034,3,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,Response B is more detailed,,Yes
+J034,4,AI_STEREOTYPE,B,AI_SIGNAL,polished,,Yes
+J034,5,STYLE_FORMAT,B,AI_SIGNAL,structured headings,,Yes
+J034,6,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,broad coverage,,Yes
+J035,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"uses more technical terminology such as 'activation patching' and 'counterfactual interventions', which are specific methods within the field of mechanistic interpretability",,Yes
+J035,2,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,Response B also mentions relevant techniques like 'targeted ablation' and 'counterfactual generation',,Yes
+J035,3,STYLE_REGISTER,A,HUMAN_SIGNAL,Response A's phrasing feels more like a researcher directly addressing a methodological critique,,Yes
+J035,4,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,with precise terminology,,Yes
+J036,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"provides a comprehensive and nuanced approach to distinguishing meaningful effects from artifacts, detailing multiple experimental and analytical strategies",,Yes
+J036,2,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"demonstrates a deeper understanding of research methodology and potential pitfalls, typical of a postgraduate researcher",,Yes
+J036,3,STYLE_FORMAT,B,UNSPECIFIED,too brief,,Yes
+J036,4,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,lacks the depth expected for a detailed research question,,Yes
+J037,1,EXPERIENTIAL_TACIT,B,HUMAN_SIGNAL,refers to a specific evaluation procedure—back-translation—and reports concrete cues such as lexical cues and large ranking shifts,,Yes
+J037,2,STYLE_FORMAT,A,UNSPECIFIED,structured,,Yes
+J037,3,STYLE_FORMAT,A,UNSPECIFIED,broad checklist-style points,,Yes
+J037,4,EXPERIENTIAL_TACIT,A,UNSPECIFIED,less tied to an observed experiment,,Yes
+J038,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,comprehensive,,Yes
+J038,2,STYLE_FORMAT,B,UNSPECIFIED,structured answer,,Yes
+J038,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,detailing specific linguistic and technical considerations,,Yes
+J038,4,STYLE_FORMAT,B,UNSPECIFIED,"The inclusion of numbered points, sub-points, and a concluding summary with actionable steps is characteristic of a detailed, expert explanation",,Yes
+J038,5,STYLE_FORMAT,A,AI_SIGNAL,very brief,,Yes
+J038,6,TECHNICAL_SUBSTANCE,A,AI_SIGNAL,lacks the depth and systematic approach expected from a postgraduate researcher,,Yes
+J039,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"uses the term ‘token fertility,’ which is a domain-specific metric commonly discussed in multilingual NLP",,Yes
+J039,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,proposes a controlled tokenizer experiment,,Yes
+J039,3,STYLE_FORMAT,B,UNSPECIFIED,reads more like a generic checklist,,Yes
+J039,4,STYLE_REGISTER,A,HUMAN_SIGNAL,A’s phrasing feels more like a researcher focused on tokenization effects,,Yes
+J040,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,more detailed,,Yes
+J040,2,STYLE_FORMAT,B,UNSPECIFIED,structured,,Yes
+J040,3,EXPERIENTIAL_TACIT,B,UNSPECIFIED,demonstrating a deeper understanding of practical LLM experimentation,,Yes
+J040,4,EXPERIENTIAL_TACIT,B,HUMAN_SIGNAL,"breaks down the investigation into logical, actionable steps covering environment, data, model, and evaluation, which is characteristic of a researcher's approach",,Yes
+J040,5,STYLE_FORMAT,A,UNSPECIFIED,too brief,,Yes
+J040,6,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,lacks the specificity expected in this domain,,Yes
+J041,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"uses more nuanced and comprehensive language, discussing ‘unnatural phrasing,’ ‘cultural references,’ ‘inconsistent annotation,’ and ‘tokenization quirks’",,Yes
+J041,2,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"Response B is more simplistic, focusing on ‘back-translation,’ ‘lexical cues,’ and ‘ranking shifts,’ which are valid but less detailed points",,Yes
+J041,3,STYLE_FORMAT,A,HUMAN_SIGNAL,The structure,,Yes
+J041,4,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,vocabulary in A suggest a human with deeper domain knowledge,,Yes
+J042,1,EXPERIENTIAL_TACIT,B,HUMAN_SIGNAL,"gives concrete, sequential checks",,Yes
+J042,2,EPISTEMIC_STYLE,B,HUMAN_SIGNAL,describes cautious reporting,,Yes
+J042,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,abstract,,Yes
+J042,4,EXPERIENTIAL_TACIT,A,UNSPECIFIED,using broad phrases like ‘hypotheses’ and ‘eliminating possible explanations’ without the same practical detail,,Yes
+J043,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,provides a more detailed and nuanced explanation of how to address the reviewer's concern,,Yes
+J043,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,citing relevant work,,Yes
+J043,3,STYLE_FORMAT,B,UNSPECIFIED,Response B is more concise,,Yes
+J043,4,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,less comprehensive in its proposed solutions,,Yes
+J044,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"provides a much more detailed and nuanced interpretation, referencing specific metrics (CKA, SVCCA) and clearly articulating potential reasons for the observed discrepancy",,Yes
+J044,2,STYLE_FORMAT,B,HUMAN_SIGNAL,The structure,,Yes
+J044,3,TECHNICAL_SUBSTANCE,B,HUMAN_SIGNAL,"depth of analysis, and comprehensive list of future tests suggest a human expert's understanding of the field",,Yes
+J044,4,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,going beyond the superficial points in Response A,,Yes
+J045,1,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"it proposes causal, controlled interventions: swapping tokenizers and testing character-level inputs, while also checking overlap and segmentation consistency",,Yes
+J045,2,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"slightly imprecise, especially the claim that low-resource languages generally have more tokens and that reducing fertility through a language-specific tokenizer should improve performance",,Yes
+J046,1,STYLE_FORMAT,A,HUMAN_SIGNAL,it is structured,,Yes
+J046,2,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"nuanced, and integrates statistical testing, replication, controls, qualitative inspection, and theoretical grounding",,Yes
+J046,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,Response B is accurate,,Yes
+J046,4,STYLE_FORMAT,B,UNSPECIFIED,terse,,Yes
+J046,5,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,less of the detail and framing typical of a postgraduate researcher addressing this evaluation question,,Yes
+J047,1,STYLE_FORMAT,A,UNSPECIFIED,more concise,,Yes
+J047,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"research-oriented, focusing on effect size, confidence intervals, and replication across models, layers, prompts, and seeds",,Yes
+J047,3,STYLE_FORMAT,B,UNSPECIFIED,more elaborate and formulaic,,Yes
+J047,4,STYLE_FORMAT,B,AI_SIGNAL,broad explanatory scaffolding and lists that resemble AI-generated writing,,Yes
+J047,5,STYLE_FORMAT,A,HUMAN_SIGNAL,A's brevity,,Yes
+J047,6,STYLE_REGISTER,A,HUMAN_SIGNAL,directness make it slightly more consistent with a human postgraduate researcher's answer,,Yes
+J048,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,provides a much more comprehensive,,Yes
+J048,2,STYLE_FORMAT,B,UNSPECIFIED,structured approach to the problem,,Yes
+J048,3,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,detailing multiple lines of evidence beyond just statistical significance and replication,,Yes
+J048,4,TECHNICAL_SUBSTANCE,B,HUMAN_SIGNAL,"The detailed breakdown, including concepts like layer-wise pattern analysis and theoretical grounding, is characteristic of a deep understanding and experience in the field, typical of a postgraduate researcher",,Yes
+J048,5,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,Response A is accurate,,Yes
+J048,6,STYLE_FORMAT,A,UNSPECIFIED,very brief,,Yes
+J048,7,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,lacks the depth of analysis presented in B,,Yes
+J049,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,provides a detailed,,Yes
+J049,2,STYLE_FORMAT,A,UNSPECIFIED,structured,,Yes
+J049,3,EXPERIENTIAL_TACIT,A,UNSPECIFIED,practical breakdown of the steps involved in debugging an LLM experiment,,Yes
+J049,4,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"demonstrates domain-specific knowledge by mentioning specific tools and considerations like tokenizers, language tags, and different multilingual datasets",,Yes
+J049,5,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,too generic and lacks the depth expected from a postgraduate researcher in the field,,Yes
+J050,1,STYLE_FORMAT,A,HUMAN_SIGNAL,concise,,Yes
+J050,2,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"it explicitly invokes effect size and confidence intervals, which are central to distinguishing a meaningful effect from noise",,Yes
+J050,3,AI_STEREOTYPE,B,AI_SIGNAL,its phrasing feels more like a general AI-generated checklist,,Yes
+J051,1,STYLE_FORMAT,A,UNSPECIFIED,more concise,,Yes
+J051,2,STYLE_REGISTER,A,UNSPECIFIED,direct,,Yes
+J051,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,technically focused on token fertility and controlled improvement with a language-specific tokenizer,,Yes
+J051,4,STYLE_FORMAT,B,UNSPECIFIED,more elaborate and formulaic,,Yes
+J051,5,STYLE_FORMAT,B,UNSPECIFIED,generic headings,,Yes
+J051,6,STYLE_REGISTER,B,UNSPECIFIED,boilerplate phrasing such as ‘Great question’ and ‘common in recent research’,,Yes
+J051,7,STYLE_FORMAT,A,HUMAN_SIGNAL,The brevity,,Yes
+J051,8,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,specialized emphasis on fertility make A more consistent with a human postgraduate researcher’s answer,,Yes
+J052,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"more specific and detailed, mentioning concrete elements like model checkpoints, tokenizers, and preprocessing scripts",,Yes
+J052,2,TECHNICAL_SUBSTANCE,B,HUMAN_SIGNAL,This level of technical detail,,Yes
+J052,3,EXPERIENTIAL_TACIT,B,HUMAN_SIGNAL,focus on common sources of error in LLM experiments is characteristic of a researcher in the field,,Yes
+J052,4,STYLE_FORMAT,A,UNSPECIFIED,procedural,,Yes
+J052,5,TECHNICAL_SUBSTANCE,A,AI_SIGNAL,lacking the specific technical insights expected from an NLP postgraduate,,Yes
+J053,1,EXPERIENTIAL_TACIT,A,UNSPECIFIED,"provides a more nuanced and practical approach, detailing a step-by-step process for validating an effect",,Yes
+J053,2,EXPERIENTIAL_TACIT,A,UNSPECIFIED,"emphasizes checking for consistency across seeds and related models first, then validating with different prompts or tasks",,Yes
+J053,3,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,This iterative validation process is characteristic of how a human researcher would approach the problem,,Yes
+J054,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,offers a more detailed and nuanced interpretation,,Yes
+J054,2,CONTEXT_SENSITIVITY,A,UNSPECIFIED,directly addressing potential causes like task-specific nuances and language-specific features,,Yes
+J054,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"Its proposed next steps (probing task alignment, fine-tuning, and error analysis) are standard and concrete in NLP research",,Yes
+J054,4,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,Response B is more abstract,,Yes
+J054,5,EXPERIENTIAL_TACIT,B,UNSPECIFIED,questioning the methods for observing similarity and suggesting a general ‘causal mechanism’ examination without specific actionable steps,,Yes
+J055,1,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"provides a comprehensive and detailed explanation, characteristic of a human expert in the field",,Yes
+J055,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"elaborates on multiple facets of potential artifacts, including translation quality, dataset issues, and tokenization, offering specific examples and structured reasoning",,Yes
+J055,3,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,"significantly less detailed and uses vague terminology, making it less convincing as a postgraduate researcher’s answer",,Yes
+J056,1,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,sounds more like a human researcher's practical workflow,,Yes
+J056,2,STYLE_REGISTER,A,HUMAN_SIGNAL,using phrasing such as ‘I'd first check’,,Yes
+J056,3,EXPERIENTIAL_TACIT,A,HUMAN_SIGNAL,"emphasizing repeated checks across seeds, related models, prompts, and tasks",,Yes
+J056,4,STYLE_FORMAT,B,UNSPECIFIED,more concise and formulaic,,Yes
+J056,5,AI_STEREOTYPE,B,AI_SIGNAL,"generic statistical language like ‘effect size and confidence interval,’ which fits an AI-generated answer",,Yes
+J057,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,more detailed,,Yes
+J057,2,EXPERIENTIAL_TACIT,A,UNSPECIFIED,"actionable, naming concrete next steps such as probing task alignment, fine-tuning on the target language, and analyzing error patterns",,Yes
+J057,3,LANGUAGE_FORM,A,HUMAN_SIGNAL,Its phrasing is also more fluent,,Yes
+J057,4,STYLE_REGISTER,A,HUMAN_SIGNAL,"academic, consistent with a postgraduate researcher",,Yes
+J057,5,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,Response B is vaguer,,Yes
+J057,6,EPISTEMIC_STYLE,B,UNSPECIFIED,more tentative,,Yes
+J058,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,comprehensive,,Yes
+J058,2,STYLE_FORMAT,A,UNSPECIFIED,structured approach to investigating the research question,,Yes
+J058,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"details multiple experimental steps, including analyzing tokenizer coverage, performing ablation studies with alternative tokenizers, controlling for other variables, and conducting error analysis",,Yes
+J058,4,STYLE_FORMAT,B,AI_SIGNAL,very brief,,Yes
+J058,5,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,lacks the depth and detail expected from a postgraduate researcher in the field,,Yes
+J059,1,STYLE_FORMAT,A,HUMAN_SIGNAL,structured evaluation plan,,Yes
+J059,2,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,with domain-specific breadth and nuance,,Yes
+J059,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"discusses multilingual semantic metrics, human evaluation protocols, task-specific probing, robustness, and limitations such as cultural/pragmatic nuance and low-resource bias",,Yes
+J059,4,STYLE_FORMAT,B,UNSPECIFIED,concise,,Yes
+J059,5,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"less comprehensive, with less detail about multilingual evaluation concerns",,Yes
+J060,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"provides a more nuanced and comprehensive explanation, discussing specific issues like mistranslations, unnatural phrasing, cultural references, inconsistent annotation, and tokenization quirks",,Yes
+J060,2,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,Response A's points about back-translation and lexical cues are valid but less detailed,,Yes
+J060,3,STYLE_REGISTER,B,HUMAN_SIGNAL,The language in B feels more like a researcher elaborating on potential pitfalls,,Yes
+J061,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"provides a more detailed and nuanced approach to investigation, mentioning specific areas like metric alignment and intermediate results",,Yes
+J061,2,STYLE_REGISTER,B,HUMAN_SIGNAL,"The language used, such as ‘subtle issues’ and ‘linguistic or data idiosyncrasies,’ feels more characteristic of a human researcher's thought process",,Yes
+J061,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,less specific in its proposed steps,,Yes
+J062,1,TECHNICAL_SUBSTANCE,A,HUMAN_SIGNAL,"focuses on specific, concrete technical details like model checkpoints, tokenizers, and preprocessing scripts, which is characteristic of a researcher in the field",,Yes
+J062,2,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"process-oriented, describing a debugging methodology rather than specific technical components",,Yes
+J062,3,EXPERIENTIAL_TACIT,A,UNSPECIFIED,"The detailed technical focus in A suggests a deeper, hands-on understanding of LLM experimentation",,Yes
+J063,1,TECHNICAL_SUBSTANCE,B,UNSPECIFIED,"more detailed and pedagogically balanced, covering multiple evaluation criteria, the weakness of reference-based metrics like BLEU and ROUGE, and several limitations",,Yes
+J063,2,STYLE_REGISTER,B,HUMAN_SIGNAL,Its phrasing also sounds more like a researcher's,,Yes
+J063,3,STYLE_FORMAT,B,HUMAN_SIGNAL,concise methodological answer,,Yes
+J063,4,STYLE_FORMAT,A,UNSPECIFIED,Response A is shorter,,Yes
+J063,5,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,despite mentioning useful ideas like pairwise comparison and position bias,,Yes
+J064,1,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,comprehensive,,Yes
+J064,2,STYLE_FORMAT,A,UNSPECIFIED,structured answer,,Yes
+J064,3,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"detailing multiple evaluation methods like reference-free metrics, human evaluation, and downstream tasks",,Yes
+J064,4,TECHNICAL_SUBSTANCE,A,UNSPECIFIED,"thoroughly outlines potential limitations, demonstrating a deeper understanding of the nuances in evaluating multilingual LLMs",,Yes
+J064,5,STYLE_FORMAT,B,AI_SIGNAL,too brief,,Yes
+J064,6,TECHNICAL_SUBSTANCE,B,AI_SIGNAL,lacks the depth expected from a postgraduate researcher,,Yes

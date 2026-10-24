@@ -1,4 +1,4 @@
-# Protocol v1.5 — stable paid model endpoints
+# Protocol v1.7 — pre-specified Judge-audit execution rules
 
 ## Scope
 
@@ -24,7 +24,7 @@ retired_candidates:
   - qwen/qwen3.8-27b:free
   - z-ai/glm-5.2:free
   - mistralai/mistral-small-2603
-model_status: candidate_until_Q0_gate_passes
+model_status: frozen_after_Q0_gate
 temperature: 0.7
 top_p: 0.95
 max_output_tokens: 1024
@@ -37,7 +37,7 @@ finish_reason_recorded: true
 
 The same model and supported parameters are used across both conditions. Every response records the exact model ID or alias, provider, access tier, access date, supported parameters, output-token count where available, and finish reason. Responses terminated by an output-token limit are retained as documented cases but excluded from length and mean-sentence-length comparisons.
 
-Reasoning is explicitly disabled for Judge calls that support the parameter because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. GPT-4.1 Mini does not advertise a reasoning parameter, so that field is omitted rather than sending an unsupported control. This decision was first recorded as protocol v1.1; free-model replacements were recorded in v1.2, the first paid candidate in v1.3, the stable OpenAI candidate in v1.4, and the stable paid Judge 2 candidate in v1.5.
+Reasoning is explicitly disabled for Judge calls that support the parameter because the Q0 dry run showed that provider-default reasoning differed across model families and could consume most of the shared `max_tokens` budget. The initial Qwen controlled response used 799 reasoning tokens before producing a 41-word visible answer, while one naive HTTP-200 response had no string content. GPT-4.1 Mini does not advertise a reasoning parameter, so that field is omitted rather than sending an unsupported control. This decision was first recorded as protocol v1.1; free-model replacements were recorded in v1.2, the first paid candidate in v1.3, the stable OpenAI candidate in v1.4, the stable paid Judge 2 candidate in v1.5, and the pre-specified main-analysis interpretation rules in v1.6.
 
 Because free access tiers may change model aliases, backend providers, limits, or availability over time, exact reproducibility is not guaranteed. The exact identifier exposed by the provider and execution date will be recorded.
 
@@ -49,6 +49,14 @@ Because free access tiers may change model aliases, backend providers, limits, o
 - Manual cue coding: all designated-run judge justifications.
 - Optional automated coding: exploratory concordance only; the manual coder is not treated as ground truth.
 
+### Pre-specified confounding rule
+
+If more than four of the eight designated-run condition pairs are rated `Confounded` in the content-preservation check, the primary conclusion will be that prompt-based style control was not content-neutral in this setup. In that case, condition differences in surface features will be reported only as descriptive statistics and will not be interpreted as isolated causal effects of style. The prompt conditions and the approximately 41-word target will not be revised after observing this outcome.
+
+### Pre-specified cue-counting rule
+
+The primary cue analysis will count cue events separately by `SIGNAL_DIRECTION` rather than pooling directions within a cue code. For example, `STYLE_FORMAT` used as evidence for `HUMAN` and `STYLE_FORMAT` used as evidence for `AI` are distinct cells. Direction-pooled counts may be shown only as secondary descriptive totals. Counts will also retain `TARGET_RESPONSE` so that opposing interpretations of the same response property are not collapsed.
+
 ## Judge models
 
 ```yaml
@@ -57,16 +65,48 @@ judge_model_1_catalog_canonical_slug_observed: nex-agi/nex-n2.5-mini-20260908
 judge_model_2_candidate: google/gemini-2.5-flash-lite
 judge_model_2_catalog_canonical_slug_observed: google/gemini-2.5-flash-lite
 judge_response_format: json_object
+temperature: 0.7
+top_p: 0.95
+max_output_tokens: 1024
 reasoning: disabled
-model_status: candidates_until_Q0_gate_passes
+calls_per_cell: 1
+primary_calls: 64
+model_status: frozen_after_Q0_gate
 distinct_families_from_pretender_and_each_other: required
 ```
 
+These Judge settings match the canonical Q0 gate. The primary audit contains one
+independent call for every question × condition × Judge × presentation-order
+cell. Calls are written to disk immediately; a failed endpoint does not prevent
+the remaining cells from running, and an interrupted run can resume without
+repeating cells that already returned an API output.
+
+A flipped original–swapped pair is consistent with position sensitivity, but
+does not isolate position bias from stochastic run-to-run variability because
+each order is evaluated once. Any later repeated calls on flipped cases are
+labelled exploratory, stored separately, and do not replace primary outputs.
+
+Primary execution-day checks are restricted to call completeness, schema
+validity, selected response identity, original–swapped consistency, and
+confidence differences. Justification text is retained but is not inspected or
+cue-coded until condition and model labels have been masked for the subsequent
+manual-coding stage.
+
 Using distinct families reduces direct self-enhancement confounding but does not guarantee evaluator independence.
 
-The original candidate IDs were retrieved from the OpenRouter models API on 2026-09-20 UTC; replacement availability and supported parameters were checked again on 2026-09-21 UTC. Canonical slugs are provenance records rather than guarantees of a fixed backend. GPT-4.1 Mini is the paid Pretender, Nex is Judge 1, and paid Gemini 2.5 Flash-Lite is the Judge 2 candidate. The Judge models advertise structured or JSON response support. Gemini is not frozen as Judge 2 until it passes three Q0 schema-valid calls.
+Model provenance is recorded at three separate levels because developer, probable lineage or tokenizer, and API routing provider are not interchangeable:
 
-Qwen was retired after a separately timed retry on 2026-09-21 again failed both required conditions: the naive request returned HTTP 200 without string content, while the style-controlled request exhausted retries with upstream HTTP 429. Gemma was retired after two separately timed diagnostics produced 0/6 successful calls, all due to upstream HTTP 429. A subsequent authenticated replacement gate found Nex schema-valid on 3/3 calls, but both GLM Pretender conditions exhausted retries because its free upstream provider was overloaded. Nex is therefore retained as Judge 1, while GLM is retired. Paid Mistral then completed the naive condition but exhausted upstream 429 retries for the style-controlled condition. GPT-4.1 Mini passed both Pretender conditions and is frozen. In the complete Q0 run, Nemotron produced only 1/3 schema-valid outputs; the other two raw responses were explicit NVIDIA `503 provider_overloaded` errors. Nemotron is therefore retired and paid Gemini 2.5 Flash-Lite becomes the final Judge 2 candidate.
+| Role | Frozen model | Developer | Probable lineage/tokenizer evidence | API access route |
+|---|---|---|---|---|
+| Pretender | `openai/gpt-4.1-mini` | OpenAI | GPT-4.1 family | OpenRouter |
+| Judge 1 | `nex-agi/nex-n2.5-mini:free` | Nex AGI | OpenRouter reports a Qwen3 tokenizer; exact base-model lineage is not asserted | OpenRouter; runtime provider recorded per call where exposed |
+| Judge 2 | `google/gemini-2.5-flash-lite` | Google | Gemini family | OpenRouter; runtime provider recorded per call where exposed |
+
+This supports treating Nex and Gemini as different model families for this pilot, while avoiding the stronger unsupported claim that Nex has a wholly independent base architecture.
+
+The original candidate IDs were retrieved from the OpenRouter models API on 2026-09-20 UTC; replacement availability and supported parameters were checked again on 2026-09-21 UTC. Canonical slugs are provenance records rather than guarantees of a fixed backend. GPT-4.1 Mini is the paid Pretender, Nex is Judge 1, and paid Gemini 2.5 Flash-Lite is Judge 2. The final configuration passed the canonical Q0 run `20260921T184834Z`: 2/2 Pretender conditions completed and 6/6 Judge outputs were schema-valid. All three models are frozen for main generation.
+
+Qwen was retired after a separately timed retry on 2026-09-21 again failed both required conditions: the naive request returned HTTP 200 without string content, while the style-controlled request exhausted retries with upstream HTTP 429. Gemma was retired after two separately timed diagnostics produced 0/6 successful calls, all due to upstream HTTP 429. A subsequent authenticated replacement gate found Nex schema-valid on 3/3 calls, but both GLM Pretender conditions exhausted retries because its free upstream provider was overloaded. Nex is therefore retained as Judge 1, while GLM is retired. Paid Mistral then completed the naive condition but exhausted upstream 429 retries for the style-controlled condition. GPT-4.1 Mini passed both Pretender conditions and is frozen. In the next complete Q0 run, Nemotron produced only 1/3 schema-valid outputs; the other two raw responses were explicit NVIDIA `503 provider_overloaded` errors. Nemotron was retired. Gemini passed its three-call replacement gate and then 3/3 calls in the canonical complete run, so it is frozen as Judge 2.
 
 For the Q0 access and parsing gate only, the human anchor is placed in A and the naive Pretender output in B. Each Judge candidate evaluates this same pair independently three times. If the live naive output is unavailable, Judges instead receive a frozen diagnostic Pretender fixture so their access and JSON compliance can still be tested. Fixture-based outputs are marked as diagnostics and excluded from cue coding, condition comparison, and all identification claims. A failure in any model is recorded without preventing the remaining model endpoints from being attempted.
 
@@ -93,15 +133,17 @@ The schedule is reused for both prompt conditions and both judge models so condi
 
 ## Coding rules
 
-- Codebook version: v1, frozen before inspecting model output.
-- Multiple cue codes are allowed.
+- Pre-generation taxonomy: codebook v1, frozen before any model generation. Codebook v1.1 added target, direction, and evidence-span fields after Q0 and before main generation without changing the taxonomy.
+- Final application manual: v1.2. It adds no cue category; it documents the target-attribution, attribution-scope, and event-segmentation rules made explicit during coding.
+- After v1.2 was fixed, J001–J064 were re-audited under the final target rule.
+- Multiple cue-event records are allowed; each retains cue code, target response, signal direction, and evidence span.
 - One `PRIMARY_CUE` is assigned using the first-eligible-supporting-cue rule in the codebook.
 - Ambiguous primary assignments are flagged and memoed.
 - `OVERALL_JUDGMENT` is stored separately from evidence cues.
 - `CONTENT_DIFFERENCE` refers only to substantive differences the judge identifies within an anchor–pretender comparison.
 - Condition-to-condition content preservation is assessed separately.
 - Condition-to-condition preservation is recorded with `content_check.md` v1 for Q1–Q8 designated-run pairs; confounded cases are retained and flagged.
-- After main generation, new patterns are recorded as `EMERGENT_*`; v1 is not rewritten.
+- No post-hoc cue category was added to the main analysis.
 
 ## Language-form limitation
 

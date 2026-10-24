@@ -1,0 +1,65 @@
+{
+  "call_id": "Q2__naive__run_2",
+  "saved_at_utc": "2026-09-22T17:36:17.294948+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nYou are evaluating an LLM on a benchmark translated from English into several languages. What would make you question whether performance differences reflect model capability rather than translation or dataset artifacts?"
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098573-SYa6eCuigzoElBLDfeIz",
+    "object": "chat.completion",
+    "created": 1790098573,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "Great question. When evaluating an LLM on a benchmark that’s been translated from English into multiple languages, it’s crucial to critically assess whether observed performance differences actually reflect the model’s multilingual capabilities or are instead artifacts of the translation process or dataset design. Here are several factors I’d consider that could raise red flags:\n\n1. **Translation Quality and Consistency**  \n   - **Literal vs. idiomatic translation:** If translations are overly literal, they may produce unnatural or awkward phrasing that the model struggles with, rather than truly testing its understanding of the language.  \n   - **Translator expertise and variation:** Differences in translation quality across languages or even within the same language can introduce noise. Poorly translated items might artificially depress scores for some languages.  \n   - **Back-translation checks:** Lack of rigorous back-translation or human validation could mean semantic drift or errors that affect difficulty or meaning.\n\n2. **Cultural and Linguistic Adaptation**  \n   - **Non-equivalence of concepts:** Some benchmark tasks or items may rely on culture-specific knowledge or idioms that don’t translate well, thus distorting difficulty.  \n   - **Tokenization and script differences:** Languages with complex morphology or different scripts may require different tokenization strategies. If the benchmark doesn’t control for this, it may skew performance.\n\n3. **Dataset Artifacts and Format**  \n   - **Length and complexity variance:** Translations might systematically shorten or lengthen inputs, or simplify them, affecting difficulty.  \n   - **Annotation consistency:** If labels or expected outputs were translated or adapted inconsistently, evaluation metrics might be unreliable.  \n   - **Benchmark domain mismatch:** If the benchmark content is culturally biased toward English-speaking contexts, even a perfect translation won’t fully address domain shift issues.\n\n4. **Model Pretraining and Tokenizer Alignment**  \n   - **Tokenizer vocabulary coverage:** If the model’s tokenizer covers English well but has poor coverage for certain languages, performance differences might reflect tokenization rather than true language understanding.  \n   - **Pretraining data distribution:** Performance differences might reflect the model’s exposure to different languages during pretraining rather than intrinsic multilingual capabilities.\n\n5. **Evaluation Metric Sensitivity**  \n   - Some metrics may be more sensitive to surface form differences that arise from translation artifacts rather than semantic understanding (e.g., exact match vs. semantic similarity).\n\n---\n\n**In practice, I’d want to see evidence that:**\n\n- The translations have been validated by bilingual experts with back-translation and consistency checks.  \n- The benchmark items are culturally and linguistically adapted rather than just directly translated.  \n- Tokenization and preprocessing are language-appropriate and consistent across languages.  \n- The model’s tokenizer and pretraining data are reasonably balanced across evaluated languages or that these factors are explicitly accounted for.  \n- Evaluation metrics used are robust to surface-level translation artifacts.\n\nIf these controls are missing or weak, I’d be skeptical about attributing performance differences solely to the model’s multilingual capability. Instead, I’d suspect that translation artifacts, dataset biases, or evaluation design choices are confounding the results.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 106,
+      "completion_tokens": 622,
+      "total_tokens": 728,
+      "cost": 0.0010376,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0010376,
+        "upstream_inference_prompt_cost": 4.24e-05,
+        "upstream_inference_completions_cost": 0.0009952
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "Great question. When evaluating an LLM on a benchmark that’s been translated from English into multiple languages, it’s crucial to critically assess whether observed performance differences actually reflect the model’s multilingual capabilities or are instead artifacts of the translation process or dataset design. Here are several factors I’d consider that could raise red flags:\n\n1. **Translation Quality and Consistency**  \n   - **Literal vs. idiomatic translation:** If translations are overly literal, they may produce unnatural or awkward phrasing that the model struggles with, rather than truly testing its understanding of the language.  \n   - **Translator expertise and variation:** Differences in translation quality across languages or even within the same language can introduce noise. Poorly translated items might artificially depress scores for some languages.  \n   - **Back-translation checks:** Lack of rigorous back-translation or human validation could mean semantic drift or errors that affect difficulty or meaning.\n\n2. **Cultural and Linguistic Adaptation**  \n   - **Non-equivalence of concepts:** Some benchmark tasks or items may rely on culture-specific knowledge or idioms that don’t translate well, thus distorting difficulty.  \n   - **Tokenization and script differences:** Languages with complex morphology or different scripts may require different tokenization strategies. If the benchmark doesn’t control for this, it may skew performance.\n\n3. **Dataset Artifacts and Format**  \n   - **Length and complexity variance:** Translations might systematically shorten or lengthen inputs, or simplify them, affecting difficulty.  \n   - **Annotation consistency:** If labels or expected outputs were translated or adapted inconsistently, evaluation metrics might be unreliable.  \n   - **Benchmark domain mismatch:** If the benchmark content is culturally biased toward English-speaking contexts, even a perfect translation won’t fully address domain shift issues.\n\n4. **Model Pretraining and Tokenizer Alignment**  \n   - **Tokenizer vocabulary coverage:** If the model’s tokenizer covers English well but has poor coverage for certain languages, performance differences might reflect tokenization rather than true language understanding.  \n   - **Pretraining data distribution:** Performance differences might reflect the model’s exposure to different languages during pretraining rather than intrinsic multilingual capabilities.\n\n5. **Evaluation Metric Sensitivity**  \n   - Some metrics may be more sensitive to surface form differences that arise from translation artifacts rather than semantic understanding (e.g., exact match vs. semantic similarity).\n\n---\n\n**In practice, I’d want to see evidence that:**\n\n- The translations have been validated by bilingual experts with back-translation and consistency checks.  \n- The benchmark items are culturally and linguistically adapted rather than just directly translated.  \n- Tokenization and preprocessing are language-appropriate and consistent across languages.  \n- The model’s tokenizer and pretraining data are reasonably balanced across evaluated languages or that these factors are explicitly accounted for.  \n- Evaluation metrics used are robust to surface-level translation artifacts.\n\nIf these controls are missing or weak, I’d be skeptical about attributing performance differences solely to the model’s multilingual capability. Instead, I’d suspect that translation artifacts, dataset biases, or evaluation design choices are confounding the results.",
+  "validation": null,
+  "fatal_error": null
+}

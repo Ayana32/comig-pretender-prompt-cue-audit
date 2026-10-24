@@ -1,0 +1,34 @@
+{
+  "started_at_utc": "2026-09-22T17:35:31.443127+00:00",
+  "purpose": "Q1-Q8 main Pretender corpus generation",
+  "pretender_model": "openai/gpt-4.1-mini",
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "max_output_tokens": 1024,
+  "reasoning": null,
+  "seed": null,
+  "seed_note": "unsupported/not requested",
+  "conditions": [
+    "naive",
+    "style_controlled"
+  ],
+  "run_ids": [
+    "run_1",
+    "run_2",
+    "run_3"
+  ],
+  "designated_run": "run_1",
+  "questions": {
+    "Q1": "You observe high cross-lingual representational similarity between English and a target language, but an intervention transfers inconsistently at the behavioural level. How would you interpret this result, and what would you test next?",
+    "Q2": "You are evaluating an LLM on a benchmark translated from English into several languages. What would make you question whether performance differences reflect model capability rather than translation or dataset artifacts?",
+    "Q3": "A multilingual model performs substantially worse in a low-resource language. How would you investigate whether tokenization is a major cause rather than merely a correlated explanation?",
+    "Q4": "You need to evaluate open-ended responses from a multilingual LLM, but there is no single correct reference answer. How would you choose an evaluation method, and what limitations would you report?",
+    "Q5": "Your results change noticeably across model families, layers, prompts or random seeds. How would you decide whether you have found a meaningful effect or an unstable experimental artifact?",
+    "Q6": "You inherit a multilingual LLM experiment repository whose reported results you cannot reproduce. What would you inspect first, and how would you determine where the discrepancy comes from?",
+    "Q7": "A reviewer argues that your experiment shows only a correlation between an internal representation and model behaviour, not a causal relationship. How would you respond or redesign the experiment?",
+    "Q8": "One language produces a result in the opposite direction from the others, even though the implementation checks pass. How would you investigate and report that result? "
+  },
+  "shared_base": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\n{question}",
+  "style_clause": "Write approximately 41 words.\n\nUse natural conversational prose. Do not use bullet points, numbered lists, headings, or section labels. Avoid generic introductory and concluding phrases.",
+  "api_key_recorded": false
+}

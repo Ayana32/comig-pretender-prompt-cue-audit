@@ -1,0 +1,65 @@
+{
+  "call_id": "Q3__naive__run_1",
+  "saved_at_utc": "2026-09-22T17:36:33.666289+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nA multilingual model performs substantially worse in a low-resource language. How would you investigate whether tokenization is a major cause rather than merely a correlated explanation?"
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098588-60eFOyREBmCs3XUsRaOM",
+    "object": "chat.completion",
+    "created": 1790098588,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "Great question. When a multilingual model underperforms on a low-resource language, tokenization is a common suspect but disentangling it from correlated factors (e.g., data scarcity, domain mismatch) requires a careful experimental approach. Here's how I would investigate whether tokenization is a major causal factor rather than just correlated:\n\n---\n\n### 1. **Analyze the Tokenizer's Coverage and Granularity**\n\n- **Vocabulary overlap:** Check how many tokens from the low-resource language are covered by the tokenizer’s vocabulary. A tokenizer trained primarily on high-resource languages may have poor coverage or produce overly fragmented tokens.\n- **Token length statistics:** Compute average token lengths and number of tokens per sentence compared to high-resource languages. Excessive fragmentation (many subword units per word) often signals suboptimal tokenization.\n- **Rare token frequency:** Identify how often rare or unknown tokens appear. High frequency suggests poor tokenization.\n\n---\n\n### 2. **Ablation Study with Alternative Tokenizations**\n\n- **Use language-specific tokenizers:** Replace the original tokenizer with a tokenizer optimized or trained specifically for the low-resource language (e.g., a dedicated SentencePiece or BPE model trained on only that language).\n- **Use character-level or byte-level tokenization:** These tokenizers avoid vocabulary issues and can serve as a baseline to see if avoiding subword fragmentation helps.\n- **Evaluate model performance with these tokenizers:** If performance improves significantly with a better or alternative tokenizer, that strongly implicates tokenization as a cause.\n\n---\n\n### 3. **Control for Other Factors**\n\n- **Keep training data fixed:** Ensure the training corpus size and quality remain constant when changing tokenizers to isolate the effect.\n- **Control for model size and architecture:** Use the same model architecture so improvements are not due to model capacity changes.\n\n---\n\n### 4. **Error Analysis and Qualitative Inspection**\n\n- Look for failure modes related to tokenization, such as:\n  - Errors on morphologically rich words that are split incorrectly.\n  - Misalignment between tokens and linguistic units (e.g., morphemes or phonemes).\n- Compare model outputs with different tokenizers on the same inputs.\n\n---\n\n### 5. **Correlation vs. Causation via Probing**\n\n- Train a smaller diagnostic classifier or probe on tokenized inputs to predict linguistic properties (e.g., POS tags, morphological features).\n- If tokenization quality correlates with downstream task performance and linguistic probing accuracy, it supports causality.\n\n---\n\n### Summary\n\nIf changing the tokenizer to a more appropriate or finer-grained one for the low-resource language leads to a clear and consistent improvement in evaluation metrics, while controlling for other variables, this is strong evidence that tokenization was a major cause of poor performance rather than merely correlated with it.\n\n---\n\n**In practice, I’d start by comparing the original tokenizer’s tokenization statistics and vocabulary coverage for the low-resource language, then run controlled experiments swapping tokenizers, ideally keeping training data and model architecture fixed.** This approach is common in recent multilingual NLP research (e.g., studies on mBERT, XLM-R, and language-specific adaptations) to diagnose tokenization bottlenecks.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 102,
+      "completion_tokens": 638,
+      "total_tokens": 740,
+      "cost": 0.0010616,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0010616,
+        "upstream_inference_prompt_cost": 4.08e-05,
+        "upstream_inference_completions_cost": 0.0010208
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "Great question. When a multilingual model underperforms on a low-resource language, tokenization is a common suspect but disentangling it from correlated factors (e.g., data scarcity, domain mismatch) requires a careful experimental approach. Here's how I would investigate whether tokenization is a major causal factor rather than just correlated:\n\n---\n\n### 1. **Analyze the Tokenizer's Coverage and Granularity**\n\n- **Vocabulary overlap:** Check how many tokens from the low-resource language are covered by the tokenizer’s vocabulary. A tokenizer trained primarily on high-resource languages may have poor coverage or produce overly fragmented tokens.\n- **Token length statistics:** Compute average token lengths and number of tokens per sentence compared to high-resource languages. Excessive fragmentation (many subword units per word) often signals suboptimal tokenization.\n- **Rare token frequency:** Identify how often rare or unknown tokens appear. High frequency suggests poor tokenization.\n\n---\n\n### 2. **Ablation Study with Alternative Tokenizations**\n\n- **Use language-specific tokenizers:** Replace the original tokenizer with a tokenizer optimized or trained specifically for the low-resource language (e.g., a dedicated SentencePiece or BPE model trained on only that language).\n- **Use character-level or byte-level tokenization:** These tokenizers avoid vocabulary issues and can serve as a baseline to see if avoiding subword fragmentation helps.\n- **Evaluate model performance with these tokenizers:** If performance improves significantly with a better or alternative tokenizer, that strongly implicates tokenization as a cause.\n\n---\n\n### 3. **Control for Other Factors**\n\n- **Keep training data fixed:** Ensure the training corpus size and quality remain constant when changing tokenizers to isolate the effect.\n- **Control for model size and architecture:** Use the same model architecture so improvements are not due to model capacity changes.\n\n---\n\n### 4. **Error Analysis and Qualitative Inspection**\n\n- Look for failure modes related to tokenization, such as:\n  - Errors on morphologically rich words that are split incorrectly.\n  - Misalignment between tokens and linguistic units (e.g., morphemes or phonemes).\n- Compare model outputs with different tokenizers on the same inputs.\n\n---\n\n### 5. **Correlation vs. Causation via Probing**\n\n- Train a smaller diagnostic classifier or probe on tokenized inputs to predict linguistic properties (e.g., POS tags, morphological features).\n- If tokenization quality correlates with downstream task performance and linguistic probing accuracy, it supports causality.\n\n---\n\n### Summary\n\nIf changing the tokenizer to a more appropriate or finer-grained one for the low-resource language leads to a clear and consistent improvement in evaluation metrics, while controlling for other variables, this is strong evidence that tokenization was a major cause of poor performance rather than merely correlated with it.\n\n---\n\n**In practice, I’d start by comparing the original tokenizer’s tokenization statistics and vocabulary coverage for the low-resource language, then run controlled experiments swapping tokenizers, ideally keeping training data and model architecture fixed.** This approach is common in recent multilingual NLP research (e.g., studies on mBERT, XLM-R, and language-specific adaptations) to diagnose tokenization bottlenecks.",
+  "validation": null,
+  "fatal_error": null
+}

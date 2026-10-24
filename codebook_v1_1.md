@@ -1,8 +1,23 @@
-# Cue Codebook v1
+# Cue Codebook v1.1
 
 ## Unit and general rules
 
-The basic unit is one complete LLM-judge justification. Multiple cue codes are allowed. Each justification receives one `PRIMARY_CUE`; `OVERALL_JUDGMENT` is recorded separately and is not counted as evidence in cue-distribution summaries. Code only cues that are stated or directly supported by the justification. Do not infer author identity, language background, or competence beyond what the judge states.
+The justification remains the top-level unit, but each stated cue is stored as a cue-event subrecord. Multiple cue events and repeated cue codes are allowed. Each justification receives one `PRIMARY_CUE`; `OVERALL_JUDGMENT` is recorded separately and is not counted as evidence in cue-distribution summaries. Code only cues that are stated or directly supported by the justification. Do not infer author identity, language background, or competence beyond what the judge states.
+
+## Cue-event fields added in v1.1
+
+Each cue event records four fields:
+
+| Field | Allowed values | Meaning |
+|---|---|---|
+| `CUE_CODE` | One evidence code below | What kind of evidence the judge invokes |
+| `TARGET_RESPONSE` | `A`, `B`, `BOTH`, `COMPARISON` | Which response the stated cue describes |
+| `SIGNAL_DIRECTION` | `HUMAN_SIGNAL`, `AI_SIGNAL`, `UNSPECIFIED` | Which authorship inference the judge explicitly attaches to that cue |
+| `EVIDENCE_SPAN` | Short verbatim span | Text supporting the coding decision |
+
+Use `COMPARISON` when the cue is inherently relational, such as “B is more detailed than A.” Use `UNSPECIFIED` when the judge states a difference but does not connect it to either authorship inference. Do not infer valence merely because the final selection is known.
+
+This long-form representation is required because the same cue can receive opposite interpretations. For example, structured formatting may be treated as an `AI_SIGNAL` by one judge and a `HUMAN_SIGNAL` by another. Cue-frequency summaries must therefore retain `SIGNAL_DIRECTION`; flattening both into a single `STYLE_FORMAT` count would conceal the central disagreement.
 
 ## PRIMARY_CUE rule
 
@@ -62,3 +77,6 @@ A stated reason that cannot be assigned clearly to another code. Preserve the te
 
 The public Introduction example was used only to test whether v0 separated judgment from evidence. The judge's attention to comma-linked/list-like presentation maps to `STYLE_FORMAT`; recognition that problem-solving depends on the situation maps to `CONTEXT_SENSITIVITY`; and the statement that one response is more convincing maps to `OVERALL_JUDGMENT`. `AI_STEREOTYPE` is added only if the judge explicitly links the format to expected AI behaviour. The test supported retaining separate surface, substantive, and judgment codes in v1.
 
+## v1.1 change record
+
+The canonical Q0 run exposed a loss of information in v1. Nex treated response B's polished structure as evidence of AI authorship, while Gemini treated the same response's structure and detail as evidence of human expertise. Both would have appeared as the same cue frequencies under v1. Version 1.1 therefore adds `TARGET_RESPONSE`, `SIGNAL_DIRECTION`, and `EVIDENCE_SPAN` without changing the pre-specified cue taxonomy. All Q0 records are coded under v1.1 before main generation; later unexpected patterns use `EMERGENT_*` rather than rewriting this codebook.

@@ -1,0 +1,25 @@
+{
+  "source_run": "outputs/judge_audit/20260923T182840Z",
+  "expected_calls": 64,
+  "observed_api_outputs": 64,
+  "call_status_counts": {
+    "schema_valid": 64
+  },
+  "expected_original_swapped_pairs": 32,
+  "observed_pairs": 32,
+  "position_case_counts": {
+    "flipped": 13,
+    "stable_human": 1,
+    "stable_pretender": 18
+  },
+  "position_case_counts_by_judge": {
+    "judge_1|flipped": 12,
+    "judge_1|stable_human": 1,
+    "judge_1|stable_pretender": 3,
+    "judge_2|flipped": 1,
+    "judge_2|stable_pretender": 15
+  },
+  "identity_basis": "selected response identity, not raw A/B label",
+  "flipped_case_caveat": "A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once.",
+  "justification_text_inspected_by_this_script": false
+}

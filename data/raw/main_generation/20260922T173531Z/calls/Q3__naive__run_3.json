@@ -1,0 +1,65 @@
+{
+  "call_id": "Q3__naive__run_3",
+  "saved_at_utc": "2026-09-22T17:36:45.542028+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nA multilingual model performs substantially worse in a low-resource language. How would you investigate whether tokenization is a major cause rather than merely a correlated explanation?"
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098602-0cQAJ4H805CvvW2vGPQp",
+    "object": "chat.completion",
+    "created": 1790098602,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "Great question—tokenization often plays a critical role in multilingual model performance, especially for low-resource languages where data scarcity exacerbates representation challenges.\n\nTo investigate whether tokenization is a *major* cause (not just correlated) for the poor performance in the low-resource language, I would take a multi-step approach:\n\n### 1. Analyze Tokenization Quality and Statistics\n- **Token Vocabulary Coverage:** Check what fraction of the low-resource language text is covered by the model’s tokenizer vocabulary. A low coverage (high OOV or many rare/unseen tokens) suggests the tokenizer is poorly adapted.\n- **Token Length Distributions:** Compare average token length and token counts per sentence between high-resource and low-resource languages. Excessive fragmentation (many subword tokens per word) can degrade representations.\n- **Compare with Alternative Tokenizers:** Use language-specific tokenizers or different subword methods (e.g., Byte-Pair Encoding, Unigram LM, WordPiece) to see if tokenization quality improves.\n\n### 2. Controlled Fine-tuning or Evaluation with Alternative Tokenizations\n- **Re-tokenize and Re-train / Fine-tune:** Take the same model architecture but fine-tune it with an alternative tokenizer trained on the low-resource language corpus or a multilingual tokenizer with better coverage.\n- **Evaluate on the same downstream tasks:** If performance improves substantially with better tokenization, that strongly supports tokenization as a causal factor.\n- **Ablation studies:** Freeze model weights and only change tokenization to isolate tokenization effects.\n\n### 3. Probe Token Embeddings and Representations\n- **Embedding Norms and Variance:** Check if tokens from the low-resource language have lower embedding norms or less variance, which might indicate poor representation capacity due to tokenization.\n- **Nearest Neighbors and Clustering:** Inspect if tokens cluster meaningfully or appear fragmented, signaling tokenization mismatch.\n\n### 4. Data Augmentation or Synthetic Tokenization Experiments\n- **Artificially degrade tokenization in high-resource languages:** For example, split tokens more aggressively or randomly to simulate poor tokenization and see if performance drops.\n- **Conversely, improve tokenization on low-resource language data:** For example, use character-level tokenization or byte-level models to test if finer granularity helps.\n\n### 5. Compare Tokenization Impact to Other Factors\n- **Control for training data size and domain mismatch:** Since these often correlate with performance, check if tokenization explains residual error after controlling for these.\n- **Feature importance analysis:** For example, use diagnostic classifiers or feature attribution to see how much tokenization quality impacts downstream task outputs.\n\n---\n\n### Summary\nIf changing tokenization alone (with minimal other changes) leads to substantial performance shifts in the low-resource language, this is strong evidence that tokenization is a major cause rather than just correlated. Conversely, if performance remains poor regardless of tokenizer, then tokenization is likely a correlated but not primary factor.\n\nIn practice, a combination of quantitative analysis, controlled experiments, and embedding inspection provides the best evidence for tokenization’s causal role.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 102,
+      "completion_tokens": 618,
+      "total_tokens": 720,
+      "cost": 0.0010296,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0010296,
+        "upstream_inference_prompt_cost": 4.08e-05,
+        "upstream_inference_completions_cost": 0.0009888
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "Great question—tokenization often plays a critical role in multilingual model performance, especially for low-resource languages where data scarcity exacerbates representation challenges.\n\nTo investigate whether tokenization is a *major* cause (not just correlated) for the poor performance in the low-resource language, I would take a multi-step approach:\n\n### 1. Analyze Tokenization Quality and Statistics\n- **Token Vocabulary Coverage:** Check what fraction of the low-resource language text is covered by the model’s tokenizer vocabulary. A low coverage (high OOV or many rare/unseen tokens) suggests the tokenizer is poorly adapted.\n- **Token Length Distributions:** Compare average token length and token counts per sentence between high-resource and low-resource languages. Excessive fragmentation (many subword tokens per word) can degrade representations.\n- **Compare with Alternative Tokenizers:** Use language-specific tokenizers or different subword methods (e.g., Byte-Pair Encoding, Unigram LM, WordPiece) to see if tokenization quality improves.\n\n### 2. Controlled Fine-tuning or Evaluation with Alternative Tokenizations\n- **Re-tokenize and Re-train / Fine-tune:** Take the same model architecture but fine-tune it with an alternative tokenizer trained on the low-resource language corpus or a multilingual tokenizer with better coverage.\n- **Evaluate on the same downstream tasks:** If performance improves substantially with better tokenization, that strongly supports tokenization as a causal factor.\n- **Ablation studies:** Freeze model weights and only change tokenization to isolate tokenization effects.\n\n### 3. Probe Token Embeddings and Representations\n- **Embedding Norms and Variance:** Check if tokens from the low-resource language have lower embedding norms or less variance, which might indicate poor representation capacity due to tokenization.\n- **Nearest Neighbors and Clustering:** Inspect if tokens cluster meaningfully or appear fragmented, signaling tokenization mismatch.\n\n### 4. Data Augmentation or Synthetic Tokenization Experiments\n- **Artificially degrade tokenization in high-resource languages:** For example, split tokens more aggressively or randomly to simulate poor tokenization and see if performance drops.\n- **Conversely, improve tokenization on low-resource language data:** For example, use character-level tokenization or byte-level models to test if finer granularity helps.\n\n### 5. Compare Tokenization Impact to Other Factors\n- **Control for training data size and domain mismatch:** Since these often correlate with performance, check if tokenization explains residual error after controlling for these.\n- **Feature importance analysis:** For example, use diagnostic classifiers or feature attribution to see how much tokenization quality impacts downstream task outputs.\n\n---\n\n### Summary\nIf changing tokenization alone (with minimal other changes) leads to substantial performance shifts in the low-resource language, this is strong evidence that tokenization is a major cause rather than just correlated. Conversely, if performance remains poor regardless of tokenizer, then tokenization is likely a correlated but not primary factor.\n\nIn practice, a combination of quantitative analysis, controlled experiments, and embedding inspection provides the best evidence for tokenization’s causal role.",
+  "validation": null,
+  "fatal_error": null
+}

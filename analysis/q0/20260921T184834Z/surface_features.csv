@@ -1,0 +1,4 @@
+text_id,word_count,sentence_count,mean_sentence_length,list_item_count,heading_count,paragraph_count,comma_count,comma_density_per_100_words,hedge_count,hedge_density_per_100_words,first_person_count,discourse_marker_count
+Q0_human_anchor,40,3,13.333,0,0,1,2,5.0,0,0.0,2,2
+Q0_pretender_naive,347,23,15.087,8,0,10,17,4.899,1,0.288,1,4
+Q0_pretender_style_controlled,41,2,20.5,0,0,1,2,4.878,0,0.0,0,1

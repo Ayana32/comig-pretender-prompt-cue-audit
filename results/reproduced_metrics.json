@@ -1,0 +1,80 @@
+{
+  "cue_events_per_justification": {
+    "naive": {
+      "style_form": 2.3125,
+      "substantive_practical": 2.90625
+    },
+    "style_controlled": {
+      "style_form": 0.90625,
+      "substantive_practical": 2.78125
+    }
+  },
+  "dataset": {
+    "cue_events": 285,
+    "justifications": 64,
+    "original_swapped_pairs": 32,
+    "paired_condition_cells": 32
+  },
+  "mcnemar": {
+    "exact_two_sided_p": 0.021484375,
+    "nonstyle_to_style": 1,
+    "style_to_nonstyle": 9
+  },
+  "position_cases_by_judge": {
+    "judge_1": {
+      "flipped": 12,
+      "stable_human": 1,
+      "stable_pretender": 3
+    },
+    "judge_2": {
+      "flipped": 1,
+      "stable_pretender": 15
+    }
+  },
+  "pretender_selected_as_human": {
+    "naive": {
+      "calls": 32,
+      "selected": 24,
+      "share": 0.75,
+      "wilson_95": [
+        0.5789344100575552,
+        0.8674759908149096
+      ]
+    },
+    "style_controlled": {
+      "calls": 32,
+      "selected": 25,
+      "share": 0.78125,
+      "wilson_95": [
+        0.6124500635075647,
+        0.8897616374739581
+      ]
+    }
+  },
+  "primary_cue_family": {
+    "naive": {
+      "style_form": 10,
+      "style_form_share": 0.3125,
+      "style_form_wilson_95": [
+        0.17952541633609734,
+        0.4856667830095541
+      ],
+      "substantive_practical": 22,
+      "total": 32
+    },
+    "style_controlled": {
+      "style_form": 2,
+      "style_form_share": 0.0625,
+      "style_form_wilson_95": [
+        0.017310567031640967,
+        0.2014712314415458
+      ],
+      "substantive_practical": 30,
+      "total": 32
+    }
+  },
+  "unspecified_only_justifications": {
+    "naive": 1,
+    "style_controlled": 8
+  }
+}

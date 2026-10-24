@@ -1,0 +1,7 @@
+justification_id,judge_model,selected_human_response,confidence,primary_cue,primary_cue_ambiguous,competing_cue,overall_judgment
+J1R1,nex-agi/nex-n2.5-mini:free,A,72,STYLE_FORMAT,true,EPISTEMIC_STYLE,A selected as human
+J1R2,nex-agi/nex-n2.5-mini:free,A,55,STYLE_FORMAT,false,,A selected as human
+J1R3,nex-agi/nex-n2.5-mini:free,A,95,STYLE_FORMAT,false,,A selected as human
+J2R1,google/gemini-2.5-flash-lite,B,95,TECHNICAL_SUBSTANCE,true,STYLE_FORMAT,B selected as human
+J2R2,google/gemini-2.5-flash-lite,B,95,STYLE_FORMAT,false,,B selected as human
+J2R3,google/gemini-2.5-flash-lite,B,95,TECHNICAL_SUBSTANCE,true,STYLE_FORMAT,B selected as human

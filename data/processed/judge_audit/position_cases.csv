@@ -1,0 +1,33 @@
+question_id,condition,judge_id,original_selected_label,original_selected_identity,original_confidence,swapped_selected_label,swapped_selected_identity,swapped_confidence,absolute_confidence_difference,position_case_status,interpretation_caveat
+Q1,naive,judge_1,A,pretender,70,A,human_anchor,64,6,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q1,naive,judge_2,A,pretender,95,B,pretender,95,0,stable_pretender,
+Q1,style_controlled,judge_1,A,pretender,78,B,pretender,63,15,stable_pretender,
+Q1,style_controlled,judge_2,A,pretender,75,B,pretender,75,0,stable_pretender,
+Q2,naive,judge_1,A,human_anchor,88,B,human_anchor,78,10,stable_human,
+Q2,naive,judge_2,B,pretender,95,A,pretender,95,0,stable_pretender,
+Q2,style_controlled,judge_1,A,human_anchor,74,A,pretender,86,12,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q2,style_controlled,judge_2,B,pretender,75,A,pretender,75,0,stable_pretender,
+Q3,naive,judge_1,A,pretender,70,A,human_anchor,70,0,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q3,naive,judge_2,A,pretender,95,B,pretender,95,0,stable_pretender,
+Q3,style_controlled,judge_1,A,pretender,82,A,human_anchor,60,22,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q3,style_controlled,judge_2,A,pretender,95,B,pretender,75,20,stable_pretender,
+Q4,naive,judge_1,A,pretender,82,A,human_anchor,78,4,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q4,naive,judge_2,A,pretender,95,B,pretender,75,20,stable_pretender,
+Q4,style_controlled,judge_1,B,human_anchor,78,B,pretender,82,4,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q4,style_controlled,judge_2,A,pretender,75,B,pretender,75,0,stable_pretender,
+Q5,naive,judge_1,A,human_anchor,55,A,pretender,72,17,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q5,naive,judge_2,B,pretender,95,A,pretender,95,0,stable_pretender,
+Q5,style_controlled,judge_1,A,human_anchor,65,A,pretender,57,8,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q5,style_controlled,judge_2,B,pretender,75,A,pretender,75,0,stable_pretender,
+Q6,naive,judge_1,B,pretender,82,A,pretender,72,10,stable_pretender,
+Q6,naive,judge_2,B,pretender,85,A,pretender,95,10,stable_pretender,
+Q6,style_controlled,judge_1,A,human_anchor,64,A,pretender,58,6,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q6,style_controlled,judge_2,B,pretender,75,A,pretender,75,0,stable_pretender,
+Q7,naive,judge_1,B,human_anchor,92,B,pretender,57,35,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q7,naive,judge_2,A,pretender,90,B,pretender,75,15,stable_pretender,
+Q7,style_controlled,judge_1,A,pretender,67,A,human_anchor,57,10,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q7,style_controlled,judge_2,A,pretender,60,A,human_anchor,75,15,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q8,naive,judge_1,A,human_anchor,55,A,pretender,72,17,flipped,"A flipped original-swapped pair is consistent with position sensitivity, but does not isolate position bias from stochastic run-to-run variability because each order is evaluated once."
+Q8,naive,judge_2,B,pretender,95,A,pretender,95,0,stable_pretender,
+Q8,style_controlled,judge_1,B,pretender,72,A,pretender,68,4,stable_pretender,
+Q8,style_controlled,judge_2,B,pretender,75,A,pretender,65,10,stable_pretender,

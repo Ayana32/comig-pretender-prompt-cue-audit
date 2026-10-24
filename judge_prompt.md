@@ -42,7 +42,7 @@ The response is parse-valid only if it is a single JSON object, contains exactly
 
 ## Tie and invalid-output policy
 
-Ties are not allowed because the audit mirrors COMIG's forced identification task. A judge output that returns a tie, both/neither, a null selection, an out-of-range confidence value, missing fields, or unparseable JSON is marked `INVALID`; it is never silently converted to A or B. The raw output and failure reason are retained. During Q0, recurrent failures may motivate a documented v1.1 formatting revision or judge-model replacement. After Day 3 begins, the prompt is not revised.
+Ties are not allowed because the audit mirrors COMIG's forced identification task. A judge output that returns a tie, both/neither, a null selection, an out-of-range confidence value, missing fields, or unparseable JSON is marked `INVALID`; it is never silently converted to A or B. The raw output and failure reason are retained. During Q0, recurrent failures may motivate a documented v1.1 formatting revision or judge-model replacement. After main generation begins, the prompt is not revised.
 
 ## Presentation and repetition rules
 

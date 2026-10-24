@@ -59,4 +59,4 @@ These fields are relational rather than absolute-quality judgments. `Naive omits
 
 ## Version rule
 
-Version v1 is frozen before Q0. Q0 may expose an unclear definition or missing recording instruction; any change is documented as v1.1 with its reason before main generation. Any Q0 record already coded with v1 is recoded using v1.1; model responses are not regenerated for a coding-form revision. From Day 3 onward, the form and definitions are not revised. Unexpected patterns are retained in notes rather than retrofitted into v1.
+Version v1 is frozen before Q0. Q0 may expose an unclear definition or missing recording instruction; any change is documented as v1.1 with its reason before main generation. Any Q0 record already coded with v1 is recoded using v1.1; model responses are not regenerated for a coding-form revision. Once main generation begins, the form and definitions are not revised. Unexpected patterns are retained in notes rather than retrofitted into v1.

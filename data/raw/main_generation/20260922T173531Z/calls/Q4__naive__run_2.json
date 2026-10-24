@@ -1,0 +1,65 @@
+{
+  "call_id": "Q4__naive__run_2",
+  "saved_at_utc": "2026-09-22T17:37:03.706534+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nYou need to evaluate open-ended responses from a multilingual LLM, but there is no single correct reference answer. How would you choose an evaluation method, and what limitations would you report?"
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098618-qVWUACNoc1QgEXW3ieT3",
+    "object": "chat.completion",
+    "created": 1790098618,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "When evaluating open-ended responses from a multilingual LLM in the absence of a single correct reference answer, the evaluation strategy needs to balance rigor with practical constraints. Here’s how I would approach it and the key limitations I would highlight:\n\n### Choosing an Evaluation Method\n\n1. **Use Human Evaluation as a Primary Method:**\n   - Since there is no single reference, human raters who are proficient in the relevant languages and culturally aware are crucial.\n   - Set clear annotation guidelines focusing on aspects like relevance, fluency, factual correctness, coherence, and cultural appropriateness.\n   - Employ multiple annotators per response to measure inter-annotator agreement and reduce subjectivity.\n\n2. **Leverage Reference-Free Automatic Metrics:**\n   - Use metrics designed for open-ended generation without strict references, such as:\n     - **BLEURT, COMET, BERTScore:** These can provide semantic similarity assessments, especially when adapted or fine-tuned for multilingual contexts.\n     - **Perplexity or language model scoring:** To assess fluency and naturalness, although these are language-model dependent.\n   - Consider metrics that capture diversity or informativeness (e.g., self-BLEU for diversity).\n\n3. **Use Multiple Partial References When Possible:**\n   - If multiple paraphrases or answers can be gathered (e.g., from crowdworkers or multiple experts), use multi-reference metrics to better capture acceptable variation.\n\n4. **Task-Specific Probes:**\n   - For factoid or knowledge-based questions, use fact-checking or retrieval-based methods to verify consistency.\n   - For opinion or open discussion, focus on coherence and argument quality.\n\n5. **Cross-lingual Consistency Checks:**\n   - Evaluate if the LLM provides consistent answers across languages for the same query, as a proxy for reliability.\n\n### Reporting Limitations\n\n- **Subjectivity and Variability:** Human ratings are inherently subjective, especially in multilingual settings where cultural norms and language nuances impact interpretation.\n- **Annotator Bias and Expertise:** Differences in annotator proficiency can skew results; expertise in each language and domain is not always guaranteed.\n- **Metric Limitations:** Reference-free metrics still rely on pretrained models and may not fully capture semantic correctness or cultural appropriateness.\n- **Lack of Ground Truth:** Without gold-standard answers, it is impossible to definitively measure correctness; evaluations focus on plausibility and quality rather than absolute accuracy.\n- **Resource Intensity:** Human evaluation across multiple languages is costly and time-consuming.\n- **Language Coverage:** Some languages may have limited evaluation resources or pretrained models, reducing the reliability of automatic metrics.\n\n### Summary\n\nI would combine human evaluation with carefully selected reference-free automatic metrics, emphasize cross-lingual consistency, and transparently report the inherent subjectivity and resource constraints. This mixed-method approach aligns with best practices in multilingual LLM evaluation where open-endedness precludes a single ground truth.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 109,
+      "completion_tokens": 585,
+      "total_tokens": 694,
+      "cost": 0.0009796,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0009796,
+        "upstream_inference_prompt_cost": 4.36e-05,
+        "upstream_inference_completions_cost": 0.000936
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "When evaluating open-ended responses from a multilingual LLM in the absence of a single correct reference answer, the evaluation strategy needs to balance rigor with practical constraints. Here’s how I would approach it and the key limitations I would highlight:\n\n### Choosing an Evaluation Method\n\n1. **Use Human Evaluation as a Primary Method:**\n   - Since there is no single reference, human raters who are proficient in the relevant languages and culturally aware are crucial.\n   - Set clear annotation guidelines focusing on aspects like relevance, fluency, factual correctness, coherence, and cultural appropriateness.\n   - Employ multiple annotators per response to measure inter-annotator agreement and reduce subjectivity.\n\n2. **Leverage Reference-Free Automatic Metrics:**\n   - Use metrics designed for open-ended generation without strict references, such as:\n     - **BLEURT, COMET, BERTScore:** These can provide semantic similarity assessments, especially when adapted or fine-tuned for multilingual contexts.\n     - **Perplexity or language model scoring:** To assess fluency and naturalness, although these are language-model dependent.\n   - Consider metrics that capture diversity or informativeness (e.g., self-BLEU for diversity).\n\n3. **Use Multiple Partial References When Possible:**\n   - If multiple paraphrases or answers can be gathered (e.g., from crowdworkers or multiple experts), use multi-reference metrics to better capture acceptable variation.\n\n4. **Task-Specific Probes:**\n   - For factoid or knowledge-based questions, use fact-checking or retrieval-based methods to verify consistency.\n   - For opinion or open discussion, focus on coherence and argument quality.\n\n5. **Cross-lingual Consistency Checks:**\n   - Evaluate if the LLM provides consistent answers across languages for the same query, as a proxy for reliability.\n\n### Reporting Limitations\n\n- **Subjectivity and Variability:** Human ratings are inherently subjective, especially in multilingual settings where cultural norms and language nuances impact interpretation.\n- **Annotator Bias and Expertise:** Differences in annotator proficiency can skew results; expertise in each language and domain is not always guaranteed.\n- **Metric Limitations:** Reference-free metrics still rely on pretrained models and may not fully capture semantic correctness or cultural appropriateness.\n- **Lack of Ground Truth:** Without gold-standard answers, it is impossible to definitively measure correctness; evaluations focus on plausibility and quality rather than absolute accuracy.\n- **Resource Intensity:** Human evaluation across multiple languages is costly and time-consuming.\n- **Language Coverage:** Some languages may have limited evaluation resources or pretrained models, reducing the reliability of automatic metrics.\n\n### Summary\n\nI would combine human evaluation with carefully selected reference-free automatic metrics, emphasize cross-lingual consistency, and transparently report the inherent subjectivity and resource constraints. This mixed-method approach aligns with best practices in multilingual LLM evaluation where open-endedness precludes a single ground truth.",
+  "validation": null,
+  "fatal_error": null
+}

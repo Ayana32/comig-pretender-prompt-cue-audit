@@ -1,0 +1,14 @@
+{
+  "completed_at_utc": "2026-09-22T17:38:47.089857+00:00",
+  "run_directory": "outputs/main_generation/20260922T173531Z",
+  "expected_calls": 48,
+  "completed_calls": 48,
+  "missing_call_ids": [],
+  "unexpected_call_ids": [],
+  "finish_reason_counts": {
+    "stop": 48
+  },
+  "all_finish_reasons_stop": true,
+  "main_generation_complete": true,
+  "failures_this_invocation": []
+}

@@ -1,0 +1,65 @@
+{
+  "call_id": "Q6__naive__run_1",
+  "saved_at_utc": "2026-09-22T17:37:45.051018+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nYou inherit a multilingual LLM experiment repository whose reported results you cannot reproduce. What would you inspect first, and how would you determine where the discrepancy comes from?"
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098660-z08MevG4LztvFSZyHsMX",
+    "object": "chat.completion",
+    "created": 1790098660,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "Given the scenario of inheriting a multilingual LLM experiment repository with irreproducible reported results, here is how I would approach the investigation, grounded in practical experience from multilingual NLP and LLM evaluation:\n\n---\n\n### 1. **Check the Experimental Setup and Environment**\n\n- **Dependencies and Versions:**  \n  Confirm that the exact versions of the codebase, frameworks (e.g., PyTorch, TensorFlow), tokenizers (e.g., HuggingFace tokenizers), and dependencies are installed. Differences in library versions can cause small but critical changes in model behavior and tokenization.\n\n- **Hardware and Random Seeds:**  \n  Verify the hardware setup (GPUs/TPUs, memory constraints) and ensure that the random seeds for initialization, data shuffling, and any sampling processes are set and fixed as in the original experiments. Even subtle differences here can lead to non-deterministic outcomes.\n\n---\n\n### 2. **Validate the Data Processing Pipeline**\n\n- **Data Versions and Preprocessing:**  \n  Check that the dataset versions used for training and evaluation match exactly. Multilingual datasets often have multiple releases or subsets (e.g., FLORES, XTREME). Also, inspect the data preprocessing scripts for tokenization, normalization, and filtering steps, ensuring they are identical.\n\n- **Language Tags and Tokenization:**  \n  Especially for multilingual models, language ID tokens or special prefixes are critical. Confirm that these are correctly applied and consistent with the original setup.\n\n---\n\n### 3. **Review Model Checkpoints and Loading**\n\n- **Checkpoint Integrity:**  \n  Confirm that the model checkpoints used are the exact ones reported. Sometimes, the repository may point to a different checkpoint or a fine-tuned variant. Check the hash or metadata of the checkpoint files.\n\n- **Model Configuration:**  \n  Make sure the model architecture and hyperparameters (e.g., layer sizes, number of attention heads) match those used to generate the results. Misalignment here can cause drastic differences.\n\n---\n\n### 4. **Re-execute Evaluation Code with Verbose Logging**\n\n- **Intermediate Outputs:**  \n  Run the evaluation scripts with verbose or debug logging to inspect intermediate outputs such as tokenized inputs, model logits, and final predictions. This can highlight where the results start diverging.\n\n- **Metric Calculation:**  \n  Verify that the evaluation metrics (e.g., BLEU, chrF, accuracy) are computed exactly as in the original paper or report, including any post-processing (e.g., detokenization). Differences in metric computation can cause apparent irreproducibility.\n\n---\n\n### 5. **Cross-Check with External Baselines or Prior Runs**\n\n- **Baseline Consistency:**  \n  If the repository includes baseline models or previously published results, check if those can be reproduced. This helps determine if the discrepancy is systemic or specific to certain models or languages.\n\n- **Compare Against Published Benchmarks:**  \n  Run the model on established multilingual benchmarks (FLORES, XTREME, etc.) and compare with published numbers to isolate if the discrepancy is in the data, model, or evaluation.\n\n---\n\n### 6. **Consult Documentation and Communicate**\n\n- **Check for Updates or Known Issues:**  \n  Review any documentation, issue trackers, or community discussions related to the repository. Sometimes, subtle bugs or environment issues are documented post-publication.\n\n- **Contact Original Authors if Possible:**  \n  If the discrepancy remains unresolved, reaching out to the original authors for clarifications or unpublished details can be invaluable.\n\n---\n\n### Summary:\n\n**The first and most critical step is to verify the exact experimental environment (code, dependencies, seeds), data versions, and model checkpoints.** From there, systematically inspect the data processing, model loading, and evaluation metric implementations while logging intermediate outputs to pinpoint where results diverge.\n\nThis approach is essential in multilingual LLM evaluation because small differences in tokenization, language tags, or data versions can disproportionately affect multilingual performance, leading to irreproducibility.\n\n---\n\nIf you want, I can share a checklist or scripts I use for systematically validating multilingual LLM experiments.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 104,
+      "completion_tokens": 822,
+      "total_tokens": 926,
+      "cost": 0.0013568,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0013568,
+        "upstream_inference_prompt_cost": 4.16e-05,
+        "upstream_inference_completions_cost": 0.0013152
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "Given the scenario of inheriting a multilingual LLM experiment repository with irreproducible reported results, here is how I would approach the investigation, grounded in practical experience from multilingual NLP and LLM evaluation:\n\n---\n\n### 1. **Check the Experimental Setup and Environment**\n\n- **Dependencies and Versions:**  \n  Confirm that the exact versions of the codebase, frameworks (e.g., PyTorch, TensorFlow), tokenizers (e.g., HuggingFace tokenizers), and dependencies are installed. Differences in library versions can cause small but critical changes in model behavior and tokenization.\n\n- **Hardware and Random Seeds:**  \n  Verify the hardware setup (GPUs/TPUs, memory constraints) and ensure that the random seeds for initialization, data shuffling, and any sampling processes are set and fixed as in the original experiments. Even subtle differences here can lead to non-deterministic outcomes.\n\n---\n\n### 2. **Validate the Data Processing Pipeline**\n\n- **Data Versions and Preprocessing:**  \n  Check that the dataset versions used for training and evaluation match exactly. Multilingual datasets often have multiple releases or subsets (e.g., FLORES, XTREME). Also, inspect the data preprocessing scripts for tokenization, normalization, and filtering steps, ensuring they are identical.\n\n- **Language Tags and Tokenization:**  \n  Especially for multilingual models, language ID tokens or special prefixes are critical. Confirm that these are correctly applied and consistent with the original setup.\n\n---\n\n### 3. **Review Model Checkpoints and Loading**\n\n- **Checkpoint Integrity:**  \n  Confirm that the model checkpoints used are the exact ones reported. Sometimes, the repository may point to a different checkpoint or a fine-tuned variant. Check the hash or metadata of the checkpoint files.\n\n- **Model Configuration:**  \n  Make sure the model architecture and hyperparameters (e.g., layer sizes, number of attention heads) match those used to generate the results. Misalignment here can cause drastic differences.\n\n---\n\n### 4. **Re-execute Evaluation Code with Verbose Logging**\n\n- **Intermediate Outputs:**  \n  Run the evaluation scripts with verbose or debug logging to inspect intermediate outputs such as tokenized inputs, model logits, and final predictions. This can highlight where the results start diverging.\n\n- **Metric Calculation:**  \n  Verify that the evaluation metrics (e.g., BLEU, chrF, accuracy) are computed exactly as in the original paper or report, including any post-processing (e.g., detokenization). Differences in metric computation can cause apparent irreproducibility.\n\n---\n\n### 5. **Cross-Check with External Baselines or Prior Runs**\n\n- **Baseline Consistency:**  \n  If the repository includes baseline models or previously published results, check if those can be reproduced. This helps determine if the discrepancy is systemic or specific to certain models or languages.\n\n- **Compare Against Published Benchmarks:**  \n  Run the model on established multilingual benchmarks (FLORES, XTREME, etc.) and compare with published numbers to isolate if the discrepancy is in the data, model, or evaluation.\n\n---\n\n### 6. **Consult Documentation and Communicate**\n\n- **Check for Updates or Known Issues:**  \n  Review any documentation, issue trackers, or community discussions related to the repository. Sometimes, subtle bugs or environment issues are documented post-publication.\n\n- **Contact Original Authors if Possible:**  \n  If the discrepancy remains unresolved, reaching out to the original authors for clarifications or unpublished details can be invaluable.\n\n---\n\n### Summary:\n\n**The first and most critical step is to verify the exact experimental environment (code, dependencies, seeds), data versions, and model checkpoints.** From there, systematically inspect the data processing, model loading, and evaluation metric implementations while logging intermediate outputs to pinpoint where results diverge.\n\nThis approach is essential in multilingual LLM evaluation because small differences in tokenization, language tags, or data versions can disproportionately affect multilingual performance, leading to irreproducibility.\n\n---\n\nIf you want, I can share a checklist or scripts I use for systematically validating multilingual LLM experiments.",
+  "validation": null,
+  "fatal_error": null
+}

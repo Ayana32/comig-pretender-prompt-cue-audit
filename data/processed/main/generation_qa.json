@@ -1,0 +1,15 @@
+{
+  "expected_responses": 48,
+  "observed_responses": 48,
+  "unique_response_keys": 48,
+  "missing_keys": [],
+  "unexpected_keys": [],
+  "finish_reason_counts": {
+    "stop": 48
+  },
+  "all_finish_reasons_stop": true,
+  "main_generation_complete": true,
+  "anchor_count": 9,
+  "main_anchor_count": 8,
+  "q0_anchor_separated_from_main": true
+}

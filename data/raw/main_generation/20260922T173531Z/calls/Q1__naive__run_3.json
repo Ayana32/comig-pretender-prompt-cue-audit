@@ -1,0 +1,65 @@
+{
+  "call_id": "Q1__naive__run_3",
+  "saved_at_utc": "2026-09-22T17:35:58.978668+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nYou observe high cross-lingual representational similarity between English and a target language, but an intervention transfers inconsistently at the behavioural level. How would you interpret this result, and what would you test next?"
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098554-20uuyTBpRPOz93OIDf2P",
+    "object": "chat.completion",
+    "created": 1790098554,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "This pattern—high cross-lingual representational similarity (e.g., via CKA, SVCCA, or linear probing) between English and a target language, yet inconsistent behavioural transfer after an intervention—suggests a nuanced mismatch between representational alignment and functional equivalence.\n\n**Interpretation:**\n\n1. **Surface vs. Functional Similarity:**  \n   Representational similarity metrics often capture overall geometric or linear-algebraic alignment in embedding spaces but do not guarantee that the *same* features or neurons encode *functionally equivalent* linguistic information. The model’s internal representations might be aligned in a global sense but still differ in how they support the specific task or behaviour.\n\n2. **Task-specific Discrepancies:**  \n   The intervention (e.g., fine-tuning, neuron ablation, or prompt editing) might interact differently with language-specific idiosyncrasies. For example, the model may use distinct feature subsets or encode language-specific morphosyntactic properties differently, which the representational similarity metric glosses over.\n\n3. **Intervention Granularity and Mechanism:**  \n   The intervention might be targeting a representation subspace or mechanism that is only partially shared or is used differently across languages. Hence, while the overall representation looks similar, the causal pathways to behaviour differ.\n\n4. **Evaluation Sensitivity:**  \n   Behavioural evaluation might be more sensitive to subtle linguistic phenomena (e.g., syntactic structures, pragmatics) that are poorly captured by coarse representational similarity measures.\n\n---\n\n**What to Test Next:**\n\n1. **Causal Probing / Causal Mediation Analysis:**  \n   Use causal intervention methods (e.g., ablations, causal mediation analysis) at finer granularity to identify whether the same neurons or subspaces mediate the behaviour across languages. This can reveal if the behaviourally relevant information is encoded similarly or differently.\n\n2. **Task-specific Probing:**  \n   Probe the representations for key linguistic features that drive the behaviour (e.g., syntax trees, morphology, semantic roles) in both languages to see if they are encoded equivalently. Discrepancies may explain why behavioural transfer is inconsistent.\n\n3. **Layerwise and Component-wise Analysis:**  \n   Examine cross-lingual similarity and intervention effects layerwise or component-wise (e.g., attention heads, MLPs) to localize where the divergence arises.\n\n4. **Behavioural Evaluation with Controlled Linguistic Phenomena:**  \n   Design behavioural tests targeting specific linguistic constructs (e.g., agreement, word order) to see which phenomena show transfer failure, helping link representation differences to behavioural outcomes.\n\n5. **Intervention Variants and Localization:**  \n   Try different intervention methods (e.g., fine-tuning vs. prompt editing vs. neuron ablation) or target different parts of the model to understand the robustness and scope of transfer.\n\n6. **Data Distribution and Pretraining Differences:**  \n   Consider differences in pretraining data or domain between English and the target language that might cause the model to develop superficially similar but functionally distinct representations.\n\n---\n\n**Summary:**  \nHigh representational similarity does not guarantee causal equivalence or functional interchangeability. The next step is to combine causal analysis with task-focused probing and fine-grained behavioural testing to unpack the sources of transfer failure and better align representational metrics with behavioural outcomes.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 114,
+      "completion_tokens": 673,
+      "total_tokens": 787,
+      "cost": 0.0011224,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0011224,
+        "upstream_inference_prompt_cost": 4.56e-05,
+        "upstream_inference_completions_cost": 0.0010768
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "This pattern—high cross-lingual representational similarity (e.g., via CKA, SVCCA, or linear probing) between English and a target language, yet inconsistent behavioural transfer after an intervention—suggests a nuanced mismatch between representational alignment and functional equivalence.\n\n**Interpretation:**\n\n1. **Surface vs. Functional Similarity:**  \n   Representational similarity metrics often capture overall geometric or linear-algebraic alignment in embedding spaces but do not guarantee that the *same* features or neurons encode *functionally equivalent* linguistic information. The model’s internal representations might be aligned in a global sense but still differ in how they support the specific task or behaviour.\n\n2. **Task-specific Discrepancies:**  \n   The intervention (e.g., fine-tuning, neuron ablation, or prompt editing) might interact differently with language-specific idiosyncrasies. For example, the model may use distinct feature subsets or encode language-specific morphosyntactic properties differently, which the representational similarity metric glosses over.\n\n3. **Intervention Granularity and Mechanism:**  \n   The intervention might be targeting a representation subspace or mechanism that is only partially shared or is used differently across languages. Hence, while the overall representation looks similar, the causal pathways to behaviour differ.\n\n4. **Evaluation Sensitivity:**  \n   Behavioural evaluation might be more sensitive to subtle linguistic phenomena (e.g., syntactic structures, pragmatics) that are poorly captured by coarse representational similarity measures.\n\n---\n\n**What to Test Next:**\n\n1. **Causal Probing / Causal Mediation Analysis:**  \n   Use causal intervention methods (e.g., ablations, causal mediation analysis) at finer granularity to identify whether the same neurons or subspaces mediate the behaviour across languages. This can reveal if the behaviourally relevant information is encoded similarly or differently.\n\n2. **Task-specific Probing:**  \n   Probe the representations for key linguistic features that drive the behaviour (e.g., syntax trees, morphology, semantic roles) in both languages to see if they are encoded equivalently. Discrepancies may explain why behavioural transfer is inconsistent.\n\n3. **Layerwise and Component-wise Analysis:**  \n   Examine cross-lingual similarity and intervention effects layerwise or component-wise (e.g., attention heads, MLPs) to localize where the divergence arises.\n\n4. **Behavioural Evaluation with Controlled Linguistic Phenomena:**  \n   Design behavioural tests targeting specific linguistic constructs (e.g., agreement, word order) to see which phenomena show transfer failure, helping link representation differences to behavioural outcomes.\n\n5. **Intervention Variants and Localization:**  \n   Try different intervention methods (e.g., fine-tuning vs. prompt editing vs. neuron ablation) or target different parts of the model to understand the robustness and scope of transfer.\n\n6. **Data Distribution and Pretraining Differences:**  \n   Consider differences in pretraining data or domain between English and the target language that might cause the model to develop superficially similar but functionally distinct representations.\n\n---\n\n**Summary:**  \nHigh representational similarity does not guarantee causal equivalence or functional interchangeability. The next step is to combine causal analysis with task-focused probing and fine-grained behavioural testing to unpack the sources of transfer failure and better align representational metrics with behavioural outcomes.",
+  "validation": null,
+  "fatal_error": null
+}

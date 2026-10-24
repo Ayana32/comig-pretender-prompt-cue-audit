@@ -1,0 +1,65 @@
+{
+  "call_id": "Q8__naive__run_1",
+  "saved_at_utc": "2026-09-22T17:38:29.205884+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nOne language produces a result in the opposite direction from the others, even though the implementation checks pass. How would you investigate and report that result? "
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098706-rPjv6rO6CCLDIeJo5joi",
+    "object": "chat.completion",
+    "created": 1790098706,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "When encountering a language that produces results in the opposite direction from others in a multilingual LM evaluation—despite passing implementation checks—I'd approach it systematically as follows:\n\n**1. Re-examine Data and Preprocessing**  \n- **Data quality and representativeness:** Confirm that the test data for this language is comparable in domain, difficulty, and annotation quality to the other languages. Differences here can skew results.  \n- **Tokenization and normalization:** Check if the tokenization or text normalization pipeline for this language differs substantially and might affect model inputs or outputs differently. For instance, segmentation errors, script issues, or casing.  \n- **Alignment of evaluation metrics:** Ensure that the evaluation metric is applied consistently across languages, especially for metrics sensitive to language morphology (e.g., BLEU, perplexity, accuracy).\n\n**2. Verify Model and Evaluation Code Behavior for This Language**  \n- **Language-specific model behavior:** Look at the model’s outputs and intermediate representations (e.g., logits, embeddings) for this language to detect any anomalies or unexpected patterns.  \n- **Edge cases or language-specific bugs:** Even if implementation checks pass, subtle bugs might appear only under certain linguistic conditions. For example, mis-handling of right-to-left scripts, token ID mismatches, or fallback behavior.  \n- **Random seeds and variability:** Run multiple evaluation seeds to rule out chance or variance-driven artifacts.\n\n**3. Compare Linguistic and Resource Factors**  \n- **Model training data distribution:** Confirm the extent and quality of training data for the language. Sparse or noisy training data can cause models to behave differently.  \n- **Morphological complexity and typology:** Some metrics or models may perform differently on agglutinative or polysynthetic languages, or on languages with freer word order. This could invert expected correlations.  \n- **Script and orthography:** Scripts with ambiguous segmentation or homographs might confuse the model or metric.\n\n**4. Perform Ablation and Controlled Experiments**  \n- **Cross-lingual transfer tests:** Evaluate the model’s zero-shot or few-shot performance on this language versus others to isolate if the issue is model capacity or data.  \n- **Metric sanity checks:** Try alternative metrics or human evaluation to verify if the observed direction is a true signal or an artifact of metric sensitivity.  \n- **Input perturbation:** Modify inputs slightly to see if the model’s response changes logically.\n\n**5. Document and Report Clearly**  \n- **Detailed description:** Clearly describe the anomaly, the languages involved, and the evaluation setup.  \n- **Hypotheses and tests:** Outline all hypotheses tested, the experiments run, and their outcomes.  \n- **Implications:** Discuss what this means for cross-lingual evaluation reliability and model generalization.  \n- **Recommendations:** Suggest next steps, such as collecting more data, refining metrics, or developing language-specific handling.\n\n---\n\n**In summary:** an anomalous result in one language demands careful linguistic, data, and technical scrutiny beyond standard implementation checks. Multilingual evaluation is complex due to language-specific idiosyncrasies in data, models, and metrics. Transparent investigation and reporting not only help debug but also deepen understanding of multilingual model behavior.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 102,
+      "completion_tokens": 645,
+      "total_tokens": 747,
+      "cost": 0.0010728,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0010728,
+        "upstream_inference_prompt_cost": 4.08e-05,
+        "upstream_inference_completions_cost": 0.001032
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "When encountering a language that produces results in the opposite direction from others in a multilingual LM evaluation—despite passing implementation checks—I'd approach it systematically as follows:\n\n**1. Re-examine Data and Preprocessing**  \n- **Data quality and representativeness:** Confirm that the test data for this language is comparable in domain, difficulty, and annotation quality to the other languages. Differences here can skew results.  \n- **Tokenization and normalization:** Check if the tokenization or text normalization pipeline for this language differs substantially and might affect model inputs or outputs differently. For instance, segmentation errors, script issues, or casing.  \n- **Alignment of evaluation metrics:** Ensure that the evaluation metric is applied consistently across languages, especially for metrics sensitive to language morphology (e.g., BLEU, perplexity, accuracy).\n\n**2. Verify Model and Evaluation Code Behavior for This Language**  \n- **Language-specific model behavior:** Look at the model’s outputs and intermediate representations (e.g., logits, embeddings) for this language to detect any anomalies or unexpected patterns.  \n- **Edge cases or language-specific bugs:** Even if implementation checks pass, subtle bugs might appear only under certain linguistic conditions. For example, mis-handling of right-to-left scripts, token ID mismatches, or fallback behavior.  \n- **Random seeds and variability:** Run multiple evaluation seeds to rule out chance or variance-driven artifacts.\n\n**3. Compare Linguistic and Resource Factors**  \n- **Model training data distribution:** Confirm the extent and quality of training data for the language. Sparse or noisy training data can cause models to behave differently.  \n- **Morphological complexity and typology:** Some metrics or models may perform differently on agglutinative or polysynthetic languages, or on languages with freer word order. This could invert expected correlations.  \n- **Script and orthography:** Scripts with ambiguous segmentation or homographs might confuse the model or metric.\n\n**4. Perform Ablation and Controlled Experiments**  \n- **Cross-lingual transfer tests:** Evaluate the model’s zero-shot or few-shot performance on this language versus others to isolate if the issue is model capacity or data.  \n- **Metric sanity checks:** Try alternative metrics or human evaluation to verify if the observed direction is a true signal or an artifact of metric sensitivity.  \n- **Input perturbation:** Modify inputs slightly to see if the model’s response changes logically.\n\n**5. Document and Report Clearly**  \n- **Detailed description:** Clearly describe the anomaly, the languages involved, and the evaluation setup.  \n- **Hypotheses and tests:** Outline all hypotheses tested, the experiments run, and their outcomes.  \n- **Implications:** Discuss what this means for cross-lingual evaluation reliability and model generalization.  \n- **Recommendations:** Suggest next steps, such as collecting more data, refining metrics, or developing language-specific handling.\n\n---\n\n**In summary:** an anomalous result in one language demands careful linguistic, data, and technical scrutiny beyond standard implementation checks. Multilingual evaluation is complex due to language-specific idiosyncrasies in data, models, and metrics. Transparent investigation and reporting not only help debug but also deepen understanding of multilingual model behavior.",
+  "validation": null,
+  "fatal_error": null
+}

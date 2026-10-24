@@ -1,0 +1,65 @@
+{
+  "call_id": "Q5__naive__run_2",
+  "saved_at_utc": "2026-09-22T17:37:28.894528+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nYour results change noticeably across model families, layers, prompts or random seeds. How would you decide whether you have found a meaningful effect or an unstable experimental artifact?"
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098646-QnwnwxbzG1MviCGl6U0B",
+    "object": "chat.completion",
+    "created": 1790098646,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "This is a common and important issue when working with multilingual language models, especially given their complexity and the numerous sources of variability. To determine whether the observed differences are meaningful effects or unstable artifacts, I would proceed as follows:\n\n1. **Statistical Robustness Checks:**\n   - **Multiple Seeds:** Run experiments across multiple random seeds to estimate variance and confidence intervals. If the effect size consistently appears across seeds with small variance, it is more likely to be meaningful.\n   - **Statistical Significance Testing:** Use appropriate tests (e.g., paired bootstrap tests, permutation tests) to check whether differences between conditions (models, layers, prompts) are statistically significant beyond chance variability.\n   \n2. **Consistency Across Conditions:**\n   - **Cross-Model Family Replication:** If the effect appears only in one model family but not others, consider whether this is expected due to architectural differences or training data. If it is inconsistent and no theoretical explanation exists, it may be an artifact.\n   - **Layer-wise Patterns:** Check if the effect follows expected patterns across layers (e.g., syntactic phenomena typically emerge in middle layers, semantic in later layers). Random or erratic changes across layers suggest instability.\n   \n3. **Prompt Sensitivity Analysis:**\n   - **Prompt Variations:** Test robustness by systematically varying prompts (e.g., paraphrases, different instruction styles). If the effect depends heavily on a very specific prompt formulation, it may be an artifact.\n   - **Prompt Calibration:** Use calibration methods or prompt ensembles to reduce variance introduced by prompt design.\n   \n4. **Control Experiments:**\n   - **Ablation or Baseline Checks:** Compare against appropriate baselines (e.g., chance, random embeddings, or simple heuristics) to ensure the observed effect is not trivially explained.\n   - **Sanity Checks:** For example, randomizing labels or shuffling data to see if the effect disappears, confirming that the evaluation setup is not producing spurious signals.\n   \n5. **Theoretical and Empirical Plausibility:**\n   - **Relation to Prior Work:** Does the effect align with previous findings in multilingual NLP or cognitive linguistics? Unexpected or novel findings warrant closer scrutiny.\n   - **Qualitative Analysis:** Inspect examples qualitatively to understand if the effect corresponds to meaningful linguistic or model behavior.\n   \n6. **Reporting and Transparency:**\n   - Report variance, confidence intervals, and full distributions rather than point estimates.\n   - Be transparent about experimental conditions and variability sources.\n   \n**Summary:**  \nIn practice, I rely on a combination of repeated experiments across seeds, prompt variants, and model families; rigorous statistical testing; control experiments; and qualitative inspection. Only effects that are reproducible, stable, statistically significant, and theoretically plausible are considered meaningful rather than artifacts. This approach helps avoid overinterpreting noise inherent in large multilingual language models and complex evaluation setups.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 104,
+      "completion_tokens": 583,
+      "total_tokens": 687,
+      "cost": 0.0009744,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0009744,
+        "upstream_inference_prompt_cost": 4.16e-05,
+        "upstream_inference_completions_cost": 0.0009328
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "This is a common and important issue when working with multilingual language models, especially given their complexity and the numerous sources of variability. To determine whether the observed differences are meaningful effects or unstable artifacts, I would proceed as follows:\n\n1. **Statistical Robustness Checks:**\n   - **Multiple Seeds:** Run experiments across multiple random seeds to estimate variance and confidence intervals. If the effect size consistently appears across seeds with small variance, it is more likely to be meaningful.\n   - **Statistical Significance Testing:** Use appropriate tests (e.g., paired bootstrap tests, permutation tests) to check whether differences between conditions (models, layers, prompts) are statistically significant beyond chance variability.\n   \n2. **Consistency Across Conditions:**\n   - **Cross-Model Family Replication:** If the effect appears only in one model family but not others, consider whether this is expected due to architectural differences or training data. If it is inconsistent and no theoretical explanation exists, it may be an artifact.\n   - **Layer-wise Patterns:** Check if the effect follows expected patterns across layers (e.g., syntactic phenomena typically emerge in middle layers, semantic in later layers). Random or erratic changes across layers suggest instability.\n   \n3. **Prompt Sensitivity Analysis:**\n   - **Prompt Variations:** Test robustness by systematically varying prompts (e.g., paraphrases, different instruction styles). If the effect depends heavily on a very specific prompt formulation, it may be an artifact.\n   - **Prompt Calibration:** Use calibration methods or prompt ensembles to reduce variance introduced by prompt design.\n   \n4. **Control Experiments:**\n   - **Ablation or Baseline Checks:** Compare against appropriate baselines (e.g., chance, random embeddings, or simple heuristics) to ensure the observed effect is not trivially explained.\n   - **Sanity Checks:** For example, randomizing labels or shuffling data to see if the effect disappears, confirming that the evaluation setup is not producing spurious signals.\n   \n5. **Theoretical and Empirical Plausibility:**\n   - **Relation to Prior Work:** Does the effect align with previous findings in multilingual NLP or cognitive linguistics? Unexpected or novel findings warrant closer scrutiny.\n   - **Qualitative Analysis:** Inspect examples qualitatively to understand if the effect corresponds to meaningful linguistic or model behavior.\n   \n6. **Reporting and Transparency:**\n   - Report variance, confidence intervals, and full distributions rather than point estimates.\n   - Be transparent about experimental conditions and variability sources.\n   \n**Summary:**  \nIn practice, I rely on a combination of repeated experiments across seeds, prompt variants, and model families; rigorous statistical testing; control experiments; and qualitative inspection. Only effects that are reproducible, stable, statistically significant, and theoretically plausible are considered meaningful rather than artifacts. This approach helps avoid overinterpreting noise inherent in large multilingual language models and complex evaluation setups.",
+  "validation": null,
+  "fatal_error": null
+}

@@ -1,0 +1,59 @@
+COMIG Pretender Prompt and Cue Audit — Results Summary,,,,,,,
+Descriptive pilot: 8 questions × 2 prompt conditions × 2 LLM judges × 2 presentation orders. No human participants.,,,,,,,
+Dataset check,Value,,,,,,
+Justifications coded,64,,,,,,
+Cue events coded,285,,,,,,
+Ambiguous primary cues,15,,,,,,
+Original–swapped pairs,32,,,,,,
+Cases re-audited under final target rule,64,,,,,,
+Primary cue family by prompt condition,,,,,,,
+Condition,Justifications,Style/form primary,Substantive primary,Style/form share,Wilson 95% low,Wilson 95% high,Style/form events / justification
+naive,32,10,22,0.3125,0.17952541633609734,0.4856667830095541,2.3125
+style_controlled,32,2,30,0.0625,0.017310567031640967,0.2014712314415458,0.90625
+"Paired primary-cue change: 9/32 cells changed from style/form under naive to non-style under control, versus 1/32 in the reverse direction; exact two-sided McNemar p = 0.021.",,,,,,,
+Targets and explicit authorship direction,,,,,,,
+Condition,A target,B target,Comparison target,UNSPECIFIED-only justifications,Total events,,
+naive,86,80,1,1,167,,
+style_controlled,62,55,0,8,118,,
+Pretender selected as human,,,,,,,
+Condition,Calls,Pretender selected,Share,Wilson 95% low,Wilson 95% high,Judge 1 stable pairs,Judge 2 stable pairs
+naive,32,24,0.75,0.5789344100575552,0.8674759908149096,2,8
+style_controlled,32,25,0.78125,0.6124500635075647,0.8897616374739581,2,7
+Order-consistent selections were 9/10 Pretender under naive (Judge 1 n=2; Judge 2 n=8) and 9/9 under control (Judge 1 n=2; Judge 2 n=7). These aggregates are therefore dominated by Judge 2.,,,,,,,
+Selection and confidence by judge,,,,,,,
+Condition,Judge,Calls,Human anchor,Pretender,Pretender share,Mean confidence,
+naive,judge_1,16,8,8,0.5,72.3125,
+naive,judge_2,16,0,16,1,91.5625,
+style_controlled,judge_1,16,6,10,0.625,69.4375,
+style_controlled,judge_2,16,1,15,0.9375,74.6875,
+Original–swapped position cases,,,,,,,
+Condition,Judge,Pairs,Stable human,Stable Pretender,Flipped,,
+naive,judge_1,8,1,1,6,,
+naive,judge_2,8,0,8,0,,
+style_controlled,judge_1,8,0,2,6,,
+style_controlled,judge_2,8,0,7,1,,
+Primary cue distribution,,,,,Primary cues by judge,,
+Cue,Naive,Style-controlled,Overall,,Cue,Judge 1,Judge 2
+TECHNICAL_SUBSTANCE,19,18,37,,TECHNICAL_SUBSTANCE,9,28
+STYLE_FORMAT,9,1,10,,STYLE_FORMAT,10,0
+EXPERIENTIAL_TACIT,2,8,10,,EXPERIENTIAL_TACIT,8,2
+STYLE_REGISTER,1,0,1,,STYLE_REGISTER,1,0
+EPISTEMIC_STYLE,1,3,4,,EPISTEMIC_STYLE,3,1
+CONTEXT_SENSITIVITY,0,1,1,,CONTEXT_SENSITIVITY,1,0
+LANGUAGE_FORM,0,1,1,,LANGUAGE_FORM,0,1
+Generation and content-preservation context,,,,,,,
+Feature,Naive,Style-controlled,Human anchors,,Content check,Count,Denominator
+Mean word count,447.417,41.917,40.75,,Comparable,5,8
+Mean list-item count,18.292,0,0,,Confounded,3,8
+Mean heading count,2.833,0,0,,Core claim preserved: Yes,5,8
+Mean paragraph count,13.917,1,1,,Core claim preserved: Partial,3,8
+Mean comma density / 100 words,5.694,6.976,9.709,,Controlled omits important content,8,8
+Mean sentence length,15.665,20.222,15.739,,Technical error difference,0,8
+Mean first-person density / 100 words,0.588,0.099,5.99,,Truncated generations,0,48
+Mean hedge count,5.792,0.75,0.375,,,,
+Interpretation,,,,,,,
+"Style control changed the composition of stated primary cues: style/form primary cues fell from 10/32 to 2/32 (Wilson 95% intervals 0.18–0.49 and 0.02–0.20). In the paired comparison, 9 cells moved from style/form to non-style and 1 moved in the reverse direction (exact McNemar p=0.021). This change may partly reflect reduced availability of visible surface variation. We did not detect a prompt-condition difference in aggregate Pretender-as-human selections: 24/32 naive versus 25/32 controlled, with strongly overlapping Wilson intervals. Evaluator choice strongly affected selection stability (position flips: 12/16 versus 1/16), while the stable-pair aggregates were dominated by Judge 2.",,,,,,,
+Claim boundary and reliability,,,,,,,
+"Controlled responses omitted important content in all eight designated comparisons, and UNSPECIFIED-only justifications increased from 1/32 to 8/32. Event counts remain descriptive: style/form events fell from 2.31 to 0.91 per justification, while substantive/practical events were 2.91 versus 2.78. These counts capture stated cues under a 40–100-word justification limit, not every cue the judges may have used. I was the sole coder, and no independent second coder was used, so no inter-rater reliability statistic is available. The codebook and attribution rules were refined during coding, and J001–J064 were re-audited under the final target rule. Flipped pairs do not isolate position effects from stochastic run-to-run variability because each order was called once.",,,,,,,
+Exploratory generation observation,,,,,,,
+"The controlled prompt matched anchor length and eliminated lists and headings, but first-person density moved farther from the anchors. Comma density was higher under style control in six of eight questions, which is consistent with possible artifact migration from bullets into sentence-internal enumeration. With only eight questions, this remains an exploratory observation rather than inferential evidence. Content was comparable in 5/8 designated pairs and confounded in 3/8, so the prespecified majority-confounded threshold was not met.",,,,,,,

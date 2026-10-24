@@ -1,0 +1,65 @@
+{
+  "call_id": "Q1__naive__run_2",
+  "saved_at_utc": "2026-09-22T17:35:52.054670+00:00",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are taking part in a competence imitation task.\n\nThe target social world is recent postgraduate researchers in speech and natural language processing who have practical experience with multilingual language-model evaluation.\n\nRespond as if you are a member of this group. Answer the question accurately based on the knowledge and research judgment that such a member might use.\n\nQuestion:\nYou observe high cross-lingual representational similarity between English and a target language, but an intervention transfers inconsistently at the behavioural level. How would you interpret this result, and what would you test next?"
+      }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 1024
+  },
+  "response": {
+    "id": "gen-1790098545-Pv2jTqBTKyAFG2CtR1NX",
+    "object": "chat.completion",
+    "created": 1790098545,
+    "model": "openai/gpt-4.1-mini",
+    "provider": "OpenAI",
+    "system_fingerprint": null,
+    "service_tier": "default",
+    "choices": [
+      {
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "completed",
+        "message": {
+          "role": "assistant",
+          "content": "This is a very interesting and somewhat puzzling observation, but not uncommon in multilingual language model evaluation and intervention studies.\n\n**Interpretation:**\n\nHigh cross-lingual representational similarity (e.g., measured via CKA, SVCCA, or centered kernel alignment, or similarity in embedding space) between English and the target language suggests that the model encodes similar information or abstractions in these two languages at the representational level. This often leads to the expectation that interventions (e.g., fine-tuning, adversarial modifications, or probing interventions) on English representations should transfer well to the target language.\n\nHowever, the **inconsistent behavioural transfer** indicates that despite similar internal representations, the downstream task outputs or decision boundaries are sensitive to language-specific factors not fully captured by representational similarity alone. Possible causes and interpretations include:\n\n1. **Surface-level vs. functional alignment:** Representational similarity metrics mostly capture geometric or statistical similarity, which might not fully reflect functional equivalence at the task level. The model might encode similar features but use them differently when generating outputs or making predictions in the target language.\n\n2. **Differences in linguistic phenomena:** The target language might have structural, morphological, or syntactic features that cause the model to process it differently downstream, despite similar representations. For example, word order variations, morphology, or tokenization differences can affect output behavior.\n\n3. **Intervention specificity:** The intervention might be targeting features or dimensions that are relevant or causal in English but less so in the target language, even if those features are represented similarly. In other words, the causal mechanisms might differ across languages.\n\n4. **Evaluation metric or task mismatch:** The behavioural evaluation might be sensitive to nuances not reflected in representational similarity, or the task might rely on language-specific cues absent or underrepresented in English.\n\n5. **Domain or data distribution differences:** If the intervention is applied based on English data, domain shifts or distributional shifts in the target language might hinder consistent transfer.\n\n---\n\n**What to test next:**\n\nTo better understand and diagnose this discrepancy, I would propose the following tests:\n\n1. **Causal intervention analysis:**\n   - Perform *causal mediation analysis* or *interventional ablations* to see which parts of the representation contribute causally to the behaviour in both languages.\n   - Test whether the same latent subspaces or neurons mediate the task in English and the target language.\n\n2. **Layer-wise and component-wise similarity:**\n   - Check representational similarity at different layers or components (e.g., encoder vs. decoder, attention heads) to see if similarity is consistent or only superficial.\n\n3. **Cross-lingual probing:**\n   - Use diagnostic classifiers or probes trained on English to predict linguistic properties and test if they generalize to the target language.\n   - This can reveal if representations encode task-relevant features similarly.\n\n4. **Intervention in the target language:**\n   - Apply the intervention directly in the target language instead of transferring from English.\n   - Compare the effect sizes and behavioural outcomes to isolate language-specific factors.\n\n5. **Data distribution and tokenization checks:**\n   - Examine if tokenization or embedding mismatches contribute to inconsistent transfer.\n   - Possibly align token vocabularies or use multilingual subword vocabularies to reduce discrepancies.\n\n6. **Task-specific error analysis:**\n   - Qualitatively analyze errors or behavioural outputs in the target language to detect patterns or failure modes.\n   - This might guide refinement of the intervention or representation alignment.\n\n7. **Evaluate alternative similarity metrics:**\n   - Use task-aware similarity measures or fine-tuned metrics that better capture functional equivalence rather than purely geometric similarity.\n\n---\n\n**Summary:**\n\nHigh representational similarity does not guarantee behavioural equivalence or transferability. The key is to disentangle representational alignment from functional and causal alignment. Systematic causal and layerwise analyses combined with targeted intervention in the target language and deeper linguistic error analysis are the logical next steps to resolve this inconsistency.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 114,
+      "completion_tokens": 808,
+      "total_tokens": 922,
+      "cost": 0.0013384,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0013384,
+        "upstream_inference_prompt_cost": 4.56e-05,
+        "upstream_inference_completions_cost": 0.0012928
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  },
+  "extracted_content": "This is a very interesting and somewhat puzzling observation, but not uncommon in multilingual language model evaluation and intervention studies.\n\n**Interpretation:**\n\nHigh cross-lingual representational similarity (e.g., measured via CKA, SVCCA, or centered kernel alignment, or similarity in embedding space) between English and the target language suggests that the model encodes similar information or abstractions in these two languages at the representational level. This often leads to the expectation that interventions (e.g., fine-tuning, adversarial modifications, or probing interventions) on English representations should transfer well to the target language.\n\nHowever, the **inconsistent behavioural transfer** indicates that despite similar internal representations, the downstream task outputs or decision boundaries are sensitive to language-specific factors not fully captured by representational similarity alone. Possible causes and interpretations include:\n\n1. **Surface-level vs. functional alignment:** Representational similarity metrics mostly capture geometric or statistical similarity, which might not fully reflect functional equivalence at the task level. The model might encode similar features but use them differently when generating outputs or making predictions in the target language.\n\n2. **Differences in linguistic phenomena:** The target language might have structural, morphological, or syntactic features that cause the model to process it differently downstream, despite similar representations. For example, word order variations, morphology, or tokenization differences can affect output behavior.\n\n3. **Intervention specificity:** The intervention might be targeting features or dimensions that are relevant or causal in English but less so in the target language, even if those features are represented similarly. In other words, the causal mechanisms might differ across languages.\n\n4. **Evaluation metric or task mismatch:** The behavioural evaluation might be sensitive to nuances not reflected in representational similarity, or the task might rely on language-specific cues absent or underrepresented in English.\n\n5. **Domain or data distribution differences:** If the intervention is applied based on English data, domain shifts or distributional shifts in the target language might hinder consistent transfer.\n\n---\n\n**What to test next:**\n\nTo better understand and diagnose this discrepancy, I would propose the following tests:\n\n1. **Causal intervention analysis:**\n   - Perform *causal mediation analysis* or *interventional ablations* to see which parts of the representation contribute causally to the behaviour in both languages.\n   - Test whether the same latent subspaces or neurons mediate the task in English and the target language.\n\n2. **Layer-wise and component-wise similarity:**\n   - Check representational similarity at different layers or components (e.g., encoder vs. decoder, attention heads) to see if similarity is consistent or only superficial.\n\n3. **Cross-lingual probing:**\n   - Use diagnostic classifiers or probes trained on English to predict linguistic properties and test if they generalize to the target language.\n   - This can reveal if representations encode task-relevant features similarly.\n\n4. **Intervention in the target language:**\n   - Apply the intervention directly in the target language instead of transferring from English.\n   - Compare the effect sizes and behavioural outcomes to isolate language-specific factors.\n\n5. **Data distribution and tokenization checks:**\n   - Examine if tokenization or embedding mismatches contribute to inconsistent transfer.\n   - Possibly align token vocabularies or use multilingual subword vocabularies to reduce discrepancies.\n\n6. **Task-specific error analysis:**\n   - Qualitatively analyze errors or behavioural outputs in the target language to detect patterns or failure modes.\n   - This might guide refinement of the intervention or representation alignment.\n\n7. **Evaluate alternative similarity metrics:**\n   - Use task-aware similarity measures or fine-tuned metrics that better capture functional equivalence rather than purely geometric similarity.\n\n---\n\n**Summary:**\n\nHigh representational similarity does not guarantee behavioural equivalence or transferability. The key is to disentangle representational alignment from functional and causal alignment. Systematic causal and layerwise analyses combined with targeted intervention in the target language and deeper linguistic error analysis are the logical next steps to resolve this inconsistency.",
+  "validation": null,
+  "fatal_error": null
+}

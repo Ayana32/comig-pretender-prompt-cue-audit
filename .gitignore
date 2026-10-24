@@ -4,6 +4,8 @@ secrets.*
 __pycache__/
 *.pyc
 outputs/
+*.zip
+*.bundle
 .DS_Store
 __pycache__/
 *.pyc

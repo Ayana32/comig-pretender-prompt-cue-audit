@@ -1,0 +1,35 @@
+{
+  "started_at_utc": "2026-09-23T18:28:40.087072+00:00",
+  "purpose": "Q1-Q8 designated-run LLM Judge audit",
+  "generation_run_dir": "outputs/main_generation/20260922T173531Z",
+  "judge_models": {
+    "judge_1": "nex-agi/nex-n2.5-mini:free",
+    "judge_2": "google/gemini-2.5-flash-lite"
+  },
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "max_output_tokens": 1024,
+  "reasoning": {
+    "enabled": false
+  },
+  "response_format": {
+    "type": "json_object"
+  },
+  "calls_per_cell": 1,
+  "expected_calls": 64,
+  "orders": [
+    "original",
+    "swapped"
+  ],
+  "original_human_position": {
+    "Q1": "B",
+    "Q2": "A",
+    "Q3": "B",
+    "Q4": "B",
+    "Q5": "A",
+    "Q6": "A",
+    "Q7": "B",
+    "Q8": "A"
+  },
+  "api_key_recorded": false
+}

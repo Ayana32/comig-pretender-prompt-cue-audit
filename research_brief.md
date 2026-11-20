@@ -14,7 +14,7 @@ For the designated first generation, two LLM Judges compared each Pretender resp
 
 ### Findings
 
-- **The composition of primary stated cues changed.** Style/form was the primary cue in 10/32 naive justifications and 2/32 controlled justifications. Across matched question × Judge × order cells, nine changed from style/form to non-style and one changed in the reverse direction. The exact two-sided McNemar test was `p = 0.021`.
+- **The composition of primary stated cues changed.** Style/form was the primary cue in 10/32 naive justifications and 2/32 controlled justifications. Across matched question × Judge × order cells, nine changed from style/form to non-style and one changed in the reverse direction. The exploratory exact two-sided McNemar test gave `p = 0.021` at the cell level. The same eight questions recur across evaluators and presentation orders.
 - **No prompt-condition selection difference was detected.** The Pretender was selected as human in 24/32 naive judgments and 25/32 controlled judgments, with strongly overlapping Wilson intervals.
 - **Selection stability depended strongly on the evaluator.** Judge 1 was order-stable on 4/16 pairs, whereas Judge 2 was stable on 15/16. The order-consistent aggregate was therefore dominated by Judge 2.
 - **Style control introduced a content trade-off.** Mean length fell from 447.4 to 41.9 words and mean list-item count from 18.3 to zero. Five of eight designated pairs remained content-comparable, three were confounded, and every controlled response omitted important content.
@@ -36,7 +36,7 @@ I would next run a formally reviewed human validation study in a clearly defined
 
 ### Summary
 
-> I audited whether the organiser's Pretender prompt could create stylistic shortcuts before COMIG involved human participants. Style control significantly shifted the primary cues stated by two LLM Judges, but I did not detect a change in their aggregate selections. The manipulation also removed substantive content, and selection stability differed sharply between evaluators. My main conclusion is therefore that prompt controls and evaluators both need validation before their outputs can support claims about competence or AI literacy.
+> I audited whether the organiser's Pretender prompt could create stylistic shortcuts before COMIG involved human participants. Style/form was the primary stated cue in 10 of 32 justifications in the naive condition and 2 of 32 in the style-controlled condition. The number of times the evaluators selected the Pretender as human was similar across conditions (24/32 and 25/32). The manipulation also removed substantive content, and selection stability differed sharply between evaluators. My main conclusion is therefore that prompt controls and evaluators both need validation before their outputs can support claims about competence or AI literacy.
 
 ### Reference
 
